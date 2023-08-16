@@ -1,14 +1,20 @@
 /** @type {import('tailwindcss').Config} */
+const defaultTheme = require("tailwindcss/defaultTheme");
+
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
       colors: {
-        primary: "#fafaf9",
-        secondary: "#1c1917",
+        white: {
+          primary: "#fafaf9",
+          secondary: "#a8a29e",
+        },
+        black: "#1c1917",
         background: {
           primary: "#f5f5f4",
           secondary: "#09090b",
+          white: "#fff",
         },
         accent: {
           1: "#e3dbfa",
@@ -16,6 +22,13 @@ module.exports = {
           3: "#ffe1cc",
           4: "#d4f6ed",
         },
+      },
+      fontFamily: {
+        primary: ["Quicksand"],
+      },
+      gridTemplateColumns: {
+        "job-list": "repeat(auto-fit, 310px)",
+        // "job-list": "repeat(auto-fit, minmax(310px, 1fr))",
       },
     },
   },

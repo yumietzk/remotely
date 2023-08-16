@@ -1,8 +1,8 @@
 import { useState } from "react";
-import Navigation from "./components/Navigation";
-import SideBar from "./components/SideBar";
+import Header from "./components/Header";
+import Filters from "./components/Filters";
 import Form from "./components/Form";
-import JobsList from "./components/JobsList";
+import JobList from "./components/JobList";
 const data = require("./testData.json");
 
 function App() {
@@ -18,12 +18,12 @@ function App() {
 
   return (
     // grid-cols-[300px_1fr]
-    <div className="grid grid-rows-[auto_auto_1fr]">
-      <Navigation />
+    <div className="h-screen w-full grid grid-rows-[auto_auto_1fr] font-primary">
+      <Header />
       <Form />
-      <div className="px-12 py-9 flex">
-        <SideBar />
-        <JobsList jobs={filteredJobsList} />
+      <div className="px-12 py-9 flex bg-background-primary">
+        <Filters />
+        <JobList jobs={filteredJobsList} />
       </div>
     </div>
   );
