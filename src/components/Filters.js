@@ -1,6 +1,7 @@
 function Filters() {
   return (
-    <div className="w-72 border-r border-white-secondary">
+    // w-72
+    <div className="border-r border-white-secondary">
       Filters
       <div className="flex flex-col">
         <div>

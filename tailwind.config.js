@@ -1,5 +1,4 @@
 /** @type {import('tailwindcss').Config} */
-const defaultTheme = require("tailwindcss/defaultTheme");
 
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
@@ -27,7 +26,7 @@ module.exports = {
         primary: ["Quicksand"],
       },
       gridTemplateColumns: {
-        "job-list": "repeat(auto-fit, 310px)",
+        "job-list": "repeat(3, 300px)",
         // "job-list": "repeat(auto-fit, minmax(310px, 1fr))",
       },
     },
