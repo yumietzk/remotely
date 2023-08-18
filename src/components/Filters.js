@@ -1,20 +1,30 @@
+import CheckBox from "./CheckBox";
+
 function Filters() {
   return (
     // w-72
-    <div className="border-r border-white-secondary">
-      Filters
-      <div className="flex flex-col">
-        <div>
-          <input type="checkbox" />
-          <label>Full time</label>
+    <div className="border-r border-white-secondary space-y-7">
+      <h3 className="text-2xl font-semibold">Filters</h3>
+
+      <div>
+        <h4 className="text-white-secondary font-medium mb-3.5">Job type</h4>
+        <div className="flex flex-col font-medium space-y-3">
+          <CheckBox label="Full time" />
+          <CheckBox label="Part time" />
+          <CheckBox label="Contract" />
+          <CheckBox label="Internship" />
+          <CheckBox label="Freelance" />
         </div>
-        <div>
-          <input type="checkbox" />
-          <label>Part time</label>
-        </div>
-        <div>
-          <input type="checkbox" />
-          <label>Internship</label>
+      </div>
+
+      <div>
+        <h4 className="text-white-secondary font-medium mb-3.5">Skill</h4>
+        <div className="flex flex-col font-medium space-y-3">
+          <CheckBox label="Frontend" />
+          <CheckBox label="Backend" />
+          <CheckBox label="iOS" />
+          <CheckBox label="Andoid" />
+          <CheckBox label="React" />
         </div>
       </div>
     </div>
