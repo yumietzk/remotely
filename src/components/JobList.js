@@ -43,9 +43,9 @@ function JobList({ jobs }) {
         <p className="self-end ml-auto font-medium flex items-center">
           <span className="text-white-secondary">Sort by:&nbsp;</span>Last
           updated
-          <span className="ml-4 text-xl flex items-center">
+          <button className="ml-3.5 text-xl flex items-center">
             <BiSortAlt2 />
-          </span>
+          </button>
         </p>
       </div>
       {/* ⚠️ job-listのrepeat回数と横幅はブレイクポイント、画面幅によって変える */}

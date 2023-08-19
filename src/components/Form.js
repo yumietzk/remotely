@@ -1,12 +1,28 @@
+import { useState } from "react";
+import { CiSearch } from "react-icons/ci";
+
 function Form() {
+  const [term, setTerm] = useState("");
+
+  function handleSubmit(e) {
+    e.preventDefault();
+  }
+
   return (
-    <div className="bg-background-secondary text-white-primary px-12 py-9 text-center">
-      <h1 className="text-5xl font-bold mb-2">
-        Remote Software Engineer jobs from Japan
-      </h1>
-      <p>Search by location, skills, seniority, focus, and industry.</p>
-      {/* Form here */}
-    </div>
+    <form
+      className="w-9/12 flex items-center justify-center"
+      onSubmit={handleSubmit}
+    >
+      <button>
+        <CiSearch />
+      </button>
+      <input
+        type="text"
+        placeholder="try frontend, backend, fullstack, etc."
+        value={term}
+        onChange={(e) => setTerm(e.target.value)}
+      />
+    </form>
   );
 }
 

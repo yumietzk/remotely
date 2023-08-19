@@ -20,11 +20,11 @@ function Filters() {
       <div>
         <h4 className="text-white-secondary font-medium mb-3.5">Skill</h4>
         <div className="flex flex-col font-medium space-y-3">
-          <CheckBox label="Frontend" />
-          <CheckBox label="Backend" />
-          <CheckBox label="iOS" />
-          <CheckBox label="Andoid" />
           <CheckBox label="React" />
+          <CheckBox label="JavaScript" />
+          <CheckBox label="iOS" />
+          <CheckBox label="Android" />
+          <CheckBox label="AWS" />
         </div>
       </div>
     </div>
