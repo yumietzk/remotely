@@ -13,6 +13,7 @@ function Checkbox({ label, callback }) {
       <input
         className="mr-3 w-4 h-4 rounded text-black focus:ring-black focus:ring-1"
         type="checkbox"
+        name={label}
         value={isChecked}
         onChange={handleCheck}
       />
