@@ -1,5 +1,5 @@
 import Job from "./Job";
-import { BiSortAlt2 } from "react-icons/bi";
+import JobListTop from "./JobListTop";
 
 function getBackgroundColor(index) {
   const num = index % 4;
@@ -32,22 +32,12 @@ function getBackgroundColor(index) {
 }
 
 function JobList({ jobs }) {
+  const numOfJobs = jobs.length;
+
   return (
     // pl-10
     <div className="col-start-3 pl-6">
-      <div className="mb-10 flex items-center">
-        <h2 className="text-4xl font-bold mr-5">All jobs</h2>
-        <span className="px-3 py-1 rounded-3xl border border-white-secondary text-2xl font-bold">
-          100
-        </span>
-        <p className="self-end ml-auto font-medium flex items-center">
-          <span className="text-white-secondary">Sort by:&nbsp;</span>Last
-          updated
-          <button className="ml-3.5 text-xl flex items-center">
-            <BiSortAlt2 />
-          </button>
-        </p>
-      </div>
+      <JobListTop numOfJobs={numOfJobs} />
       {/* ⚠️ job-listのrepeat回数と横幅はブレイクポイント、画面幅によって変える */}
       <div className="w-full grid grid-cols-job-list gap-6">
         {/* width 310, height 400 */}

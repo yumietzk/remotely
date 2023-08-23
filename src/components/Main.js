@@ -65,9 +65,19 @@ function Main() {
   //     .then((data) => console.log(data));
   // }, []);
 
-  const filteredJobs = allJobs.filter(
-    (job) => selectedJobType.includes(formatString(job.job_type)) // ここに&&で続けてskillsのフイルター入れる
-  );
+  const filteredJobs = allJobs
+    .filter((job) =>
+      selectedJobType.length > 0
+        ? selectedJobType.includes(formatString(job.job_type))
+        : true
+    )
+    .filter((job) => {
+      return selectedSkill.length > 0
+        ? job.tags.some((item) => {
+            return selectedSkill.includes(formatString(item));
+          })
+        : true;
+    });
 
   function handleSelectedJobType(label) {
     const newSelected = createNewSelected(selectedJobType, label);
@@ -96,7 +106,13 @@ function Main() {
         />
       </Filters>
       {/* ⚠️ 横幅広げた時に今の状態だと不自然な空間ができる時がある */}
-      <JobList jobs={filteredJobsList} />
+      <JobList
+        jobs={
+          selectedJobType.length > 0 || selectedSkill.length > 0
+            ? filteredJobs
+            : allJobs
+        }
+      />
     </main>
   );
 }
