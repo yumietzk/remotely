@@ -1,6 +1,6 @@
-import Form from "./Form";
+// import SearchInput from "./SearchInput";
 
-function SubHeader() {
+function SubHeader({ children }) {
   return (
     <div className="bg-background-secondary text-white-primary px-40 py-12 w-full mx-auto text-center">
       <h1 className="text-[38px] leading-normal font-bold mb-3.5">
@@ -8,7 +8,7 @@ function SubHeader() {
       </h1>
       <p className="mb-4 text-xl">Search by positions.</p>
 
-      <Form />
+      {children}
     </div>
   );
 }

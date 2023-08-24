@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Filters from "./Filters";
 import Selection from "./Selection";
 import JobList from "./JobList";
-const data = require("../testData.json");
+// const data = require("../testData.json");
+import formatString from "../utils/formatString";
 
 const jobType = [
   "Full time",
@@ -14,58 +15,19 @@ const jobType = [
 
 const skill = ["React", "JavaScript", "iOS", "Android", "AWS"];
 
-const filteredJobsList = data.jobs.filter(
-  (job) =>
-    job.candidate_required_location === "Worldwide" ||
-    job.candidate_required_location.includes("Asia") ||
-    job.candidate_required_location.includes("Easter Asia") ||
-    job.candidate_required_location.includes("Japan")
-);
-
-function formatString(string) {
-  if (string.includes("_")) {
-    return string
-      .split("_")
-      .map((item) => item.toLowerCase())
-      .join("");
-  } else if (string.includes(" ")) {
-    return string
-      .split(" ")
-      .map((item) => item.toLowerCase())
-      .join("");
-  } else {
-    return string;
-  }
-}
-
 function createNewSelected(selected, label) {
-  let formattedLabel;
-  if (label.includes(" ")) {
-    formattedLabel = label
-      .split(" ")
-      .map((string) => string.toLowerCase())
-      .join("");
-  } else {
-    formattedLabel = label.toLowerCase();
-  }
+  const formattedLabel = label.replace(" ", "").toLowerCase();
 
   return selected.includes(formattedLabel)
     ? selected.filter((item) => item !== formattedLabel)
     : [...selected, formattedLabel];
 }
 
-function Main() {
-  const [allJobs, setAllJobs] = useState(filteredJobsList); // all software development jobs
+function Main({ jobs }) {
   const [selectedJobType, setSelectedJobType] = useState([]);
   const [selectedSkill, setSelectedSkill] = useState([]);
 
-  // useEffect(() => {
-  //   fetch("https://remotive.com/api/remote-jobs")
-  //     .then((res) => res.json())
-  //     .then((data) => console.log(data));
-  // }, []);
-
-  const filteredJobs = allJobs
+  const filteredJobs = jobs
     .filter((job) =>
       selectedJobType.length > 0
         ? selectedJobType.includes(formatString(job.job_type))
@@ -110,7 +72,7 @@ function Main() {
         jobs={
           selectedJobType.length > 0 || selectedSkill.length > 0
             ? filteredJobs
-            : allJobs
+            : jobs
         }
       />
     </main>
