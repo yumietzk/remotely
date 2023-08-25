@@ -1,11 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-function Checkbox({ label, callback }) {
+function Checkbox({ label, filterList, callback }) {
   const [isChecked, setIsChecked] = useState(false);
 
-  function handleCheck() {
+  useEffect(() => {
+    setIsChecked(filterList.includes(label) ? true : false);
+  }, [filterList, label]);
+
+  function handleCheck(e) {
     setIsChecked((isChecked) => !isChecked);
-    callback(label);
+    callback(e.target.value);
   }
 
   return (
@@ -14,7 +18,8 @@ function Checkbox({ label, callback }) {
         className="mr-3 w-4 h-4 rounded text-black focus:ring-black focus:ring-1"
         type="checkbox"
         name={label}
-        value={isChecked}
+        value={label}
+        checked={isChecked}
         onChange={handleCheck}
       />
       <label>{label}</label>

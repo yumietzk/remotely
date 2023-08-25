@@ -31,13 +31,25 @@ function getBackgroundColor(index) {
   return color;
 }
 
-function JobList({ jobs }) {
+function JobList({
+  filterList,
+  handleDeleteSelected,
+  jobs,
+  searchTerm,
+  handleResetSearch,
+}) {
   const numOfJobs = jobs.length;
 
   return (
     // pl-10
     <div className="col-start-3 pl-6">
-      <JobListTop numOfJobs={numOfJobs} />
+      <JobListTop
+        filterList={filterList}
+        handleDeleteSelected={handleDeleteSelected}
+        searchTerm={searchTerm}
+        numOfJobs={numOfJobs}
+        handleResetSearch={handleResetSearch}
+      />
       {/* ⚠️ job-listのrepeat回数と横幅はブレイクポイント、画面幅によって変える */}
       <div className="w-full grid grid-cols-job-list gap-6">
         {/* width 310, height 400 */}

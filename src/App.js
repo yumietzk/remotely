@@ -17,6 +17,7 @@ const filteredJobsList = data.jobs.filter(
 
 function App() {
   const [jobs, setJobs] = useState(filteredJobsList); // all software development jobs
+  const [searchTerm, setSearchTerm] = useState("");
 
   // useEffect(() => {
   //   fetch("https://remotive.com/api/remote-jobs")
@@ -25,8 +26,9 @@ function App() {
   // }, []);
 
   function handleSearch(term) {
-    const formattedSearchTerm = formatString(term);
+    setSearchTerm(term.trim());
 
+    const formattedSearchTerm = formatString(term);
     const newJobList = jobs.filter(
       (job) =>
         formatString(job.title).includes(formattedSearchTerm) ||
@@ -39,6 +41,11 @@ function App() {
     // 🤨compare with descriptionは難しそう
   }
 
+  function handleResetSearch() {
+    setSearchTerm("");
+    setJobs(filteredJobsList);
+  }
+
   return (
     // grid-cols-[300px_1fr]
     <div className="h-screen w-full grid grid-rows-[auto_auto_1fr] font-primary font-normal text-base text-black">
@@ -46,7 +53,11 @@ function App() {
       <SubHeader>
         <SearchInput handleSearch={handleSearch} />
       </SubHeader>
-      <Main jobs={jobs} />
+      <Main
+        jobs={jobs}
+        searchTerm={searchTerm}
+        handleResetSearch={handleResetSearch}
+      />
     </div>
   );
 }

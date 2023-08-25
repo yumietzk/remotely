@@ -1,17 +1,17 @@
-import { useState, useRef } from "react";
+import { useRef, useState } from "react";
 import { CiSearch } from "react-icons/ci";
 
 function SearchInput({ handleSearch }) {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [term, setTerm] = useState("");
 
   const inputRef = useRef(null);
 
   function handleSubmit(e) {
     e.preventDefault();
 
-    handleSearch(searchTerm);
+    handleSearch(term);
 
-    setSearchTerm("");
+    setTerm("");
     inputRef.current.blur();
   }
 
@@ -28,8 +28,8 @@ function SearchInput({ handleSearch }) {
         ref={inputRef}
         type="text"
         placeholder="try frontend, backend, fullstack, etc."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
+        value={term}
+        onChange={(e) => setTerm(e.target.value)}
       />
     </form>
   );
