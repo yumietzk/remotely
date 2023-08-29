@@ -1,11 +1,9 @@
-// ⚠️ Delete this component later!!! でも、全部ルーティング完成するまでは残しておく
-
-import { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
+import SubHeader from "./SubHeader";
+import SearchInput from "./SearchInput";
 import Filters from "./Filters";
 import Selection from "./Selection";
-import JobList from "./JobList";
-// const data = require("../testData.json");
 import formatString from "../utils/formatString";
 
 const jobType = [
@@ -32,7 +30,7 @@ function createNewSelected(selected, label) {
     : addItem(selected, label);
 }
 
-function Main({ jobs, searchTerm, handleResetSearch }) {
+function JobboardLayout({ jobs, searchTerm, handleSearch, handleResetSearch }) {
   const [selectedJobType, setSelectedJobType] = useState([]);
   const [selectedSkill, setSelectedSkill] = useState([]);
 
@@ -86,24 +84,34 @@ function Main({ jobs, searchTerm, handleResetSearch }) {
   }
 
   return (
-    // ⚠️ jobtitletopに、searchtermが入る時、左にバツ印入れるから、1frと言っても最小のpxは決めておく
-    <main className="pl-12 pr-9 py-9 bg-background-primary grid grid-cols-[250px_1fr_auto_1fr]">
-      <Filters>
-        <Selection
-          title="Job type"
-          labelData={jobType}
-          filterList={filterList}
-          handleSelected={handleSelectedJobType}
-        />
-        <Selection
-          title="Skill"
-          labelData={skill}
-          filterList={filterList}
-          handleSelected={handleSelectedSkill}
-        />
-      </Filters>
-      {/* ⚠️ 横幅広げた時に今の状態だと不自然な空間ができる時がある */}
-      {/* <JobList
+    <>
+      <SubHeader>
+        <SearchInput handleSearch={handleSearch} />
+      </SubHeader>
+      {/* <Main
+      // jobs={jobs}
+      // searchTerm={searchTerm}
+      // handleResetSearch={handleResetSearch}
+      /> */}
+
+      {/* ⚠️ jobtitletopに、searchtermが入る時、左にバツ印入れるから、1frと言っても最小のpxは決めておく */}
+      <main className="pl-12 pr-9 py-9 bg-background-primary grid grid-cols-[250px_1fr_auto_1fr]">
+        <Filters>
+          <Selection
+            title="Job type"
+            labelData={jobType}
+            filterList={filterList}
+            handleSelected={handleSelectedJobType}
+          />
+          <Selection
+            title="Skill"
+            labelData={skill}
+            filterList={filterList}
+            handleSelected={handleSelectedSkill}
+          />
+        </Filters>
+        {/* ⚠️ 横幅広げた時に今の状態だと不自然な空間ができる時がある */}
+        {/* <JobList
         filterList={filterList}
         handleDeleteSelected={handleDeleteSelected}
         jobs={
@@ -115,9 +123,10 @@ function Main({ jobs, searchTerm, handleResetSearch }) {
         handleResetSearch={handleResetSearch}
       /> */}
 
-      <Outlet />
-    </main>
+        <Outlet />
+      </main>
+    </>
   );
 }
 
-export default Main;
+export default JobboardLayout;

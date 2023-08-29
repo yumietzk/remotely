@@ -1,9 +1,15 @@
 import { useState } from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import AppLayout from "./components/AppLayout";
 import Header from "./components/Header";
 import SubHeader from "./components/SubHeader";
 import Main from "./components/Main";
 import SearchInput from "./components/SearchInput";
 import formatString from "./utils/formatString";
+import ErrorPage from "./components/ErrorPage";
+import SearchJobs from "./routes/SearchJobs";
+import JobboardLayout from "./components/JobboardLayout";
+import Homepage from "./components/Homepage";
 
 const data = require("./testData.json");
 
@@ -46,19 +52,47 @@ function App() {
     setJobs(filteredJobsList);
   }
 
+  // return (
+  //   // grid-cols-[300px_1fr]
+  //   <div className="h-screen w-full grid grid-rows-[auto_auto_1fr] font-primary font-normal text-base text-black">
+  //     <Header />
+  // <SubHeader>
+  //   <SearchInput handleSearch={handleSearch} />
+  // </SubHeader>
+  // <Main
+  //   jobs={jobs}
+  //   searchTerm={searchTerm}
+  //   handleResetSearch={handleResetSearch}
+  // />
+  //   </div>
+  // );
+
   return (
-    // grid-cols-[300px_1fr]
-    <div className="h-screen w-full grid grid-rows-[auto_auto_1fr] font-primary font-normal text-base text-black">
-      <Header />
-      <SubHeader>
-        <SearchInput handleSearch={handleSearch} />
-      </SubHeader>
-      <Main
-        jobs={jobs}
-        searchTerm={searchTerm}
-        handleResetSearch={handleResetSearch}
-      />
-    </div>
+    // <AppLayout>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<AppLayout />}>
+          <Route path="/" element={<Homepage />} />
+          <Route
+            element={
+              <JobboardLayout
+                jobs={jobs}
+                searchTerm={searchTerm}
+                handleSearch={handleSearch}
+                handleResetSearch={handleResetSearch}
+              />
+            }
+          >
+            <Route path="search" element={<SearchJobs />} />
+          </Route>
+          {/* <Route path="/" element={<JobboardLayout />}>
+            <Route index element={<SearchJobs />} />
+            <Route path="recommended" element={<SearchJobs />} />
+          </Route> */}
+        </Route>
+      </Routes>
+    </BrowserRouter>
+    // </AppLayout>
   );
 }
 
