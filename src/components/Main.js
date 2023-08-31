@@ -1,7 +1,4 @@
-// ⚠️ Delete this component later!!! でも、全部ルーティング完成するまでは残しておく
-
-import { useEffect, useState } from "react";
-import { Outlet } from "react-router-dom";
+import { useState } from "react";
 import Filters from "./Filters";
 import Selection from "./Selection";
 import JobList from "./JobList";
@@ -103,7 +100,7 @@ function Main({ jobs, searchTerm, handleResetSearch }) {
         />
       </Filters>
       {/* ⚠️ 横幅広げた時に今の状態だと不自然な空間ができる時がある */}
-      {/* <JobList
+      <JobList
         filterList={filterList}
         handleDeleteSelected={handleDeleteSelected}
         jobs={
@@ -113,9 +110,7 @@ function Main({ jobs, searchTerm, handleResetSearch }) {
         }
         searchTerm={searchTerm}
         handleResetSearch={handleResetSearch}
-      /> */}
-
-      <Outlet />
+      />
     </main>
   );
 }

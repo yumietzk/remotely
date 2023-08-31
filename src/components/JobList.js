@@ -1,3 +1,4 @@
+import JobListTop from "./JobListTop";
 import Job from "./Job";
 
 function getBackgroundColor(index) {
@@ -30,16 +31,35 @@ function getBackgroundColor(index) {
   return color;
 }
 
-function JobList({ jobs }) {
-  return (
-    // ⚠️ job-listのrepeat回数と横幅はブレイクポイント、画面幅によって変える
-    <div className="w-full grid grid-cols-job-list gap-6">
-      {/* width 310, height 400 */}
-      {jobs.map((job, i) => {
-        const color = getBackgroundColor(i);
+function JobList({
+  filterList,
+  handleDeleteSelected,
+  jobs,
+  searchTerm,
+  handleResetSearch,
+}) {
+  const numOfJobs = jobs.length;
 
-        return <Job key={job.id} job={job} bgColor={color} />;
-      })}
+  return (
+    // pl-10
+    <div className="col-start-3 pl-6">
+      <JobListTop
+        filterList={filterList}
+        handleDeleteSelected={handleDeleteSelected}
+        searchTerm={searchTerm}
+        numOfJobs={numOfJobs}
+        handleResetSearch={handleResetSearch}
+      />
+
+      {/* ⚠️ job-listのrepeat回数と横幅はブレイクポイント、画面幅によって変える */}
+      <div className="w-full grid grid-cols-job-list gap-6">
+        {/* width 310, height 400 */}
+        {jobs.map((job, i) => {
+          const color = getBackgroundColor(i);
+
+          return <Job key={job.id} job={job} bgColor={color} />;
+        })}
+      </div>
     </div>
   );
 }

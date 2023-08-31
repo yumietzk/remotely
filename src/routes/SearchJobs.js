@@ -1,28 +1,20 @@
-import JobListTop from "../components/JobListTop";
-import JobList from "../components/JobList";
+import SubHeader from "../components/SubHeader";
+import SearchInput from "../components/SearchInput";
+import Main from "../components/Main";
 
-function SearchJobs({
-  filterList,
-  handleDeleteSelected,
-  jobs,
-  searchTerm,
-  handleResetSearch,
-}) {
-  const numOfJobs = jobs.length;
-
+function SearchJobs({ handleSearch, jobs, searchTerm, handleResetSearch }) {
   return (
-    // ⚠️ 横幅広げた時に今の状態だと不自然な空間ができる時がある
-    // pl-10
-    <div className="col-start-3 pl-6">
-      <JobListTop
-        filterList={filterList}
-        handleDeleteSelected={handleDeleteSelected}
+    <>
+      <SubHeader>
+        <SearchInput handleSearch={handleSearch} />
+      </SubHeader>
+
+      <Main
+        jobs={jobs}
         searchTerm={searchTerm}
-        numOfJobs={numOfJobs}
         handleResetSearch={handleResetSearch}
       />
-      <JobList jobs={jobs} />
-    </div>
+    </>
   );
 }
 

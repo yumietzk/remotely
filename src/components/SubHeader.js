@@ -8,7 +8,7 @@ function SubHeader({ children }) {
       </h1>
       <p className="mb-4 text-xl">Search by positions.</p>
 
-      {/* {children} */}
+      {children}
     </div>
   );
 }
