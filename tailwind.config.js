@@ -23,7 +23,9 @@ module.exports = {
         },
       },
       fontFamily: {
-        primary: ["Quicksand"],
+        primary: ["Inter"],
+        // primary: ["Playfair Display"],
+        // primary: ["Quicksand"],
       },
       gridTemplateColumns: {
         "job-list": "repeat(3, 300px)",

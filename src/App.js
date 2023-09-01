@@ -1,50 +1,69 @@
-import { useState } from "react";
+// import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AppLayout from "./components/AppLayout";
-import formatString from "./utils/formatString";
-import SearchJobs from "./routes/SearchJobs";
+import SearchJobs from "./pages/SearchJobs";
 import Homepage from "./components/Homepage";
 
-const data = require("./testData.json");
+// const data = require("./testData.json");
 
-const filteredJobsList = data.jobs.filter(
-  (job) =>
-    job.candidate_required_location === "Worldwide" ||
-    job.candidate_required_location.includes("Asia") ||
-    job.candidate_required_location.includes("Easter Asia") ||
-    job.candidate_required_location.includes("Japan")
-);
+// const filteredJobsList = data.jobs.filter(
+//   (job) =>
+//     job.candidate_required_location === "Worldwide" ||
+//     job.candidate_required_location.includes("Asia") ||
+//     job.candidate_required_location.includes("Easter Asia") ||
+//     job.candidate_required_location.includes("Japan")
+// );
 
 function App() {
-  const [jobs, setJobs] = useState(filteredJobsList); // all software development jobs
-  const [searchTerm, setSearchTerm] = useState("");
+  // const [status, setStatus] = useState({ isLoading: false, error: "" });
+  // const [jobs, setJobs] = useState(filteredJobsList); // all software development jobs
+  // const [searchTerm, setSearchTerm] = useState("");
+
+  // const { isLoading, error } = status;
 
   // useEffect(() => {
-  //   fetch("https://remotive.com/api/remote-jobs")
-  //     .then((res) => res.json())
-  //     .then((data) => console.log(data));
+  //   const getJobs = async () => {
+  //     try {
+  //       setStatus({ ...status, isLoading: true, error: "" });
+
+  //       const res = await fetch(
+  //         "https://remotive.com/api/remote-jobs?limit=30"
+  //       );
+  //       const data = await res.json();
+  //       // console.log(data);
+
+  //       setJobs(data);
+  //     } catch (err) {
+  //       console.error(err);
+  //       setStatus({ ...status, error: err.message });
+  //     } finally {
+  //       setStatus({ ...status, isLoading: false });
+  //     }
+  //   };
+
+  //   getJobs();
   // }, []);
 
-  function handleSearch(term) {
-    setSearchTerm(term.trim());
+  // function handleSearch(term) {
+  //   setSearchTerm(term.trim());
 
-    const formattedSearchTerm = formatString(term);
-    const newJobList = jobs.filter(
-      (job) =>
-        formatString(job.title).includes(formattedSearchTerm) ||
-        job.tags.some((item) => {
-          return formatString(item).includes(formattedSearchTerm);
-        })
-    );
+  //   const formattedSearchTerm = formatString(term);
+  //   const newJobList = jobs.filter(
+  //     (job) =>
+  //       formatString(job.title).includes(formattedSearchTerm) ||
+  //       job.tags.some((item) => {
+  //         return formatString(item).includes(formattedSearchTerm);
+  //       })
+  //   );
 
-    setJobs(newJobList);
-    // 🤨compare with descriptionは難しそう
-  }
+  //   setJobs(newJobList);
+  //   // 🤨compare with descriptionは難しそう
+  // }
 
-  function handleResetSearch() {
-    setSearchTerm("");
-    setJobs(filteredJobsList);
-  }
+  // function handleResetSearch() {
+  //   setSearchTerm("");
+  //   setJobs(filteredJobsList);
+  // }
 
   // return (
   //   // grid-cols-[300px_1fr]
@@ -62,7 +81,6 @@ function App() {
   // );
 
   return (
-    // <AppLayout>
     <BrowserRouter>
       <Routes>
         <Route element={<AppLayout />}>
@@ -71,17 +89,19 @@ function App() {
             path="search"
             element={
               <SearchJobs
-                handleSearch={handleSearch}
+                isLoading={isLoading}
                 jobs={jobs}
                 searchTerm={searchTerm}
+                handleSearch={handleSearch}
                 handleResetSearch={handleResetSearch}
               />
             }
           />
+          <Route path="blog" element={<p>Blog</p>} />
+          <Route path="account" element={<p>User Account</p>} />
         </Route>
       </Routes>
     </BrowserRouter>
-    // </AppLayout>
   );
 }
 
