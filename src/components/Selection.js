@@ -1,6 +1,6 @@
 import Checkbox from "./Checkbox";
 
-function Selection({ title, labelData, filterList, handleSelected }) {
+function Selection({ title, labelData, filterList, onSelected }) {
   return (
     <div>
       <h4 className="text-white-secondary font-medium mb-3.5">{title}</h4>
@@ -10,7 +10,7 @@ function Selection({ title, labelData, filterList, handleSelected }) {
             key={label}
             label={label}
             filterList={filterList}
-            callback={handleSelected}
+            callback={onSelected}
           />
         ))}
       </div>

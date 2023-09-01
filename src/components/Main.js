@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Filters from "./Filters";
 import Selection from "./Selection";
-import JobList from "./JobList";
+import Content from "./Content";
 // const data = require("../testData.json");
 import formatString from "../utils/formatString";
 
@@ -29,7 +29,7 @@ function createNewSelected(selected, label) {
     : addItem(selected, label);
 }
 
-function Main({ jobs, searchTerm, handleResetSearch }) {
+function Main({ isLoading, jobs, searchTerm, onResetSearch }) {
   const [selectedJobType, setSelectedJobType] = useState([]);
   const [selectedSkill, setSelectedSkill] = useState([]);
 
@@ -42,19 +42,22 @@ function Main({ jobs, searchTerm, handleResetSearch }) {
     formatString(item)
   );
 
-  const filteredJobs = jobs
-    .filter((job) =>
-      selectedJobType.length > 0
-        ? formattedSelectedJobType.includes(formatString(job.job_type))
-        : true
-    )
-    .filter((job) => {
-      return selectedSkill.length > 0
-        ? job.tags.some((item) => {
-            return formattedSelectedSkill.includes(formatString(item));
+  const filteredJobs =
+    selectedJobType.length > 0 || selectedSkill.length > 0
+      ? jobs
+          .filter((job) =>
+            selectedJobType.length > 0
+              ? formattedSelectedJobType.includes(formatString(job.job_type))
+              : true
+          )
+          .filter((job) => {
+            return selectedSkill.length > 0
+              ? job.tags.some((item) => {
+                  return formattedSelectedSkill.includes(formatString(item));
+                })
+              : true;
           })
-        : true;
-    });
+      : jobs;
 
   function handleSelectedJobType(label) {
     const newSelected = createNewSelected(selectedJobType, label);
@@ -90,27 +93,27 @@ function Main({ jobs, searchTerm, handleResetSearch }) {
           title="Job type"
           labelData={jobType}
           filterList={filterList}
-          handleSelected={handleSelectedJobType}
+          onSelected={handleSelectedJobType}
         />
         <Selection
           title="Skill"
           labelData={skill}
           filterList={filterList}
-          handleSelected={handleSelectedSkill}
+          onSelected={handleSelectedSkill}
         />
       </Filters>
       {/* ⚠️ 横幅広げた時に今の状態だと不自然な空間ができる時がある */}
-      <JobList
-        filterList={filterList}
-        handleDeleteSelected={handleDeleteSelected}
-        jobs={
-          selectedJobType.length > 0 || selectedSkill.length > 0
-            ? filteredJobs
-            : jobs
-        }
-        searchTerm={searchTerm}
-        handleResetSearch={handleResetSearch}
-      />
+      {isLoading ? (
+        <p>loading...</p>
+      ) : (
+        <Content
+          filterList={filterList}
+          onDeleteSelected={handleDeleteSelected}
+          jobs={filteredJobs}
+          searchTerm={searchTerm}
+          onResetSearch={onResetSearch}
+        />
+      )}
     </main>
   );
 }

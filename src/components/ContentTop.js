@@ -2,12 +2,12 @@ import FilterItemList from "./FilterItemList";
 import Sort from "./Sort";
 import { CiCircleRemove } from "react-icons/ci";
 
-function JobListTop({
+function ContentTop({
   filterList,
-  handleDeleteSelected,
+  onDeleteSelected,
   searchTerm,
   numOfJobs,
-  handleResetSearch,
+  onResetSearch,
 }) {
   return (
     <div className="mb-10 flex items-center relative">
@@ -21,7 +21,7 @@ function JobListTop({
 
       <FilterItemList
         filterList={filterList}
-        handleDeleteSelected={handleDeleteSelected}
+        onDeleteSelected={onDeleteSelected}
       />
 
       {/* <Sort /> */}
@@ -29,7 +29,7 @@ function JobListTop({
       {searchTerm && (
         <button
           className="border-none absolute -left-6"
-          onClick={handleResetSearch}
+          onClick={onResetSearch}
         >
           <CiCircleRemove className="w-7 h-7" />
         </button>
@@ -38,4 +38,4 @@ function JobListTop({
   );
 }
 
-export default JobListTop;
+export default ContentTop;

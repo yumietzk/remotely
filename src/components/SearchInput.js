@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { CiSearch } from "react-icons/ci";
 
-function SearchInput({ handleSearch }) {
+function SearchInput({ onSearch }) {
   const [term, setTerm] = useState("");
 
   const inputRef = useRef(null);
@@ -9,7 +9,7 @@ function SearchInput({ handleSearch }) {
   function handleSubmit(e) {
     e.preventDefault();
 
-    handleSearch(term);
+    onSearch(term);
 
     setTerm("");
     inputRef.current.blur();

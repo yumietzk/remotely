@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import image from "../assets/homepage-image.png";
+import image from "../assets/image2.png";
 
 function Homepage() {
   return (
@@ -11,13 +11,13 @@ function Homepage() {
       </p>
       <Link
         to="/search"
-        className="px-5 py-3.5 rounded border border-white-secondary text-2xl"
+        className="px-5 py-3.5 rounded border border-white-secondary text-2xl transition-colors duration-300 hover:bg-accent-1 hover:border-accent-1 hover:text-black"
       >
         Get started!
       </Link>
 
-      <div className="absolute bottom-0 right-0 flex justify-end">
-        <img className="w-[950px] h-auto" src={image} alt="Homepage" />
+      <div className="absolute bottom-0 right-16 flex justify-end">
+        <img className="h-[650px] w-auto" src={image} alt="Homepage" />
       </div>
     </div>
   );

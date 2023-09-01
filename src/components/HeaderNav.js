@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
-const nav = ["Search jobs", "Recommended", "Blog"];
-const path = ["search", "recommended", "blog"];
+const nav = ["Search jobs", "Blog"];
+const path = ["search", "blog"];
 
 function HeaderNav() {
   return (

@@ -74,7 +74,7 @@ function JobProvider({ children }) {
 function useJob() {
   const context = useContext(JobContext);
   if (context === undefined) {
-    throw new Error("JobContext is used in a wrong place!");
+    throw new Error("JobContext is used outside the JobProvider");
   }
 
   return context;
