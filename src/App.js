@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AppLayout from "./components/AppLayout";
 import Homepage from "./components/Homepage";
 import SearchJobs from "./pages/SearchJobs";
-import Blog from "./pages/Blog";
+import News from "./pages/News";
 
 function App() {
   // return (
@@ -26,7 +26,7 @@ function App() {
         <Route element={<AppLayout />}>
           <Route path="/" element={<Homepage />} />
           <Route path="search" element={<SearchJobs />} />
-          <Route path="blog" element={<Blog />} />
+          <Route path="news" element={<News />} />
           <Route path="account" element={<p>User Account</p>} />
         </Route>
       </Routes>
