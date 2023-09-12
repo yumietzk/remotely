@@ -1,4 +1,4 @@
-export default function formatString(string) {
+export function formatString(string) {
   return string
     .trim()
     .replace(" ", "")

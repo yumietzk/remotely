@@ -3,7 +3,7 @@ import Filters from "./Filters";
 import Selection from "./Selection";
 import Content from "./Content";
 // const data = require("../testData.json");
-import formatString from "../utils/formatString";
+import { formatString } from "../utils/formatString";
 
 const jobType = [
   "Full time",

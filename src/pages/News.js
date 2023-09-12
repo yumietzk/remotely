@@ -35,11 +35,11 @@ function News() {
   // }, []);
 
   return (
-    <div className="px-12 py-9 bg-background-primary row-span-2">
+    <div className="px-12 py-9 bg-background-primary row-span-2 h-max">
       <h1 className="text-4xl font-bold mb-3 text-center">
         The latest tech news
       </h1>
-      <p className="text-lg text-center">
+      <p className="text-lg text-center mb-16">
         Learn how to grow your business with our expert advice.
       </p>
 

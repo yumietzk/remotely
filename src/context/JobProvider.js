@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import formatString from "../utils/formatString";
+import { formatString } from "../utils/formatString";
 
 const JobContext = createContext();
 

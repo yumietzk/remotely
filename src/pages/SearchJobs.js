@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import SubHeader from "../components/SubHeader";
 import SearchInput from "../components/SearchInput";
 import Main from "../components/Main";
-import formatString from "../utils/formatString";
+import { formatString } from "../utils/formatString";
 
 const data = require("../testData.json");
 
