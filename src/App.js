@@ -3,6 +3,7 @@ import AppLayout from "./components/AppLayout";
 import Homepage from "./components/Homepage";
 import SearchJobs from "./pages/SearchJobs";
 import News from "./pages/News";
+import UserAccount from "./pages/UserAccount";
 
 function App() {
   // return (
@@ -27,7 +28,7 @@ function App() {
           <Route path="/" element={<Homepage />} />
           <Route path="search" element={<SearchJobs />} />
           <Route path="news" element={<News />} />
-          <Route path="account" element={<p>User Account</p>} />
+          <Route path="account" element={<UserAccount />} />
         </Route>
       </Routes>
     </BrowserRouter>

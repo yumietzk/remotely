@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import HeaderNav from "./HeaderNav";
 import Location from "./Location";
-import UserAccount from "./UserAccount";
+import UserIcon from "./UserIcon";
 
 function Header() {
   return (
@@ -12,7 +12,7 @@ function Header() {
       </div>
       <HeaderNav />
       <Location />
-      <UserAccount />
+      <UserIcon />
     </header>
   );
 }
