@@ -4,6 +4,7 @@ import Homepage from "./components/Homepage";
 import SearchJobs from "./pages/SearchJobs";
 import News from "./pages/News";
 import UserAccount from "./pages/UserAccount";
+import CreatAccount from "./pages/CreatAccount";
 
 function App() {
   // return (
@@ -28,7 +29,9 @@ function App() {
           <Route path="/" element={<Homepage />} />
           <Route path="search" element={<SearchJobs />} />
           <Route path="news" element={<News />} />
-          <Route path="account" element={<UserAccount />} />
+          <Route path="account" element={<UserAccount />}>
+            <Route path="create" element={<CreatAccount />} />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>
