@@ -1,7 +1,21 @@
 import { Link } from "react-router-dom";
 import image from "../assets/image2.png";
+import { useEffect, useState } from "react";
+import { supabase } from "../supabase";
 
 function Homepage() {
+  const [users, setUsers] = useState([]);
+  // console.log(users);
+
+  useEffect(() => {
+    const getData = async () => {
+      const { data } = await supabase.from("users").select();
+      setUsers(data);
+    };
+
+    getData();
+  }, []);
+
   return (
     <div className="row-span-2 bg-background-secondary text-white-primary px-16 pt-12 relative">
       <h1 className="text-6xl font-bold mb-3">Find Your New Remote Job</h1>

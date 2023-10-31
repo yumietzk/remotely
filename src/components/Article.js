@@ -2,7 +2,6 @@ import { formatDate } from "../utils/formatDate";
 import { truncateString } from "../utils/truncateString";
 
 function Article({ news, tempImage, btnColor }) {
-  console.log(news);
   const { title, description, image_url, link, creator, pubDate } = news;
 
   return (

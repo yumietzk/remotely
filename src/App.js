@@ -5,6 +5,8 @@ import SearchJobs from "./pages/SearchJobs";
 import News from "./pages/News";
 import UserAccount from "./pages/UserAccount";
 import CreatAccount from "./pages/CreatAccount";
+import { useEffect, useState } from "react";
+import { supabase } from "./supabase";
 
 function App() {
   // return (
