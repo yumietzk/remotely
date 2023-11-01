@@ -3,6 +3,8 @@ import image from "../assets/image2.png";
 import { useEffect, useState } from "react";
 import { supabase } from "../supabase";
 
+// ⚠️ ToppagenのフォントはDribbleのやつみたいに変更する
+// ⚠️ これはprivate, public routeがあるから後回し！
 function Homepage() {
   const [users, setUsers] = useState([]);
   // console.log(users);
@@ -17,7 +19,7 @@ function Homepage() {
   }, []);
 
   return (
-    <div className="row-span-2 bg-background-secondary text-white-primary px-16 pt-12 relative">
+    <div className="row-span-2 bg-green-400 text-white px-16 pt-12 relative">
       <h1 className="text-6xl font-bold mb-3">Find Your New Remote Job</h1>
       <p className="text-2xl mb-16">
         We help you find your new Software Engineer job available from where you

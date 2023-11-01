@@ -1,30 +1,49 @@
 /** @type {import('tailwindcss').Config} */
 
+const colors = require("tailwindcss/colors");
+
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
-    extend: {
-      colors: {
-        white: {
-          primary: "#fafaf9",
-          secondary: "#a8a29e",
-        },
-        black: "#1c1917",
-        background: {
-          primary: "#f5f5f4",
-          secondary: "#09090b",
-          white: "#fff",
-        },
-        accent: {
-          1: "#e3dbfa",
-          2: "#fbe2f4",
-          3: "#ffe1cc",
-          4: "#d4f6ed",
-        },
+    colors: {
+      transparent: "transparent",
+      current: "currentColor",
+      black: colors.black,
+      white: colors.white,
+      gray: {
+        100: "#b1bfbc",
+        200: "#888f8c",
       },
+      green: {
+        100: "#e0e8da",
+        200: "#bfc54e",
+        300: "#0cbf5e",
+        400: "#273b33",
+      },
+      accent: "#dff376",
+    },
+    extend: {
+      // colors: {
+      //   white: {
+      //     primary: "#fafaf9",
+      //     secondary: "#a8a29e",
+      //   },
+      //   black: "#1c1917",
+      //   background: {
+      //     primary: "#f5f5f4",
+      //     secondary: "#09090b",
+      //     white: "#fff",
+      //   },
+      //   accent: {
+      //     1: "#e3dbfa",
+      //     2: "#fbe2f4",
+      //     3: "#ffe1cc",
+      //     4: "#d4f6ed",
+      //   },
+      // },
       fontFamily: {
         primary: ["Inter"],
-        // primary: ["Playfair Display"],
+        secondary: ["Playfair Display"],
         // primary: ["Quicksand"],
       },
       gridTemplateColumns: {
@@ -35,3 +54,15 @@ module.exports = {
   },
   plugins: [require("@tailwindcss/forms")],
 };
+
+// Colors:
+// #e0e8da
+// #dff376
+// #bfc54e
+// #0cbf5e
+// #273b33
+
+// #dee7e2
+
+// #b1bfbc
+// #888f8c

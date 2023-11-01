@@ -6,7 +6,8 @@ import UserIcon from "./UserIcon";
 function Header() {
   return (
     // "/"の時は背景白、それ以外は黒???
-    <header className="bg-background-secondary text-white-primary px-12 flex items-center">
+    // bg-background-secondary
+    <header className="bg-white text-white-primary px-12 flex items-center">
       <div className="flex-none py-9 mr-16 font-bold">
         <Link to="/">🌎 Remote from 🇯🇵</Link>
       </div>

@@ -28,6 +28,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route element={<AppLayout />}>
+          {/* ⚠️ Fix Homepage later */}
           <Route path="/" element={<Homepage />} />
           <Route path="search" element={<SearchJobs />} />
           <Route path="news" element={<News />} />

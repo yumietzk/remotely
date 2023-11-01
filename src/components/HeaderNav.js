@@ -10,7 +10,7 @@ function HeaderNav() {
         {nav.map((item, i) => (
           <li
             key={item}
-            className="h-full flex items-center cursor-pointer hover:text-white hover:border-b-[0.3px] hover:border-white-primary"
+            className="h-full flex items-center cursor-pointer hover:text-white hover:border-b-[0.3px] hover:border-white"
           >
             <Link to={`/${path[i]}`}>{item}</Link>
           </li>
