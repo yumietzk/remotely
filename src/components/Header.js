@@ -1,19 +1,16 @@
-import { Link } from "react-router-dom";
-import HeaderNav from "./HeaderNav";
 import Location from "./Location";
 import UserIcon from "./UserIcon";
 
 function Header() {
   return (
-    // "/"の時は背景白、それ以外は黒???
-    // bg-background-secondary
-    <header className="bg-white text-white-primary px-12 flex items-center">
-      <div className="flex-none py-9 mr-16 font-bold">
-        <Link to="/">🌎 Remote from 🇯🇵</Link>
+    <header className="text-white-primary flex items-center mb-8">
+      <h2 className="flex-none mr-16 font-semibold text-2xl">
+        Good morning, Ollie!
+      </h2>
+      <div className="flex-1 flex justify-end">
+        <UserIcon />
+        <Location />
       </div>
-      <HeaderNav />
-      <Location />
-      <UserIcon />
     </header>
   );
 }

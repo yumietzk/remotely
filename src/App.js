@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AppLayout from "./components/AppLayout";
-import Homepage from "./components/Homepage";
+import Dashboard from "./components/Dashboard";
 import SearchJobs from "./pages/SearchJobs";
 import News from "./pages/News";
 import UserAccount from "./pages/UserAccount";
@@ -24,12 +24,13 @@ function App() {
   //   </div>
   // );
 
+  /* ⚠️ Fix Route later */
   return (
     <BrowserRouter>
       <Routes>
         <Route element={<AppLayout />}>
-          {/* ⚠️ Fix Homepage later */}
-          <Route path="/" element={<Homepage />} />
+          {/* <Route path="/" element={<Dashboard />} /> */}
+          <Route path="dashboard" element={<Dashboard />} />
           <Route path="search" element={<SearchJobs />} />
           <Route path="news" element={<News />} />
           <Route path="account" element={<UserAccount />}>

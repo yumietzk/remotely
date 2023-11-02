@@ -8,10 +8,9 @@ function AppLayout() {
     <div className="h-screen w-full flex font-primary font-normal text-base text-green-400">
       <Sidebar />
 
-      <div className="flex-1">
-        <p className="bg-green-100 h-full">Header</p>
-        {/* <Header /> */}
-        {/* <Outlet /> */}
+      <div className="flex-1 bg-green-100 h-full overflow-y-scroll py-5 px-9 rounded-l-3xl">
+        <Header />
+        <Outlet />
       </div>
     </div>
   );

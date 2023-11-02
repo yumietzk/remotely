@@ -5,7 +5,7 @@ import { supabase } from "../supabase";
 
 // ⚠️ ToppagenのフォントはDribbleのやつみたいに変更する
 // ⚠️ これはprivate, public routeがあるから後回し！
-function Homepage() {
+function Toppage() {
   const [users, setUsers] = useState([]);
   // console.log(users);
 
@@ -33,10 +33,10 @@ function Homepage() {
       </Link>
 
       <div className="absolute bottom-0 right-16 flex justify-end">
-        <img className="h-[650px] w-auto" src={image} alt="Homepage" />
+        <img className="h-[650px] w-auto" src={image} alt="toppage" />
       </div>
     </div>
   );
 }
 
-export default Homepage;
+export default Toppage;
