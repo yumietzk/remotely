@@ -155,27 +155,29 @@ function SearchJobs() {
 
   return (
     <>
-      <SubHeader>
-        <SearchInput onSearch={handleSearch} />
-        <FilterButton filterOpen={filterOpen} setFilterOpen={setFilterOpen} />
-      </SubHeader>
+      <div className="mb-12">
+        <SubHeader>
+          <SearchInput onSearch={handleSearch} />
+          <FilterButton filterOpen={filterOpen} setFilterOpen={setFilterOpen} />
+        </SubHeader>
 
-      {filterOpen && (
-        <div className="mb-2">
-          <Selection
-            title="Job type"
-            labelData={jobType}
-            filterList={filterList}
-            onSelected={handleSelectedJobType}
-          />
-          <Selection
-            title="Skill"
-            labelData={skill}
-            filterList={filterList}
-            onSelected={handleSelectedSkill}
-          />
-        </div>
-      )}
+        {filterOpen && (
+          <div className="mt-4 space-y-3">
+            <Selection
+              title="Job type"
+              labelData={jobType}
+              filterList={filterList}
+              onSelected={handleSelectedJobType}
+            />
+            <Selection
+              title="Skill"
+              labelData={skill}
+              filterList={filterList}
+              onSelected={handleSelectedSkill}
+            />
+          </div>
+        )}
+      </div>
 
       <Main
         isLoading={isLoading}

@@ -12,7 +12,8 @@ function Content({
 
   return (
     // pl-10
-    <div className="">
+    // <div className="">
+    <>
       <ContentTop
         filterList={filterList}
         onDeleteSelected={onDeleteSelected}
@@ -22,7 +23,8 @@ function Content({
       />
 
       <JobPage jobs={jobs} />
-    </div>
+    </>
+    // </div>
   );
 }
 

@@ -1,11 +1,12 @@
 import Checkbox from "./Checkbox";
 
 function Selection({ title, labelData, filterList, onSelected }) {
-  // space-y-3
   return (
     <div>
-      <h4 className="bg-gray-200 font-medium mb-3.5">{title}</h4>
-      <div className="flex font-medium space-x-3.5">
+      <h4 className="inline-block bg-gray-200 py-1 px-2.5 text-sm rounded-full text-white mb-1.5">
+        {title}
+      </h4>
+      <div className="flex text-sm space-x-4">
         {labelData.map((label) => (
           <Checkbox
             key={label}

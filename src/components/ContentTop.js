@@ -10,7 +10,7 @@ function ContentTop({
   onResetSearch,
 }) {
   return (
-    <div className="mb-10 flex items-center relative">
+    <div className="mb-8 flex items-center relative">
       {/* All jobs / Recommended jobs / {search term} jobs */}
       <h2 className="text-4xl font-bold mr-5">
         {searchTerm ? searchTerm : "All"} jobs
@@ -28,10 +28,10 @@ function ContentTop({
 
       {searchTerm && (
         <button
-          className="border-none absolute -left-6"
+          className="border-none absolute -left-7"
           onClick={onResetSearch}
         >
-          <CiCircleRemove className="w-7 h-7" />
+          <CiCircleRemove className="w-6 h-6" />
         </button>
       )}
     </div>
