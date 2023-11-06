@@ -19,7 +19,7 @@ function Toppage() {
   }, []);
 
   return (
-    <div className="row-span-2 bg-green-400 text-white px-16 pt-12 relative">
+    <div className="row-span-2 bg-green-500 text-white px-16 pt-12 relative">
       <h1 className="text-6xl font-bold mb-3">Find Your New Remote Job</h1>
       <p className="text-2xl mb-16">
         We help you find your new Software Engineer job available from where you

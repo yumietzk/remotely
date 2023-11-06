@@ -28,7 +28,7 @@ function Article({ news, tempImage }) {
 
       <div className="mt-11 flex justify-end">
         <a
-          className="bg-gray-100 px-3.5 py-2 text-white rounded text-sm text-right hover:bg-green-400"
+          className="bg-gray-100 px-3.5 py-2 text-white rounded text-sm text-right hover:bg-green-500"
           href={link}
           target="_blank"
           rel="noreferrer"

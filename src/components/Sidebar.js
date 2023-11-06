@@ -57,7 +57,7 @@ function Sidebar() {
         {data.map((item, i) => (
           <li
             key={item.nav}
-            className="py-3 px-3.5 rounded-xl cursor-pointer transition duration-300 hover:bg-green-400 hover:text-white"
+            className="py-3 px-3.5 rounded-xl cursor-pointer transition duration-300 hover:bg-green-500 hover:text-white"
           >
             <Link to={item.path} className="flex items-center">
               {renderIcon(item.nav)}

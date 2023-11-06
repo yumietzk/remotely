@@ -19,7 +19,8 @@ module.exports = {
         100: "#e0e8da",
         200: "#bfc54e",
         300: "#0cbf5e",
-        400: "#273b33",
+        400: "#40634d",
+        500: "#273b33",
       },
       accent: "#dff376",
     },
@@ -49,6 +50,7 @@ module.exports = {
       },
       gridTemplateColumns: {
         "job-list": "repeat(3, 300px)",
+        "kanban-board": "repeat(6, 280px)",
         // "job-list": "repeat(auto-fit, minmax(310px, 1fr))",
       },
     },
@@ -62,6 +64,8 @@ module.exports = {
 // #bfc54e
 // #0cbf5e
 // #273b33
+
+// #778e82
 
 // #dee7e2
 // #f0f4f3
