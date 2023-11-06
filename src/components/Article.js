@@ -1,7 +1,7 @@
 import { formatDate } from "../utils/formatDate";
 import { truncateString } from "../utils/truncateString";
 
-function Article({ news, tempImage, btnColor }) {
+function Article({ news, tempImage }) {
   const { title, description, image_url, link, creator, pubDate } = news;
 
   return (
@@ -28,7 +28,7 @@ function Article({ news, tempImage, btnColor }) {
 
       <div className="mt-11 flex justify-end">
         <a
-          className={`bg-white-secondary px-3.5 py-2 text-white-primary rounded text-sm text-right hover:${btnColor} hover:text-black`}
+          className="bg-gray-100 px-3.5 py-2 text-white rounded text-sm text-right hover:bg-green-400"
           href={link}
           target="_blank"
           rel="noreferrer"
