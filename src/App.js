@@ -1,12 +1,13 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AppLayout from "./components/AppLayout";
-import Dashboard from "./components/Dashboard";
+import Dashboard from "./pages/Dashboard";
 import SearchJobs from "./pages/SearchJobs";
 import News from "./pages/News";
 import UserAccount from "./pages/UserAccount";
 import CreatAccount from "./pages/CreatAccount";
 import { useEffect, useState } from "react";
 import { supabase } from "./supabase";
+import Profile from "./pages/Profile";
 
 function App() {
   // return (
@@ -31,7 +32,7 @@ function App() {
         <Route element={<AppLayout />}>
           {/* <Route path="/" element={<Dashboard />} /> */}
           <Route path="dashboard" element={<Dashboard />} />
-          <Route path="profile" element={<Dashboard />} />
+          <Route path="profile" element={<Profile />} />
           <Route path="myJobs" element={<Dashboard />} />
           <Route path="search" element={<SearchJobs />} />
           <Route path="news" element={<News />} />

@@ -1,5 +1,4 @@
 import Article from "./Article";
-import { getBackgroundColor } from "../utils/getBackgroundColor";
 
 // Placeholder image
 const placeholderImg = [
@@ -19,7 +18,7 @@ function ArticleList({ news }) {
           key={item.title}
           news={item}
           tempImage={placeholderImg[i]}
-          btnColor={getBackgroundColor(i + 1)}
+          btnColor=""
         />
       ))}
     </div>

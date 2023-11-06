@@ -1,5 +1,4 @@
 import Job from "./Job";
-import { getBackgroundColor } from "../utils/getBackgroundColor";
 
 function JobList({ jobs }) {
   return (
@@ -7,9 +6,7 @@ function JobList({ jobs }) {
     <div className="w-full grid grid-cols-job-list gap-6">
       {/* width 310, height 400 */}
       {jobs.map((job, i) => {
-        const color = getBackgroundColor(i);
-
-        return <Job key={job.id} job={job} bgColor={color} />;
+        return <Job key={job.id} job={job} bgColor="" />;
       })}
     </div>
   );
