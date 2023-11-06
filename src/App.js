@@ -8,6 +8,7 @@ import CreatAccount from "./pages/CreatAccount";
 import { useEffect, useState } from "react";
 import { supabase } from "./supabase";
 import Profile from "./pages/Profile";
+import MyJobs from "./pages/MyJobs";
 
 function App() {
   // return (
@@ -33,8 +34,8 @@ function App() {
           {/* <Route path="/" element={<Dashboard />} /> */}
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="profile" element={<Profile />} />
-          <Route path="myJobs" element={<Dashboard />} />
-          <Route path="search" element={<SearchJobs />} />
+          <Route path="myJobs" element={<MyJobs />} />
+          <Route path="searchJobs" element={<SearchJobs />} />
           <Route path="news" element={<News />} />
           <Route path="account" element={<UserAccount />}>
             <Route path="create" element={<CreatAccount />} />
