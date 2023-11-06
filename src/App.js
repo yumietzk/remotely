@@ -31,11 +31,14 @@ function App() {
         <Route element={<AppLayout />}>
           {/* <Route path="/" element={<Dashboard />} /> */}
           <Route path="dashboard" element={<Dashboard />} />
+          <Route path="profile" element={<Dashboard />} />
+          <Route path="myJobs" element={<Dashboard />} />
           <Route path="search" element={<SearchJobs />} />
           <Route path="news" element={<News />} />
           <Route path="account" element={<UserAccount />}>
             <Route path="create" element={<CreatAccount />} />
           </Route>
+          <Route path="delete" element={<Dashboard />} />
         </Route>
       </Routes>
     </BrowserRouter>

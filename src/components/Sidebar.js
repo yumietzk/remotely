@@ -57,7 +57,15 @@ function renderIcon(text) {
   }
 }
 
-// const path = ["search", "news"];
+const path = [
+  "dashboard",
+  "profile",
+  "myJobs",
+  "search",
+  "news",
+  "account",
+  "delete",
+];
 
 function Sidebar() {
   return (
@@ -70,7 +78,7 @@ function Sidebar() {
             key={nav}
             className="py-3 px-3.5 rounded-xl cursor-pointer transition duration-300 hover:bg-green-400 hover:text-white"
           >
-            <Link to="" className="flex items-center">
+            <Link to={path[i]} className="flex items-center">
               {renderIcon(nav)}
               {nav}
             </Link>
