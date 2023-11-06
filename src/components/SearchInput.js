@@ -16,15 +16,13 @@ function SearchInput({ onSearch }) {
   }
 
   return (
-    <form
-      className="w-8/12 mx-auto flex items-center justify-center"
-      onSubmit={handleSubmit}
-    >
+    <form className="w-96 flex items-center mr-2" onSubmit={handleSubmit}>
       <button className="relative left-0" type="submit">
-        <CiSearch className="text-black w-6 h-6 bg-background-primary" />
+        <CiSearch className="text-current w-5 h-5 bg-white" />
       </button>
+      {/* 💡 fix the ring outline later, and placeholder font size and color */}
       <input
-        className="w-10/12 border-none bg-background-primary -ml-9 rounded-3xl pl-12 pr-7 text-black"
+        className="flex-1 border-none bg-white -ml-7 rounded-3xl pl-12 pr-7 py-1 text-current"
         ref={inputRef}
         type="text"
         placeholder="try frontend, backend, fullstack, etc."

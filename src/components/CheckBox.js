@@ -15,7 +15,7 @@ function Checkbox({ label, filterList, callback }) {
   return (
     <div className="flex items-center">
       <input
-        className="mr-3 w-4 h-4 rounded text-black focus:ring-black focus:ring-1"
+        className="mr-2 w-4 h-4 rounded text-black focus:ring-black focus:ring-1"
         type="checkbox"
         name={label}
         value={label}

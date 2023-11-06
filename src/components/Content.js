@@ -12,7 +12,7 @@ function Content({
 
   return (
     // pl-10
-    <div className="col-start-3 pl-6">
+    <div className="">
       <ContentTop
         filterList={filterList}
         onDeleteSelected={onDeleteSelected}

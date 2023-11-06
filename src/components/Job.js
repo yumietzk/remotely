@@ -26,16 +26,14 @@ function Job({ job, bgColor }) {
   } = job;
 
   return (
-    <div className="border border-white-secondary p-1 rounded-2xl bg-background-white">
-      <div
-        className={`${bgColor} rounded-2xl p-4 h-60 flex flex-col justify-between`}
-      >
-        <div className="mb-8 flex justify-between items-center">
-          <p className="bg-background-white px-2.5 py-2 rounded-3xl text-sm font-medium">
+    <div className="p-1.5 rounded-2xl bg-white">
+      <div className="bg-green-50 rounded-2xl p-4 h-56 flex flex-col justify-between">
+        <div className="mb-6 flex justify-between items-center">
+          <p className="bg-accent px-2.5 py-2 rounded-3xl text-sm font-medium">
             {formatDate(publication_date)}
           </p>
           <button>
-            <CiBookmark className="bg-background-white w-9 h-9 p-2 rounded-full" />
+            <CiBookmark className="bg-accent w-9 h-9 p-2 rounded-full" />
           </button>
         </div>
 
@@ -52,7 +50,7 @@ function Job({ job, bgColor }) {
         </div>
 
         <div>
-          <span className="border border-white-secondary px-2 py-1.5 rounded-3xl text-xs font-medium">
+          <span className="border border-gray-100 px-2 py-1.5 rounded-3xl text-xs font-medium">
             {formatJobType(job_type)}
           </span>
         </div>
@@ -63,7 +61,7 @@ function Job({ job, bgColor }) {
         <div>
           {/* あとでreact router使う */}
           <a
-            className="bg-background-secondary px-3.5 py-2 text-white-primary rounded-3xl text-sm"
+            className="bg-gray-200 px-3.5 py-2 rounded-3xl text-sm text-white"
             href={url}
             target="_blank"
             rel="noreferrer"

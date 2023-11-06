@@ -15,7 +15,7 @@ function ContentTop({
       <h2 className="text-4xl font-bold mr-5">
         {searchTerm ? searchTerm : "All"} jobs
       </h2>
-      <span className="mr-5 px-3.5 py-1 rounded-3xl border border-white text-2xl font-bold">
+      <span className="mr-5 px-3.5 py-1 rounded-3xl border border-gray-200 text-2xl font-bold">
         {numOfJobs}
       </span>
 

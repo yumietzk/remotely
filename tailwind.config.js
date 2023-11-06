@@ -15,6 +15,7 @@ module.exports = {
         200: "#888f8c",
       },
       green: {
+        50: "#f0f4f3",
         100: "#e0e8da",
         200: "#bfc54e",
         300: "#0cbf5e",
@@ -63,6 +64,7 @@ module.exports = {
 // #273b33
 
 // #dee7e2
+// #f0f4f3
 
 // #b1bfbc
 // #888f8c

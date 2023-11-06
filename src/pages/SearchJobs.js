@@ -3,13 +3,70 @@ import SubHeader from "../components/SubHeader";
 import SearchInput from "../components/SearchInput";
 import Main from "../components/Main";
 import { formatString } from "../utils/formatString";
+import FilterButton from "../components/FilterButton";
+import Selection from "../components/Selection";
 
 const data = require("../testData.json");
+
+const jobType = [
+  "Full time",
+  "Part time",
+  "Contract",
+  "Internship",
+  "Freelance",
+];
+
+const skill = ["React", "JavaScript", "iOS", "Android", "AWS"];
+
+function addItem(array, item) {
+  return [...array, item];
+}
+
+function deleteItem(array, item) {
+  return array.filter((cur) => cur !== item);
+}
+
+function createNewSelected(selected, label) {
+  return selected.includes(label)
+    ? deleteItem(selected, label)
+    : addItem(selected, label);
+}
 
 function SearchJobs() {
   const [status, setStatus] = useState({ isLoading: false, error: "" });
   const [jobs, setJobs] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+
+  const [selectedJobType, setSelectedJobType] = useState([]);
+  const [selectedSkill, setSelectedSkill] = useState([]);
+
+  const [filterOpen, setFilterOpen] = useState(false);
+
+  const filterList = [...selectedJobType, ...selectedSkill];
+
+  const formattedSelectedJobType = selectedJobType.map((item) =>
+    formatString(item)
+  );
+  const formattedSelectedSkill = selectedSkill.map((item) =>
+    formatString(item)
+  );
+
+  const filteredJobs =
+    selectedJobType.length > 0 || selectedSkill.length > 0
+      ? jobs
+          .filter((job) =>
+            selectedJobType.length > 0
+              ? formattedSelectedJobType.includes(formatString(job.job_type))
+              : true
+          )
+          .filter((job) => {
+            return selectedSkill.length > 0
+              ? job.tags.some((item) => {
+                  return formattedSelectedSkill.includes(formatString(item));
+                })
+              : true;
+          })
+      : jobs;
 
   const { isLoading, error } = status;
 
@@ -28,6 +85,7 @@ function SearchJobs() {
   useEffect(() => {
     setStatus((status) => ({ ...status, isLoading: true, error: "" }));
     // ⚠️ 本来は、まずここで全部のjobを引っ張ってきた後に、このavailable listを計算する感じ。
+    // 💡 In the below case, extract jobs available in Japan
     const availableJobsList = data.jobs.filter(
       (job) =>
         job.candidate_required_location === "Worldwide" ||
@@ -69,17 +127,64 @@ function SearchJobs() {
     setSearchTerm("");
   }
 
+  function handleSelectedJobType(label) {
+    const newSelected = createNewSelected(selectedJobType, label);
+
+    setSelectedJobType(newSelected);
+  }
+
+  function handleSelectedSkill(label) {
+    const newSelected = createNewSelected(selectedSkill, label);
+
+    setSelectedSkill(newSelected);
+  }
+
+  function handleDeleteSelected(item) {
+    if (selectedJobType.includes(item)) {
+      const newSelected = deleteItem(selectedJobType, item);
+
+      setSelectedJobType(newSelected);
+    }
+
+    if (selectedSkill.includes(item)) {
+      const newSelected = deleteItem(selectedSkill, item);
+
+      setSelectedSkill(newSelected);
+    }
+  }
+
   return (
     <>
       <SubHeader>
         <SearchInput onSearch={handleSearch} />
+        <FilterButton filterOpen={filterOpen} setFilterOpen={setFilterOpen} />
       </SubHeader>
+
+      {filterOpen && (
+        <div className="mb-2">
+          <Selection
+            title="Job type"
+            labelData={jobType}
+            filterList={filterList}
+            onSelected={handleSelectedJobType}
+          />
+          <Selection
+            title="Skill"
+            labelData={skill}
+            filterList={filterList}
+            onSelected={handleSelectedSkill}
+          />
+        </div>
+      )}
 
       <Main
         isLoading={isLoading}
         jobs={searchedJobs}
         searchTerm={searchTerm}
         onResetSearch={handleResetSearch}
+        filterList={filterList}
+        handleDeleteSelected={handleDeleteSelected}
+        filteredJobs={filteredJobs}
       />
     </>
   );
