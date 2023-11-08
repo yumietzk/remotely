@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const formLabels = ["Full name", "Email", "Password"];
+const formLabels = ["First name", "Last name", "Email", "Password"];
 
 function createName(label) {
   const splitted = label.split(" ");

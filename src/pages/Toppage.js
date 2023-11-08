@@ -19,21 +19,26 @@ function Toppage() {
   }, []);
 
   return (
-    <div className="row-span-2 bg-green-500 text-white px-16 pt-12 relative">
+    <div className="h-screen w-full font-primary font-normal text-base bg-green-500 text-white px-16 py-10">
+      <header className="mb-7">
+        <div className="text-4xl font-medium font-secondary">Remotely 🌎</div>
+      </header>
+
       <h1 className="text-6xl font-bold mb-3">Find Your New Remote Job</h1>
       <p className="text-2xl mb-16">
         We help you find your new Software Engineer job available from where you
         are located.
       </p>
       <Link
-        to="/search"
-        className="px-5 py-3.5 rounded border border-white-secondary text-2xl transition-colors duration-300 hover:bg-accent-1 hover:border-accent-1 hover:text-black"
+        // 💡 gonna navigate to either dashboard page or sign up page
+        to="dashboard"
+        className="px-5 py-3.5 rounded border border-white text-2xl transition-colors duration-300 hover:bg-gray-100 hover:border-gray-100 hover:text-black"
       >
         Get started!
       </Link>
 
-      <div className="absolute bottom-0 right-16 flex justify-end">
-        <img className="h-[650px] w-auto" src={image} alt="toppage" />
+      <div className="absolute bottom-0 right-32 flex justify-end">
+        <img className="h-[500px] w-auto" src={image} alt="toppage" />
       </div>
     </div>
   );

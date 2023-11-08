@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "./supabase";
 import Profile from "./pages/Profile";
 import MyJobs from "./pages/MyJobs";
+import Toppage from "./pages/Toppage";
 
 function App() {
   // return (
@@ -30,6 +31,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<Toppage />} />
         <Route element={<AppLayout />}>
           {/* <Route path="/" element={<Dashboard />} /> */}
           <Route path="dashboard" element={<Dashboard />} />
