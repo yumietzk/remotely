@@ -10,6 +10,8 @@ import { supabase } from "./supabase";
 import Profile from "./pages/Profile";
 import MyJobs from "./pages/MyJobs";
 import Toppage from "./pages/Toppage";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
 
 function App() {
   // return (
@@ -32,6 +34,8 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Toppage />} />
+        <Route path="signin" element={<SignIn />} />
+        <Route path="signup" element={<SignUp />} />
         <Route element={<AppLayout />}>
           {/* <Route path="/" element={<Dashboard />} /> */}
           <Route path="dashboard" element={<Dashboard />} />
