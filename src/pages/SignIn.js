@@ -1,8 +1,53 @@
+import { useEffect, useState } from "react";
+import { CiWarning } from "react-icons/ci";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { supabase } from "../supabase";
 
 // ⚠️ Need back to the top page button?
 function SignIn() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  // const [session, setSession] = useState(null);
+
+  const navigate = useNavigate();
+
+  // useEffect(() => {
+  //   supabase.auth.getSession().then(({ data: { session } }) => {
+  //     setSession(session);
+  //   });
+
+  //   const {
+  //     data: { subscription },
+  //   } = supabase.auth.onAuthStateChange((_event, session) => {
+  //     setSession(session);
+  //   });
+
+  //   return () => subscription.unsubscribe();
+  // }, []);
+
+  // // You can configure the Auth component to display whenever there is no session inside supabase.auth.getSession()
+  // console.log(session);
+
+  // if (!session) {
+  //   return <div className="text-black">Nothing here</div>;
+  // }
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) setError(error.message);
+    if (data?.user) navigate("/dashboard");
+  }
+
+  console.log(error);
+
   return (
     <div className="h-screen w-full px-12 py-7 font-primary font-normal text-base bg-green-500 text-white flex flex-col items-center justify-center">
       <h3 className="mb-4">
@@ -10,7 +55,17 @@ function SignIn() {
       </h3>
       <p className="mb-12 text-2xl">Sign in to your account</p>
 
-      <form className="bg-green-100 py-10 px-11 rounded-md text-green-500 flex flex-col space-y-10">
+      {error && (
+        <p className="text-red mb-1 flex items-center relative -left-[135px]">
+          <CiWarning className="h-5 w-5 mr-1" />
+          {error}
+        </p>
+      )}
+
+      <form
+        className="bg-green-100 py-10 px-11 rounded-md text-green-500 flex flex-col space-y-10"
+        onSubmit={handleSubmit}
+      >
         <div className="flex flex-col space-y-7 font-medium">
           <label className="flex flex-col">
             Email address
@@ -18,7 +73,9 @@ function SignIn() {
               className="w-96 border border-gray-100 rounded-lg p-2 font-normal focus:outline-none focus:ring focus:ring-gray-200"
               type="text"
               name="email"
+              value={email}
               placeholder="Enter your email"
+              onChange={(e) => setEmail(e.target.value)}
             />
           </label>
 
@@ -28,7 +85,9 @@ function SignIn() {
               className="w-96 border border-gray-100 rounded-lg p-2 font-normal focus:outline-none focus:ring focus:ring-gray-200"
               type="password"
               name="password"
+              value={password}
               placeholder="Enter your password"
+              onChange={(e) => setPassword(e.target.value)}
             />
           </label>
         </div>
