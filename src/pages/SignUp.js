@@ -6,35 +6,46 @@ import { supabase } from "../supabase";
 
 // ⚠️ Need back to the top page button?
 function SignUp() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [data, setData] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (!email || !password) return;
+
     async function signUpNewUser() {
       const { data, error } = await supabase.auth.signUp({
-        email: "test@test.com",
-        password: "test1234",
+        email,
+        password,
       });
 
       console.log(data, error);
-      setData(data);
-      setError(error ? error.message : null);
+      // setData(data);
+
+      if (error) {
+        setError(error.message);
+      } else {
+        setError(null);
+        navigate("/dashboard");
+      }
 
       // ⚠️ Find out if I can do this with supabase, currently both data and error are returned to null
       // 💡 also if the user hasn't registered their name yet, navigate to the profile setting
-      if (!error) navigate("/dashboard");
     }
 
     signUpNewUser();
 
     // const { data: { user } } = await supabase.auth.getUser()
-  }, [navigate]);
+  }, []);
 
   return (
     <div className="h-screen w-full px-12 py-7 font-primary font-normal text-base bg-green-500 text-white flex flex-col items-center justify-center overflow-y-scroll">
       <h3 className="mb-4">
-        <div className="text-3xl font-medium font-secondary">Remotely 🌎</div>
+        <Link className="text-3xl font-medium font-secondary" to="/">
+          Remotely 🌎
+        </Link>
       </h3>
       <p className="mb-12 text-2xl">Sign up now</p>
 
@@ -73,7 +84,9 @@ function SignUp() {
               className="w-96 border border-gray-100 rounded-lg p-2 font-normal focus:outline-none focus:ring focus:ring-gray-200"
               type="text"
               name="email"
+              value={email}
               placeholder="Enter your email"
+              onChange={(e) => setEmail(e.target.value)}
             />
           </label>
 
@@ -83,7 +96,9 @@ function SignUp() {
               className="w-96 border border-gray-100 rounded-lg p-2 font-normal focus:outline-none focus:ring focus:ring-gray-200"
               type="password"
               name="password"
+              value={password}
               placeholder="Enter your password"
+              onChange={(e) => setPassword(e.target.value)}
             />
           </label>
         </div>

@@ -6,7 +6,7 @@ import UserModal from "./UserModal";
 function UserIcon() {
   const [isShown, setIsShown] = useState(false);
 
-  console.log(isShown);
+  // console.log(isShown);
 
   const navigate = useNavigate();
 
