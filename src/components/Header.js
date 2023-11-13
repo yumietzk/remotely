@@ -6,8 +6,8 @@ import { data } from "../sidebarData";
 function Header() {
   const { pathname } = useLocation();
 
-  const targetItem = data.find((item) => item.path === pathname.slice(1));
-  const title = targetItem.title || targetItem.nav;
+  const targetItem = data.find((item) => item.path === pathname?.slice(1));
+  const title = targetItem?.title || targetItem?.nav;
 
   return (
     <header className="text-white-primary flex items-center mb-10">

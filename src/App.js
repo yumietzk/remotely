@@ -1,12 +1,12 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { supabase } from "./supabase";
 import AppLayout from "./components/AppLayout";
 import Dashboard from "./pages/Dashboard";
 import SearchJobs from "./pages/SearchJobs";
 import News from "./pages/News";
 import UserAccount from "./pages/UserAccount";
 import CreatAccount from "./pages/CreatAccount";
-import { useEffect, useState } from "react";
-import { supabase } from "./supabase";
 import Profile from "./pages/Profile";
 import MyJobs from "./pages/MyJobs";
 import Toppage from "./pages/Toppage";
@@ -14,28 +14,36 @@ import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 
 function App() {
-  // const [session, setSession] = useState(null);
-  // console.log(session);
+  const [user, setUser] = useState(null);
 
-  // useEffect(() => {
-  //   supabase.auth.getSession().then(({ data: { session } }) => {
-  //     setSession(session);
-  //   });
+  useEffect(() => {
+    async function getUser() {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      setUser(user);
+    }
 
-  //   supabase.auth.onAuthStateChange((_event, session) => {
-  //     setSession(session);
-  //   });
-  // }, []);
+    getUser();
+  }, []);
 
   /* ⚠️ Fix Route later */
+
+  if (!user)
+    return (
+      <BrowserRouter>
+        <Routes>
+          <Route exact path="/" element={<Toppage />} />
+          <Route path="signin" element={<SignIn />} />
+          <Route path="signup" element={<SignUp />} />
+        </Routes>
+      </BrowserRouter>
+    );
+
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Toppage />} />
-        <Route path="signin" element={<SignIn />} />
-        <Route path="signup" element={<SignUp />} />
         <Route element={<AppLayout />}>
-          {/* <Route path="/" element={<Dashboard />} /> */}
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="profile" element={<Profile />} />
           <Route path="myJobs" element={<MyJobs />} />
@@ -45,6 +53,7 @@ function App() {
             <Route path="create" element={<CreatAccount />} />
           </Route>
           <Route path="delete" element={<Dashboard />} />
+          <Route path="/" element={<Navigate to="dashboard" />} />
         </Route>
       </Routes>
     </BrowserRouter>
