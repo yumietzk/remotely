@@ -14,20 +14,18 @@ import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 
 function App() {
-  // return (
-  //   // grid-cols-[300px_1fr]
-  //   <div className="h-screen w-full grid grid-rows-[auto_auto_1fr] font-primary font-normal text-base text-black">
-  //     <Header />
-  //     <SubHeader>
-  //       <SearchInput handleSearch={handleSearch} />
-  //     </SubHeader>
-  //     <Main
-  //       jobs={jobs}
-  //       searchTerm={searchTerm}
-  //       handleResetSearch={handleResetSearch}
-  //     />
-  //   </div>
-  // );
+  // const [session, setSession] = useState(null);
+  // console.log(session);
+
+  // useEffect(() => {
+  //   supabase.auth.getSession().then(({ data: { session } }) => {
+  //     setSession(session);
+  //   });
+
+  //   supabase.auth.onAuthStateChange((_event, session) => {
+  //     setSession(session);
+  //   });
+  // }, []);
 
   /* ⚠️ Fix Route later */
   return (

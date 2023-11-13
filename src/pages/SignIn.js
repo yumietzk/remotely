@@ -8,6 +8,7 @@ import { supabase } from "../supabase";
 function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   // const [session, setSession] = useState(null);
 
@@ -37,16 +38,27 @@ function SignIn() {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
+    try {
+      setIsLoading(true);
+      setError("");
 
-    if (error) setError(error.message);
-    if (data?.user) navigate("/dashboard");
+      if (!email || !password) return;
+
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (error) throw new Error(`Something went wrong: ${error.message}`);
+
+      if (data?.user) navigate("/dashboard");
+    } catch (err) {
+      console.error(err);
+      setError(err.message);
+    } finally {
+      setIsLoading(false);
+    }
   }
-
-  console.log(error);
 
   return (
     <div className="h-screen w-full px-12 py-7 font-primary font-normal text-base bg-green-500 text-white flex flex-col items-center justify-center">
@@ -94,8 +106,16 @@ function SignIn() {
           </label>
         </div>
 
-        <button className="border-none bg-green-400 text-white py-2 rounded-lg transition-colors duration-300 hover:bg-green-500">
-          Sign in
+        <button
+          className={`border-none ${
+            isLoading ? "bg-gray-100" : "bg-green-400"
+          } text-white py-2 rounded-lg transition-colors duration-300 ${
+            !isLoading && "hover:bg-green-500"
+          }`}
+          type="submit"
+          disabled={isLoading}
+        >
+          {isLoading ? "Loading..." : "Sign in"}
         </button>
 
         <p className="flex items-center before:h-[1px] before:grow before:bg-gray-100 before:mr-3 after:h-[1px] after:grow after:bg-gray-100 after:ml-3">

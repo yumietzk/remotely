@@ -1,44 +1,42 @@
 import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { CiWarning } from "react-icons/ci";
 import { FcGoogle } from "react-icons/fc";
-import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "../supabase";
 
 // ⚠️ Need back to the top page button?
 function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [data, setData] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!email || !password) return;
+  async function handleSubmit(e) {
+    e.preventDefault();
 
-    async function signUpNewUser() {
+    try {
+      setIsLoading(true);
+      setError("");
+
+      if (!email || !password) return;
+
       const { data, error } = await supabase.auth.signUp({
         email,
         password,
       });
 
-      console.log(data, error);
-      // setData(data);
+      if (error) throw new Error(`Something went wrong: ${error.message}`);
 
-      if (error) {
-        setError(error.message);
-      } else {
-        setError(null);
-        navigate("/dashboard");
-      }
-
-      // ⚠️ Find out if I can do this with supabase, currently both data and error are returned to null
-      // 💡 also if the user hasn't registered their name yet, navigate to the profile setting
+      if (data?.user) navigate("/dashboard");
+    } catch (err) {
+      console.error(err);
+      setError(err.message);
+    } finally {
+      setIsLoading(false);
     }
-
-    signUpNewUser();
-
-    // const { data: { user } } = await supabase.auth.getUser()
-  }, []);
+  }
 
   return (
     <div className="h-screen w-full px-12 py-7 font-primary font-normal text-base bg-green-500 text-white flex flex-col items-center justify-center overflow-y-scroll">
@@ -49,14 +47,17 @@ function SignUp() {
       </h3>
       <p className="mb-12 text-2xl">Sign up now</p>
 
-      {error && (
+      {error ? (
         <p className="text-red mb-1 flex items-center relative -left-[135px]">
           <CiWarning className="h-5 w-5 mr-1" />
           {error}
         </p>
-      )}
+      ) : null}
 
-      <form className="bg-green-100 py-10 px-11 rounded-md text-green-500 flex flex-col space-y-10">
+      <form
+        className="bg-green-100 py-10 px-11 rounded-md text-green-500 flex flex-col space-y-10"
+        onSubmit={handleSubmit}
+      >
         <div className="flex flex-col space-y-7 font-medium">
           {/* <label className="flex flex-col">
             First name
@@ -103,8 +104,15 @@ function SignUp() {
           </label>
         </div>
 
-        <button className="border-none bg-green-400 text-white py-2 rounded-lg transition-colors duration-300 hover:bg-green-500">
-          Sign up
+        <button
+          className={`border-none ${
+            isLoading ? "bg-gray-100" : "bg-green-400"
+          } text-white py-2 rounded-lg transition-colors duration-300 ${
+            !isLoading && "hover:bg-green-500"
+          }`}
+          disabled={isLoading}
+        >
+          {isLoading ? "Loading..." : "Sign up"}
         </button>
 
         <p className="flex items-center before:h-[1px] before:grow before:bg-gray-100 before:mr-3 after:h-[1px] after:grow after:bg-gray-100 after:ml-3">

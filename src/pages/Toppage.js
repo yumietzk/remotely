@@ -7,7 +7,6 @@ import { supabase } from "../supabase";
 // ⚠️ これはprivate, public routeがあるから後回し！
 function Toppage() {
   const [user, setUser] = useState(null);
-  // console.log(user);
 
   useEffect(() => {
     async function getUser() {
@@ -19,8 +18,6 @@ function Toppage() {
 
     getUser();
   }, []);
-
-  function handleClick() {}
 
   return (
     <div className="h-screen w-full font-primary font-normal text-base bg-green-500 text-white px-12 py-7">
@@ -34,8 +31,8 @@ function Toppage() {
         are located.
       </p>
       <Link
-        to="/dashboard"
-        // 💡 gonna navigate to either dashboard page or sign up page
+        to={!user ? "/signin" : "/dashboard"}
+        // 💡 gonna navigate to either dashboard page or sign up page, if already signed in, go to dashboard
         className="px-5 py-3.5 rounded border border-white text-2xl transition-colors duration-300 hover:bg-gray-100 hover:border-gray-100 hover:text-black"
         // onClick={handleClick}
       >
