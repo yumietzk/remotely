@@ -29,7 +29,15 @@ function SignUp() {
 
       if (error) throw new Error(`Something went wrong: ${error.message}`);
 
-      if (data?.user) navigate("/dashboard");
+      if (data?.user) {
+        const { error } = await supabase
+          .from("profiles")
+          .insert({ userId: data?.user.id });
+
+        if (error) throw new Error(`Something went wrong: ${error.message}`);
+
+        navigate("/dashboard");
+      }
     } catch (err) {
       console.error(err);
       setError(err.message);

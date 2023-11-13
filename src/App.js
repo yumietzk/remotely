@@ -17,6 +17,13 @@ function App() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
+    async function signOut() {
+      const { error } = await supabase.auth.signOut();
+    }
+    signOut();
+  });
+
+  useEffect(() => {
     async function getUser() {
       const {
         data: { user },
@@ -52,7 +59,7 @@ function App() {
           <Route path="account" element={<UserAccount />}>
             <Route path="create" element={<CreatAccount />} />
           </Route>
-          <Route path="delete" element={<Dashboard />} />
+          <Route path="/delete" element={<Dashboard />} />
           <Route path="/" element={<Navigate to="dashboard" />} />
         </Route>
       </Routes>

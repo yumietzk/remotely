@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { supabase } from "../supabase";
 
 // const formLabels = ["First name", "Last name", "Email", "Password"];
@@ -15,12 +15,29 @@ import { supabase } from "../supabase";
 //   return name;
 // }
 
-function Profile() {
+function Profile({ user }) {
   const [image, setImage] = useState("");
   // ⚠️ try to limit the only png/jpeg etc extentions for the file
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [country, setCountry] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+
+  const { id: userId } = user;
+
+  // useEffect(() => {
+  //   // async function fetchData() {
+  //   //   const { data, error } = await supabase.from("profiles").select();
+  //   //   console.log(data);
+  //   // }
+  //   // fetchData();
+
+  //   async function createData() {
+  //     const { error } = await supabase.from("profiles").insert({ userId });
+  //   }
+  //   createData();
+  // }, []);
 
   function handleImageUpload(e) {
     console.log(e.target.files[0]);
@@ -35,16 +52,26 @@ function Profile() {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    const { error } = await supabase
-      .from("profiles")
-      .insert({ firstName, lastName });
+    try {
+      setIsLoading(true);
+      setError("");
 
-    if (error) {
-      setError(error.message);
+      const { error } = await supabase
+        .from("profiles")
+        .insert({ firstName, lastName, country });
+
+      if (error) throw new Error(`Something went wrong: ${error.message}`);
+
+      alert("Added");
+    } catch (err) {
+      console.error(err);
+      setError(err.message);
+    } finally {
+      setIsLoading(false);
+      setFirstName("");
+      setLastName("");
+      setCountry("");
     }
-
-    setFirstName("");
-    setLastName("");
   }
 
   // 💡 add more fields later
@@ -79,6 +106,18 @@ function Profile() {
             value={lastName}
             placeholder="Enter your last name"
             onChange={(e) => setLastName(e.target.value)}
+          />
+        </label>
+
+        <label className="flex flex-col">
+          Which country are you based out of?
+          <input
+            className="rounded-lg px-2 py-1 border border-gray-100 text-current"
+            type="text"
+            name="country"
+            value={country}
+            placeholder="Enter the country you are based out of"
+            onChange={(e) => setCountry(e.target.value)}
           />
         </label>
 
