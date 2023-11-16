@@ -5,6 +5,10 @@ import {
   CiFaceSmile,
   CiFaceFrown,
 } from "react-icons/ci";
+import { supabase } from "../supabase";
+import { useNavigate } from "react-router-dom";
+import { useUser } from "../contexts/UserProvider";
+import { useEffect } from "react";
 
 const metrics = [
   { number: 10, status: "Applied" },
@@ -40,6 +44,18 @@ function renderIcon(text) {
 }
 
 function Dashboard() {
+  const navigate = useNavigate();
+  const { user, getUser } = useUser();
+
+  useEffect(() => {
+    if (!user) navigate("/");
+  }, [user, navigate]);
+
+  async function handleSignOut() {
+    const { error } = await supabase.auth.signOut();
+    if (!error) getUser();
+  }
+
   return (
     <div className="grid grid-rows-2 grid-cols-2 gap-6">
       <div className="col-span-2 grid grid-cols-4 gap-4">
@@ -65,7 +81,10 @@ function Dashboard() {
         {/* CiFaceFrown */}
       </div>
       <div className="bg-white rounded-xl">Glaph</div>
-      <div className="bg-white rounded-xl">Saved jobs from recent</div>
+      <div className="bg-white rounded-xl">
+        Saved jobs from recent
+        <button onClick={handleSignOut}>Sign out</button>
+      </div>
     </div>
   );
 }

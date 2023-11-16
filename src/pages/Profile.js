@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../supabase";
+import { useUser } from "../contexts/UserProvider";
 
 // const formLabels = ["First name", "Last name", "Email", "Password"];
 
@@ -15,7 +16,7 @@ import { supabase } from "../supabase";
 //   return name;
 // }
 
-function Profile({ user }) {
+function Profile() {
   const [image, setImage] = useState("");
   // ⚠️ try to limit the only png/jpeg etc extentions for the file
   const [firstName, setFirstName] = useState("");
@@ -24,7 +25,8 @@ function Profile({ user }) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const { id: userId } = user;
+  // const { user } = useUser();
+  // const { id: userId } = user;
 
   // useEffect(() => {
   //   // async function fetchData() {

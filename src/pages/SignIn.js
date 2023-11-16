@@ -3,16 +3,23 @@ import { CiWarning } from "react-icons/ci";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "../supabase";
+import { useUser } from "../contexts/UserProvider";
 
 // ⚠️ Need back to the top page button?
 function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [data, setData] = useState("");
   const [error, setError] = useState("");
   // const [session, setSession] = useState(null);
 
+  const { user, getUser } = useUser();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) navigate("/dashboard");
+  }, [user, navigate]);
 
   // useEffect(() => {
   //   supabase.auth.getSession().then(({ data: { session } }) => {
@@ -51,7 +58,7 @@ function SignIn() {
 
       if (error) throw new Error(`Something went wrong: ${error.message}`);
 
-      if (data?.user) navigate("/dashboard");
+      if (data?.user) getUser();
     } catch (err) {
       console.error(err);
       setError(err.message);

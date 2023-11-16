@@ -2,10 +2,12 @@ import { Link } from "react-router-dom";
 import image from "../assets/image2.png";
 import { useEffect, useState } from "react";
 import { supabase } from "../supabase";
+import { useUser } from "../contexts/UserProvider";
 
 // ⚠️ ToppagenのフォントはDribbleのやつみたいに変更する
 // ⚠️ これはprivate, public routeがあるから後回し！
 function Toppage() {
+  const { user } = useUser();
   // const [user, setUser] = useState(null);
 
   // useEffect(() => {
@@ -31,7 +33,7 @@ function Toppage() {
         are located.
       </p>
       <Link
-        to="/signin"
+        to={user ? "/dashboard" : "/signin"}
         // 💡 gonna navigate to either dashboard page or sign up page, if already signed in, go to dashboard
         className="px-5 py-3.5 rounded border border-white text-2xl transition-colors duration-300 hover:bg-gray-100 hover:border-gray-100 hover:text-black"
         // onClick={handleClick}
