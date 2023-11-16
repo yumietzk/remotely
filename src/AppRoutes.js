@@ -1,12 +1,10 @@
-import { useEffect, useState } from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { supabase } from "./supabase";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AppLayout from "./components/AppLayout";
 import Dashboard from "./pages/Dashboard";
 import SearchJobs from "./pages/SearchJobs";
 import News from "./pages/News";
 import UserAccount from "./pages/UserAccount";
-import CreatAccount from "./pages/CreatAccount";
+// import CreatAccount from "./pages/CreatAccount";
 import Profile from "./pages/Profile";
 import MyJobs from "./pages/MyJobs";
 import Toppage from "./pages/Toppage";
@@ -17,29 +15,7 @@ import ProtectedRoute from "./routes/ProtectedRoute";
 
 function AppRoutes() {
   const { user } = useUser();
-  // console.log(user);
-
-  // useEffect(() => {
-  //   async function signOut() {
-  //     const { error } = await supabase.auth.signOut();
-  //   }
-  //   signOut();
-  // });
-
-  /* ⚠️ Fix Route later */
-
-  // if (!user)
-  //   return (
-  //     <BrowserRouter>
-  //       <Routes>
-  //         <Route path="/" element={<Toppage />} />
-  //         <Route path="/signin" element={<SignIn />} />
-  //         <Route path="/signup" element={<SignUp />} />
-  //       </Routes>
-  //     </BrowserRouter>
-  //   );
-
-  // if (!user) return <Navigate
+  console.log(user);
 
   return (
     <BrowserRouter>
