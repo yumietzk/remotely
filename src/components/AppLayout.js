@@ -1,6 +1,8 @@
 import { Outlet } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import Header from "./Header";
+import { useEffect } from "react";
+import { supabase } from "../supabase";
 
 function AppLayout() {
   return (

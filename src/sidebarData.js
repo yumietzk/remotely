@@ -1,5 +1,5 @@
 export const data = [
-  { nav: "Dashboard", path: "dashboard", title: "Good morning, Ollie!" },
+  { nav: "Dashboard", path: "dashboard" },
   { nav: "My Profile", path: "profile" },
   { nav: "My Jobs", path: "myJobs" },
   { nav: "Search Jobs", path: "searchJobs" },
