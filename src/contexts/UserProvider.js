@@ -4,7 +4,8 @@ import { supabase } from "../supabase";
 const UserContext = createContext();
 
 function UserProvider({ children }) {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState("");
+  const [profileData, setProfileData] = useState("");
 
   async function getUser() {
     const {
@@ -13,11 +14,25 @@ function UserProvider({ children }) {
     setUser(user);
   }
 
+  // 💡get user data here too
+  async function getProfileData() {
+    const { data, error } = await supabase.from("profiles").select();
+
+    if (error) return;
+    setProfileData(data[0]);
+  }
+
   useEffect(() => {
     getUser();
   }, []);
 
-  const value = { user, getUser };
+  useEffect(() => {
+    if (!user) return;
+
+    getProfileData();
+  }, [user]);
+
+  const value = { user, profileData, getUser, getProfileData };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 }

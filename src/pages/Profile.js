@@ -17,7 +17,7 @@ import { useUser } from "../contexts/UserProvider";
 // }
 
 function Profile() {
-  const [image, setImage] = useState("");
+  const [imageUrl, setAvatarUrl] = useState(null);
   // ⚠️ try to limit the only png/jpeg etc extentions for the file
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -25,30 +25,40 @@ function Profile() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const { user } = useUser();
-  const { id } = user;
+  const {
+    user: { id },
+    profileData,
+    getProfileData,
+  } = useUser();
 
-  // useEffect(() => {
-  //   // async function fetchData() {
-  //   //   const { data, error } = await supabase.from("profiles").select();
-  //   //   console.log(data);
-  //   // }
-  //   // fetchData();
+  console.log(imageUrl, profileData);
 
-  //   async function createData() {
-  //     const { error } = await supabase.from("profiles").insert({ userId });
-  //   }
-  //   createData();
-  // }, []);
+  useEffect(() => {
+    if (!profileData) return;
 
-  function handleImageUpload(e) {
-    console.log(e.target.files[0]);
+    const { firstName, lastName, country } = profileData;
+    setFirstName(firstName);
+    setLastName(lastName);
+    setCountry(country);
+  }, [profileData]);
 
-    const file = e.target.files;
-
-    if (file && file[0]) {
-      setImage(file[0]);
+  async function handleUploadImage(e) {
+    if (!e.target.files || e.target.files.length === 0) {
+      return;
     }
+
+    const file = e.target.files[0];
+    const filePath = `${id}/${file.name}`;
+
+    // Upload a file
+    const { data, error } = await supabase.storage
+      .from("images")
+      .upload(filePath, file);
+
+    if (error) {
+    }
+
+    console.log(data);
   }
 
   async function handleSubmit(e) {
@@ -87,15 +97,19 @@ function Profile() {
 
       <form className="flex flex-col space-y-12" onSubmit={handleSubmit}>
         <div className="flex flex-col space-y-7 font-medium">
-          <div>
-            <label>Profile picture</label>
+          <label className="flex flex-col">
+            Profile picture
+            {/* <label className="button primary block" htmlFor="single">
+              {uploading ? "Uploading ..." : ""}
+            </label> */}
             <input
               className="font-normal"
               type="file"
-              name="profile"
-              onChange={handleImageUpload}
+              name="image"
+              onChange={handleUploadImage}
             />
-          </div>
+            <img src={imageUrl} alt="" />
+          </label>
 
           <label className="flex flex-col">
             First name
@@ -168,7 +182,11 @@ function Profile() {
           type="submit"
           disabled={isLoading}
         >
-          {isLoading ? "Loading..." : "Save"}
+          {isLoading
+            ? "Loading..."
+            : firstName || lastName || country
+            ? "Update"
+            : "Save"}
         </button>
       </form>
     </div>
