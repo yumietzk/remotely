@@ -1,10 +1,9 @@
 import { Outlet } from "react-router-dom";
-import Sidebar from "./Sidebar";
-import Header from "./Header";
+import Sidebar from "./layout/Sidebar";
+import Header from "./layout/Header";
 
 function AppLayout() {
   return (
-    // <div className="h-screen w-full grid grid-rows-[auto_auto_1fr] font-primary font-normal text-base text-black">
     <div className="h-screen w-full flex font-primary font-normal text-base text-green-500 z-0">
       <Sidebar />
 

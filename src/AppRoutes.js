@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AppLayout from "./components/AppLayout";
+import ProtectedRoute from "./routes/ProtectedRoute";
 import Dashboard from "./pages/Dashboard";
 import SearchJobs from "./pages/SearchJobs";
 import News from "./pages/News";
@@ -10,13 +11,8 @@ import MyJobs from "./pages/MyJobs";
 import Toppage from "./pages/Toppage";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
-import { useUser } from "./contexts/UserProvider";
-import ProtectedRoute from "./routes/ProtectedRoute";
 
 function AppRoutes() {
-  const { user } = useUser();
-  console.log(user);
-
   return (
     <BrowserRouter>
       <Routes>
@@ -31,13 +27,10 @@ function AppRoutes() {
             <Route path="/searchJobs" element={<SearchJobs />} />
             <Route path="/news" element={<News />} />
             <Route path="/account" element={<UserAccount />} />
-            {/* <Route path="/create" element={<CreatAccount />} /> */}
-            {/* </Route> */}
             <Route path="/delete" element={<Dashboard />} />
           </Route>
-          {/* <Route path="/" element={<Navigate to="/dashboard" />} /> */}
         </Route>
-        <Route path="*" element={<p>Path not resolved</p>} />
+        <Route path="*" element={<p>There's nothing here!! 😜</p>} />
       </Routes>
     </BrowserRouter>
   );

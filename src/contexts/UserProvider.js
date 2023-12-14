@@ -7,6 +7,16 @@ function UserProvider({ children }) {
   const [user, setUser] = useState("");
   const [profileData, setProfileData] = useState("");
 
+  useEffect(() => {
+    getUser();
+  }, []);
+
+  useEffect(() => {
+    if (!user) return;
+
+    getProfileData();
+  }, [user]);
+
   async function getUser() {
     const {
       data: { user },
@@ -22,16 +32,6 @@ function UserProvider({ children }) {
     setProfileData(data[0]);
   }
 
-  useEffect(() => {
-    getUser();
-  }, []);
-
-  useEffect(() => {
-    if (!user) return;
-
-    getProfileData();
-  }, [user]);
-
   const value = { user, profileData, getUser, getProfileData };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
@@ -39,8 +39,10 @@ function UserProvider({ children }) {
 
 function useUser() {
   const context = useContext(UserContext);
-  if (context === undefined)
+
+  if (context === undefined) {
     throw new Error("UserContext was used outside of the UserProvider");
+  }
 
   return context;
 }
