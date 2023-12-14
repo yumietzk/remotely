@@ -1,5 +1,5 @@
 import ContentTop from "./ContentTop";
-import JobPage from "./JobPage";
+import JobPage from "../features/jobs/JobPage";
 
 function Content({
   filterList,

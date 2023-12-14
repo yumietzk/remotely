@@ -6,7 +6,7 @@ import { formatString } from "../utils/formatString";
 import FilterButton from "../components/FilterButton";
 import Selection from "../components/Selection";
 
-const data = require("../testData.json");
+const data = require("../data/testData.json");
 
 const jobType = [
   "Full time",

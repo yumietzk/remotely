@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import ArticleList from "../components/ArticleList";
+import ArticleList from "../features/news/ArticleList";
 
-const newsData = require("../testNewsData.json");
+const newsData = require("../data/testNewsData.json");
 
 // https://newsdata.io/api/1/news?apikey=pub_28974941b1185099ec9745db0046ff1f4270e&category=technology&language=en
 // https://newsdata.io/api/1/archive?apikey=pub_28974941b1185099ec9745db0046ff1f4270e&q=example&language=en&from_date=2023-01-19&to_date=2023-01-25

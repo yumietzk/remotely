@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { CiWarning } from "react-icons/ci";
 import { FcGoogle } from "react-icons/fc";
-import { supabase } from "../supabase";
+import { supabase } from "../services/supabase";
 
 // ⚠️ Need back to the top page button?
 function SignUp() {

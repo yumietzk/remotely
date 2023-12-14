@@ -5,7 +5,7 @@ import {
   CiFaceSmile,
   CiFaceFrown,
 } from "react-icons/ci";
-import { supabase } from "../supabase";
+import { supabase } from "../services/supabase";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../contexts/UserProvider";
 import { useEffect } from "react";

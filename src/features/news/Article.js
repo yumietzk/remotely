@@ -1,5 +1,5 @@
-import { formatDate } from "../utils/formatDate";
-import { truncateString } from "../utils/truncateString";
+import { formatDate } from "../../utils/formatDate";
+import { truncateString } from "../../utils/truncateString";
 
 function Article({ news, tempImage }) {
   const { title, description, image_url, link, creator, pubDate } = news;

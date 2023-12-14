@@ -8,7 +8,7 @@ import {
   CiSettings,
   CiTrash,
 } from "react-icons/ci";
-import { data } from "../sidebarData";
+import { data } from "../data/sidebarData";
 
 function renderIcon(text) {
   const className = "mr-2 w-5 h-5";

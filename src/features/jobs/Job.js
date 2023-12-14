@@ -1,5 +1,5 @@
 import { CiBookmark } from "react-icons/ci";
-import { formatDate } from "../utils/formatDate";
+import { formatDate } from "../../utils/formatDate";
 
 function formatJobType(type) {
   if (type.includes("_")) {

@@ -1,10 +1,10 @@
+import { useEffect, useState } from "react";
+import { supabase } from "../services/supabase";
 import { useLocation } from "react-router-dom";
 import { useUser } from "../contexts/UserProvider";
 import Location from "./Location";
 import UserIcon from "./UserIcon";
-import { data } from "../sidebarData";
-import { useEffect, useState } from "react";
-import { supabase } from "../supabase";
+import { data } from "../data/sidebarData";
 
 function Header() {
   // const [isLoading, setIsLoading] = useState(false);

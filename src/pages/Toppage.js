@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import image from "../assets/image2.png";
 import { useEffect, useState } from "react";
-import { supabase } from "../supabase";
+import { supabase } from "../services/supabase";
 import { useUser } from "../contexts/UserProvider";
 
 // ⚠️ ToppagenのフォントはDribbleのやつみたいに変更する

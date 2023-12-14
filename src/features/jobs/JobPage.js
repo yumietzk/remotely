@@ -1,6 +1,6 @@
 import { useState } from "react";
 import JobList from "./JobList";
-import Pagination from "./Pagination";
+import Pagination from "../../components/Pagination";
 
 function JobPage({ jobs }) {
   const [currentPage, setCurrentPage] = useState(1);

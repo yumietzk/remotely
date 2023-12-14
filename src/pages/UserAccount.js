@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
-import { supabase } from "../supabase";
+import { supabase } from "../services/supabase";
 
 function UserAccount() {
   const [email, setEmail] = useState("");
