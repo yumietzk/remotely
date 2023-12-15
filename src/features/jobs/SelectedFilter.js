@@ -1,9 +1,9 @@
-function FilterItem({ item, onDeleteSelected }) {
+function SelectedFilter({ item, handleDeleteSelected }) {
   return (
     <div className="px-3 py-0.5 rounded-3xl border border-gray-100 flex items-center">
       <button
         className="flex justify-center items-center mr-2 font-semibold"
-        onClick={() => onDeleteSelected(item)}
+        onClick={() => handleDeleteSelected(item)}
       >
         x
       </button>
@@ -12,4 +12,4 @@ function FilterItem({ item, onDeleteSelected }) {
   );
 }
 
-export default FilterItem;
+export default SelectedFilter;

@@ -1,22 +1,9 @@
 import { useEffect, useState } from "react";
-import SubHeader from "../components/SubHeader";
-import SearchInput from "../components/SearchInput";
-import Main from "../components/Main";
+import SubHeader from "../features/jobs/SubHeader";
+import JobTable from "../features/jobs/JobTable";
 import { formatString } from "../utils/formatString";
-import FilterButton from "../components/FilterButton";
-import Selection from "../components/Selection";
 
 const data = require("../data/testData.json");
-
-const jobType = [
-  "Full time",
-  "Part time",
-  "Contract",
-  "Internship",
-  "Freelance",
-];
-
-const skill = ["React", "JavaScript", "iOS", "Android", "AWS"];
 
 function addItem(array, item) {
   return [...array, item];
@@ -36,11 +23,8 @@ function SearchJobs() {
   const [status, setStatus] = useState({ isLoading: false, error: "" });
   const [jobs, setJobs] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-
   const [selectedJobType, setSelectedJobType] = useState([]);
   const [selectedSkill, setSelectedSkill] = useState([]);
-
-  const [filterOpen, setFilterOpen] = useState(false);
 
   const filterList = [...selectedJobType, ...selectedSkill];
 
@@ -119,10 +103,6 @@ function SearchJobs() {
     // getJobs();
   }, []);
 
-  function handleSearch(term) {
-    setSearchTerm(term.trim());
-  }
-
   function handleResetSearch() {
     setSearchTerm("");
   }
@@ -155,35 +135,18 @@ function SearchJobs() {
 
   return (
     <>
-      <div className="mb-12">
-        <SubHeader>
-          <SearchInput onSearch={handleSearch} />
-          <FilterButton filterOpen={filterOpen} setFilterOpen={setFilterOpen} />
-        </SubHeader>
+      <SubHeader
+        setSearchTerm={setSearchTerm}
+        filterList={filterList}
+        handleSelectedJobType={handleSelectedJobType}
+        handleSelectedSkill={handleSelectedSkill}
+      />
 
-        {filterOpen && (
-          <div className="mt-4 space-y-3">
-            <Selection
-              title="Job type"
-              labelData={jobType}
-              filterList={filterList}
-              onSelected={handleSelectedJobType}
-            />
-            <Selection
-              title="Skill"
-              labelData={skill}
-              filterList={filterList}
-              onSelected={handleSelectedSkill}
-            />
-          </div>
-        )}
-      </div>
-
-      <Main
+      <JobTable
         isLoading={isLoading}
         jobs={searchedJobs}
         searchTerm={searchTerm}
-        onResetSearch={handleResetSearch}
+        setSearchTerm={setSearchTerm}
         filterList={filterList}
         handleDeleteSelected={handleDeleteSelected}
         filteredJobs={filteredJobs}

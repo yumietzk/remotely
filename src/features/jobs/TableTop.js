@@ -1,13 +1,13 @@
-import FilterItemList from "./FilterItemList";
-import Sort from "./Sort";
 import { CiCircleRemove } from "react-icons/ci";
+import SelectedFilterList from "./SelectedFilterList";
+import Button from "../../components/elements/Button";
 
-function ContentTop({
+function TableTop({
   filterList,
-  onDeleteSelected,
+  handleDeleteSelected,
   searchTerm,
   numOfJobs,
-  onResetSearch,
+  setSearchTerm,
 }) {
   return (
     <div className="mb-8 flex items-center relative">
@@ -19,23 +19,23 @@ function ContentTop({
         {numOfJobs}
       </span>
 
-      <FilterItemList
+      <SelectedFilterList
         filterList={filterList}
-        onDeleteSelected={onDeleteSelected}
+        handleDeleteSelected={handleDeleteSelected}
       />
 
       {/* <Sort /> */}
 
       {searchTerm && (
-        <button
-          className="border-none absolute -left-7"
-          onClick={onResetSearch}
+        <Button
+          classes="border-none rounded-full absolute -left-7"
+          callback={() => setSearchTerm("")}
         >
           <CiCircleRemove className="w-6 h-6" />
-        </button>
+        </Button>
       )}
     </div>
   );
 }
 
-export default ContentTop;
+export default TableTop;

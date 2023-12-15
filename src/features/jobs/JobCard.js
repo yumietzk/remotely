@@ -1,4 +1,5 @@
 import { CiBookmark } from "react-icons/ci";
+import LinkButton from "../../components/elements/LinkButton";
 import { formatDate } from "../../utils/formatDate";
 
 function formatJobType(type) {
@@ -14,7 +15,7 @@ function formatJobType(type) {
   }
 }
 
-function Job({ job, bgColor }) {
+function JobCard({ job, bgColor }) {
   const {
     url,
     title,
@@ -59,19 +60,16 @@ function Job({ job, bgColor }) {
       <div className="flex justify-between items-center px-4 py-5">
         <p className="text-lg font-semibold">{salary || "N/A"}</p>
         <div>
-          {/* あとでreact router使う */}
-          <a
-            className="bg-gray-200 px-3.5 py-2 rounded-3xl text-sm text-white"
-            href={url}
-            target="_blank"
-            rel="noreferrer"
+          <LinkButton
+            classes="bg-gray-200 px-3.5 py-2 rounded-3xl text-sm text-white"
+            url={url}
           >
-            <button>Details</button>
-          </a>
+            Details
+          </LinkButton>
         </div>
       </div>
     </div>
   );
 }
 
-export default Job;
+export default JobCard;

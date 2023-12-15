@@ -1,8 +1,8 @@
 import { useState } from "react";
 import JobList from "./JobList";
-import Pagination from "../../components/Pagination";
+import Pagination from "../../components/elements/Pagination";
 
-function JobPage({ jobs }) {
+function JobGrid({ jobs }) {
   const [currentPage, setCurrentPage] = useState(1);
 
   // jobs = [{}, {}, {}] 30
@@ -37,4 +37,4 @@ function JobPage({ jobs }) {
   );
 }
 
-export default JobPage;
+export default JobGrid;

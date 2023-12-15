@@ -31,8 +31,6 @@ function Profile() {
     getProfileData,
   } = useUser();
 
-  console.log(imageUrl, profileData);
-
   useEffect(() => {
     if (!profileData) return;
 

@@ -3,6 +3,7 @@ import { formatString } from "../utils/formatString";
 
 const JobContext = createContext();
 
+// ⚠️ これは必要ないかも
 function JobProvider({ children }) {
   const [status, setStatus] = useState({ isLoading: false, error: "" });
   const [jobs, setJobs] = useState();

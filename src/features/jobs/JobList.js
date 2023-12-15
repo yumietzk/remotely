@@ -1,4 +1,4 @@
-import Job from "./Job";
+import JobCard from "./JobCard";
 
 function JobList({ jobs }) {
   return (
@@ -6,7 +6,7 @@ function JobList({ jobs }) {
     <div className="w-full grid grid-cols-job-list gap-6">
       {/* width 310, height 400 */}
       {jobs.map((job, i) => {
-        return <Job key={job.id} job={job} bgColor="" />;
+        return <JobCard key={job.id} job={job} bgColor="" />;
       })}
     </div>
   );
