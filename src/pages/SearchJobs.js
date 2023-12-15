@@ -1,23 +1,13 @@
 import { useEffect, useState } from "react";
 import SubHeader from "../features/jobs/SubHeader";
 import JobTable from "../features/jobs/JobTable";
-import { formatString } from "../utils/formatString";
+import {
+  deleteItem,
+  manageSelectedFilter,
+} from "../utils/manageSelectedFilter";
+import { createJobList } from "../utils/createJobList";
 
 const data = require("../data/testData.json");
-
-function addItem(array, item) {
-  return [...array, item];
-}
-
-function deleteItem(array, item) {
-  return array.filter((cur) => cur !== item);
-}
-
-function createNewSelected(selected, label) {
-  return selected.includes(label)
-    ? deleteItem(selected, label)
-    : addItem(selected, label);
-}
 
 function SearchJobs() {
   const [status, setStatus] = useState({ isLoading: false, error: "" });
@@ -26,95 +16,70 @@ function SearchJobs() {
   const [selectedJobType, setSelectedJobType] = useState([]);
   const [selectedSkill, setSelectedSkill] = useState([]);
 
-  const filterList = [...selectedJobType, ...selectedSkill];
-
-  const formattedSelectedJobType = selectedJobType.map((item) =>
-    formatString(item)
-  );
-  const formattedSelectedSkill = selectedSkill.map((item) =>
-    formatString(item)
-  );
-
-  const filteredJobs =
-    selectedJobType.length > 0 || selectedSkill.length > 0
-      ? jobs
-          .filter((job) =>
-            selectedJobType.length > 0
-              ? formattedSelectedJobType.includes(formatString(job.job_type))
-              : true
-          )
-          .filter((job) => {
-            return selectedSkill.length > 0
-              ? job.tags.some((item) => {
-                  return formattedSelectedSkill.includes(formatString(item));
-                })
-              : true;
-          })
-      : jobs;
-
   const { isLoading, error } = status;
 
-  const formattedSearchTerm = formatString(searchTerm);
-  // 🤨compare with descriptionは難しそう
-  const searchedJobs = searchTerm
-    ? jobs.filter(
-        (job) =>
-          formatString(job.title).includes(formattedSearchTerm) ||
-          job.tags.some((item) => {
-            return formatString(item).includes(formattedSearchTerm);
-          })
-      )
-    : jobs;
+  const filterList = [...selectedJobType, ...selectedSkill];
+  const newJobs = createJobList(
+    jobs,
+    selectedJobType,
+    selectedSkill,
+    searchTerm
+  );
 
   useEffect(() => {
     setStatus((status) => ({ ...status, isLoading: true, error: "" }));
     // ⚠️ 本来は、まずここで全部のjobを引っ張ってきた後に、このavailable listを計算する感じ。
     // 💡 In the below case, extract jobs available in Japan
-    const availableJobsList = data.jobs.filter(
-      (job) =>
-        job.candidate_required_location === "Worldwide" ||
-        job.candidate_required_location.includes("Asia") ||
-        job.candidate_required_location.includes("Easter Asia") ||
-        job.candidate_required_location.includes("Japan")
-    );
-    setJobs(availableJobsList);
+    // const availableJobsList = data.jobs.filter(
+    //   (job) =>
+    //     job.candidate_required_location === "Worldwide" ||
+    //     job.candidate_required_location.includes("Asia") ||
+    //     job.candidate_required_location.includes("Easter Asia") ||
+    //     job.candidate_required_location.includes("Japan")
+    // );
+    setJobs(data.jobs);
 
     setStatus((status) => ({ ...status, isLoading: false }));
-    // const getJobs = async () => {
+
+    // async function fetchJobs() {
     //   try {
     //     setStatus((status) => ({ ...status, isLoading: true, error: "" }));
 
     //     const res = await fetch(
     //       // ⚠️ Will figure out how many we fetch later!!!
-    //       "https://remotive.com/api/remote-jobs?limit=30"
+    //       "https://remotive.com/api/remote-jobs?category=software-dev"
     //     );
     //     const data = await res.json();
     //     // console.log(data);
 
-    //     setJobs(data);
+    //     // ⚠️ This depends on where the uesr is based on
+    //     // const availableJobsList = data.jobs.filter(
+    //     //   (job) => job.candidate_required_location === "Worldwide"
+    //     //   // job.candidate_required_location.includes("Asia") ||
+    //     //   // job.candidate_required_location.includes("Easter Asia") ||
+    //     //   // job.candidate_required_location.includes("Japan")
+    //     // );
+
+    //     setJobs(data.jobs);
     //   } catch (err) {
     //     console.error(err);
     //     setStatus((status) => ({ ...status, error: err.message }));
     //   } finally {
     //     setStatus((status) => ({ ...status, isLoading: false }));
     //   }
-    // };
+    // }
 
-    // getJobs();
+    // fetchJobs();
   }, []);
 
-  function handleResetSearch() {
-    setSearchTerm("");
-  }
-
   function handleSelectedJobType(label) {
-    const newSelected = createNewSelected(selectedJobType, label);
+    const newSelected = manageSelectedFilter(selectedJobType, label);
 
     setSelectedJobType(newSelected);
   }
 
   function handleSelectedSkill(label) {
-    const newSelected = createNewSelected(selectedSkill, label);
+    const newSelected = manageSelectedFilter(selectedSkill, label);
 
     setSelectedSkill(newSelected);
   }
@@ -144,12 +109,11 @@ function SearchJobs() {
 
       <JobTable
         isLoading={isLoading}
-        jobs={searchedJobs}
+        jobs={newJobs}
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
         filterList={filterList}
         handleDeleteSelected={handleDeleteSelected}
-        filteredJobs={filteredJobs}
       />
     </>
   );

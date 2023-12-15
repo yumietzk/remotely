@@ -1,7 +1,14 @@
-function Button({ children, classes, callback, disabled = false }) {
+function Button({
+  children,
+  classes,
+  type = "button",
+  callback,
+  disabled = false,
+}) {
   return (
     <button
-      className={`${classes} transition duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-green-100 focus:ring-green-300`}
+      className={`${classes} transition duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent`}
+      type={type}
       onClick={callback}
       disabled={disabled}
     >

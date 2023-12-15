@@ -18,7 +18,7 @@ const metrics = [
 ];
 
 function renderIcon(text) {
-  const className = "w-11 h-11 p-3 bg-accent rounded-full";
+  const className = "w-11 h-11 p-3 bg-accent text-white rounded-full";
 
   switch (text) {
     case "Applied": {

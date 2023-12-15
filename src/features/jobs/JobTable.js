@@ -3,13 +3,13 @@ import JobGrid from "./JobGrid";
 
 function JobTable({
   isLoading,
+  jobs,
   searchTerm,
   setSearchTerm,
   filterList,
   handleDeleteSelected,
-  filteredJobs,
 }) {
-  const numOfJobs = filteredJobs.length;
+  const numOfJobs = jobs.length;
 
   return (
     <main className="w-full">
@@ -26,7 +26,7 @@ function JobTable({
             setSearchTerm={setSearchTerm}
           />
 
-          <JobGrid jobs={filteredJobs} />
+          <JobGrid key={searchTerm || filterList} jobs={jobs} />
         </>
       )}
     </main>

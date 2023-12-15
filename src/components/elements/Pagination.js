@@ -5,7 +5,7 @@ function Pagination({ currentPage, pages, onNextPage, onPreviousPage }) {
   return (
     <div className="mt-11 flex justify-center items-center space-x-4">
       <Button
-        classes="rounded-full"
+        classes="rounded-full focus:ring-offset-green-100"
         callback={onPreviousPage}
         disabled={currentPage === 1}
       >
@@ -30,7 +30,7 @@ function Pagination({ currentPage, pages, onNextPage, onPreviousPage }) {
       </div>
 
       <Button
-        classes="rounded-full"
+        classes="rounded-full focus:ring-offset-green-100"
         callback={onNextPage}
         disabled={currentPage === pages}
       >

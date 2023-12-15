@@ -10,7 +10,7 @@ function JobGrid({ jobs }) {
   const jobsPerPage = 12; // ⭐️ 12
   const pages = Math.ceil(jobs.length / jobsPerPage);
 
-  const curJobList = jobs.slice(
+  const currentJobList = jobs.slice(
     jobsPerPage * (currentPage - 1),
     jobsPerPage * currentPage
   );
@@ -25,7 +25,7 @@ function JobGrid({ jobs }) {
 
   return (
     <div>
-      <JobList jobs={curJobList} />
+      <JobList jobs={currentJobList} />
 
       <Pagination
         currentPage={currentPage}

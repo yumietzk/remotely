@@ -1,6 +1,7 @@
 import { CiBookmark } from "react-icons/ci";
 import LinkButton from "../../components/elements/LinkButton";
 import { formatDate } from "../../utils/formatDate";
+import Button from "../../components/elements/Button";
 
 function formatJobType(type) {
   if (type.includes("_")) {
@@ -30,12 +31,12 @@ function JobCard({ job, bgColor }) {
     <div className="p-1.5 rounded-2xl bg-white">
       <div className="bg-green-50 rounded-2xl p-4 h-56 flex flex-col justify-between">
         <div className="mb-6 flex justify-between items-center">
-          <p className="bg-accent px-2.5 py-2 rounded-3xl text-sm font-medium">
+          <p className="bg-accent text-white px-2.5 py-2 rounded-3xl text-sm font-medium">
             {formatDate(publication_date)}
           </p>
-          <button>
-            <CiBookmark className="bg-accent w-9 h-9 p-2 rounded-full" />
-          </button>
+          <Button classes="rounded-full focus:ring-offset-green-50">
+            <CiBookmark className="bg-white w-9 h-9 p-2 rounded-full" />
+          </Button>
         </div>
 
         <div>
@@ -61,7 +62,7 @@ function JobCard({ job, bgColor }) {
         <p className="text-lg font-semibold">{salary || "N/A"}</p>
         <div>
           <LinkButton
-            classes="bg-gray-200 px-3.5 py-2 rounded-3xl text-sm text-white"
+            classes="bg-gray-200 px-3.5 py-2 rounded-3xl text-sm text-white hover:bg-black active:ring-offset-white active:ring-black"
             url={url}
           >
             Details

@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import TextInput from "../../components/form/TextInput";
+import Button from "../../components/elements/Button";
 
 function SearchBar({ onSearch }) {
   const [term, setTerm] = useState("");
@@ -27,9 +28,10 @@ function SearchBar({ onSearch }) {
         value={term}
         handleChange={(e) => setTerm(e.target.value)}
       >
-        <button className="relative left-0" type="submit">
-          <CiSearch className="text-current w-5 h-5 bg-white" />
-        </button>
+        <Button classes="relative left-0 rounded-full" type="submit">
+          <CiSearch className="text-current w-5 h-5 bg-white rounded-full" />
+        </Button>
+        {/* <button className="relative left-0" type="submit"></button> */}
       </TextInput>
     </form>
   );
