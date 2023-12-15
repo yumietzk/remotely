@@ -1,4 +1,4 @@
-import Article from "./Article";
+import ArticleCard from "./ArticleCard";
 
 // Placeholder image
 const placeholderImg = [
@@ -14,11 +14,10 @@ function ArticleList({ news }) {
   return (
     <div className="grid grid-cols-3 gap-x-14 gap-y-20">
       {news.map((item, i) => (
-        <Article
+        <ArticleCard
           key={item.title}
           news={item}
           tempImage={placeholderImg[i]}
-          btnColor=""
         />
       ))}
     </div>

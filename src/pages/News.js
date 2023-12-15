@@ -28,7 +28,8 @@ function News() {
         The latest tech news
       </h1>
       <p className="text-lg text-center mb-14">
-        Learn how to grow your business with our expert advice.
+        Stay informed about industry trends and recent technological
+        advancements.
       </p>
 
       <ArticleList news={news} />

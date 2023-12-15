@@ -1,22 +1,10 @@
 import { CiBookmark } from "react-icons/ci";
 import LinkButton from "../../components/elements/LinkButton";
-import { formatDate } from "../../utils/formatDate";
 import Button from "../../components/elements/Button";
+import { formatDate } from "../../utils/formatDate";
+import { formatJobType } from "../../utils/formatJobType";
 
-function formatJobType(type) {
-  if (type.includes("_")) {
-    return type
-      .split("_")
-      .map((item, i) =>
-        i === 0 ? `${item[0].toUpperCase()}${item.slice(1)}` : item
-      )
-      .join(" ");
-  } else {
-    return `${type[0].toUpperCase()}${type.slice(1)}`;
-  }
-}
-
-function JobCard({ job, bgColor }) {
+function JobCard({ job }) {
   const {
     url,
     title,

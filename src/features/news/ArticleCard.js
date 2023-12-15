@@ -1,7 +1,8 @@
+import LinkButton from "../../components/elements/LinkButton";
 import { formatDate } from "../../utils/formatDate";
 import { truncateString } from "../../utils/truncateString";
 
-function Article({ news, tempImage }) {
+function ArticleCard({ news, tempImage }) {
   const { title, description, image_url, link, creator, pubDate } = news;
 
   return (
@@ -27,17 +28,15 @@ function Article({ news, tempImage }) {
       </div>
 
       <div className="mt-11 flex justify-end">
-        <a
-          className="bg-gray-100 px-3.5 py-2 text-white rounded text-sm text-right hover:bg-green-500"
-          href={link}
-          target="_blank"
-          rel="noreferrer"
+        <LinkButton
+          classes="bg-gray-100 px-3.5 py-2 text-white rounded text-sm text-right hover:bg-gray-200 active:ring-offset-green-100 active:ring-accent"
+          url={link}
         >
-          <button>Read Article</button>
-        </a>
+          Read Article
+        </LinkButton>
       </div>
     </div>
   );
 }
 
-export default Article;
+export default ArticleCard;
