@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { CiWarning } from "react-icons/ci";
 import { FcGoogle } from "react-icons/fc";
 import { supabase } from "../../services/supabase";
+import TextInput from "../../components/form/TextInput";
+import Button from "../../components/elements/Button";
 
 const inputFields = [
   {
@@ -21,46 +23,65 @@ const inputFields = [
 
 const initialState = { email: "", password: "" };
 
-function AuthForm() {
+const items = {
+  signUp: {
+    button: "Sign up",
+    googleButton: "Sign up with Google",
+    link: "/signin",
+    message: ["or", "Have an account?", "Sign in!"],
+  },
+  signIn: {
+    button: "Sign in",
+    googleButton: "Google",
+    link: "/signup",
+    message: ["Or continue with", "Don't have an account?", "Sign up!"],
+  },
+};
+
+function AuthForm({ type }) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [values, setValues] = useState(initialState);
 
-  const { email, password } = values;
-
   const navigate = useNavigate();
+
+  const { email, password } = values;
+  const { button, googleButton, link, message } = items[type];
 
   async function handleSubmit(e) {
     e.preventDefault();
 
-    try {
-      setIsLoading(true);
-      setError("");
+    setIsLoading(true);
+    setError("");
 
-      if (!email || !password) return;
+    if (!email || !password) return;
 
-      const { data, error } = await supabase.auth.signUp({
+    if (type === "signUp") {
+      const { error: signUpError } = await supabase.auth.signUp({
         email,
         password,
       });
 
-      if (error) throw new Error(`Something went wrong: ${error.message}`);
-
-      if (data?.user) {
-        const { error } = await supabase
-          .from("profiles")
-          .insert({ userId: data?.user.id });
-
-        if (error) throw new Error(`Something went wrong: ${error.message}`);
-
+      if (signUpError) {
+        setError(signUpError.message);
+      } else {
         navigate("/dashboard");
       }
-    } catch (err) {
-      console.error(err);
-      setError(err.message);
-    } finally {
-      setIsLoading(false);
+    } else if (type === "signIn") {
+      const { error: signInError } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (signInError) {
+        setError(signInError.message);
+      } else {
+        navigate("/dashboard");
+      }
     }
+
+    setValues(initialState);
+    setIsLoading(false);
   }
 
   return (
@@ -78,49 +99,51 @@ function AuthForm() {
       >
         <div className="flex flex-col space-y-7 font-medium">
           {inputFields.map((field) => (
-            <label className="flex flex-col">
+            <TextInput
+              key={field.label}
+              labelClasses="flex flex-col"
+              inputClasses="w-96 focus:ring-offset-green-100"
+              type={field.type}
+              name={field.name}
+              placeholder={field.placeholder}
+              value={values[field.name]}
+              handleChange={(e) =>
+                setValues({ ...values, [field.name]: e.target.value })
+              }
+            >
               {field.label}
-              <input
-                className="w-96 border border-gray-100 rounded-lg p-2 font-normal focus:outline-none focus:ring focus:ring-gray-200"
-                type={field.type}
-                name={field.name}
-                value={values[field.name]}
-                placeholder={field.placeholder}
-                onChange={(e) =>
-                  setValues({ ...values, [field.name]: e.target.value })
-                }
-              />
-            </label>
+            </TextInput>
           ))}
         </div>
 
-        <button
-          className={`border-none ${
+        <Button
+          classes={`border-none ${
             isLoading ? "bg-gray-100" : "bg-green-400"
-          } text-white py-2 rounded-lg transition-colors duration-300 ${
+          } text-white py-2 rounded-lg ${
             !isLoading && "hover:bg-green-500"
-          }`}
+          } focus:ring-offset-green-100`}
+          type="submit"
           disabled={isLoading}
         >
-          {isLoading ? "Loading..." : "Sign up"}
-        </button>
+          {isLoading ? "Loading..." : button}
+        </Button>
 
         <p className="flex items-center before:h-[1px] before:grow before:bg-gray-100 before:mr-3 after:h-[1px] after:grow after:bg-gray-100 after:ml-3">
-          or
+          {message[0]}
         </p>
 
-        <button className="border border-gray-200 py-2 rounded-lg flex items-center justify-center transition-colors duration-300 hover:bg-white">
+        <Button classes="border border-gray-200 py-2 rounded-lg flex items-center justify-center hover:bg-white focus:ring-offset-green-100">
           <FcGoogle className="mr-3 h-6 w-6" />
-          Sign up with Google
-        </button>
+          {googleButton}
+        </Button>
 
         <div className="flex items-center justify-center">
-          <p className="mr-1">Have an account?</p>
+          <p className="mr-1">{message[1]}</p>
           <Link
-            to="/signin"
-            className="text-green-300 transition-colors duration-300 hover:text-green-500"
+            to={link}
+            className="text-green-300 transition duration-300 hover:text-green-500"
           >
-            Sign in!
+            {message[2]}
           </Link>
         </div>
       </form>

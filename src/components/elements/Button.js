@@ -7,7 +7,7 @@ function Button({
 }) {
   return (
     <button
-      className={`${classes} transition duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent`}
+      className={`${classes} transition duration-300 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2`}
       type={type}
       onClick={callback}
       disabled={disabled}

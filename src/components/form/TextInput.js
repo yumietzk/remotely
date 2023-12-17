@@ -2,8 +2,8 @@ function TextInput({
   children,
   labelClasses,
   inputClasses,
-  inputRef,
   type,
+  name,
   placeholder,
   value,
   handleChange,
@@ -12,9 +12,9 @@ function TextInput({
     <label className={labelClasses}>
       {children}
       <input
-        className={`${inputClasses} transition duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-green-100 focus:ring-accent`}
-        ref={inputRef}
+        className={`${inputClasses} border border-gray-100 rounded-lg p-2 text-base font-normal transition duration-300 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2`}
         type={type}
+        name={name}
         placeholder={placeholder}
         value={value}
         onChange={handleChange}

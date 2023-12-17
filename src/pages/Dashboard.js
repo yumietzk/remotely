@@ -45,15 +45,20 @@ function renderIcon(text) {
 
 function Dashboard() {
   const navigate = useNavigate();
-  const { user, getUser } = useUser();
+  const { user, profileData } = useUser();
 
-  useEffect(() => {
-    if (!user) navigate("/");
-  }, [user, navigate]);
+  // useEffect(() => {
+  //   if (!user) navigate("/");
+  // }, [user, navigate]);
 
   async function handleSignOut() {
     const { error } = await supabase.auth.signOut();
-    if (!error) getUser();
+
+    if (error) {
+      alert("You couldn't log out!");
+    } else {
+      navigate("/");
+    }
   }
 
   return (

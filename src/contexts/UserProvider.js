@@ -8,32 +8,34 @@ function UserProvider({ children }) {
   const [profileData, setProfileData] = useState("");
 
   useEffect(() => {
-    getUser();
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session);
+    });
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session);
+    });
+
+    return () => subscription.unsubscribe();
   }, []);
 
   useEffect(() => {
     if (!user) return;
 
-    getProfileData();
+    getProfiles();
   }, [user]);
 
-  async function getUser() {
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-
-    setUser(user);
-  }
-
   // 💡get user data here too
-  async function getProfileData() {
+  async function getProfiles() {
     const { data, error } = await supabase.from("profiles").select();
 
     if (error) return;
     setProfileData(data[0]);
   }
 
-  const value = { user, profileData, getUser, getProfileData };
+  const value = { user, profileData, getProfiles };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 }
