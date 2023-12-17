@@ -8,7 +8,7 @@ import UserAccount from "./pages/UserAccount";
 // import CreatAccount from "./pages/CreatAccount";
 import Profile from "./pages/Profile";
 import MyJobs from "./pages/MyJobs";
-import Toppage from "./pages/Toppage";
+import TopPage from "./pages/TopPage";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 
@@ -16,7 +16,7 @@ function AppRoutes() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Toppage />} />
+        <Route path="/" element={<TopPage />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
         <Route element={<ProtectedRoute />}>

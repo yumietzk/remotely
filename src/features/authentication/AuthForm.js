@@ -1,84 +1,71 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { CiWarning } from "react-icons/ci";
 import { FcGoogle } from "react-icons/fc";
-import { supabase } from "../services/supabase";
-import AuthForm from "../features/authentication/AuthForm";
+import { supabase } from "../../services/supabase";
 
-// const inputFields = [
-//   {
-//     label: "Email",
-//     type: "email",
-//     name: "email",
-//     placeholder: "Enter your email",
-//   },
-//   {
-//     label: "Password",
-//     type: "password",
-//     name: "password",
-//     placeholder: "Enter your password",
-//   },
-// ];
+const inputFields = [
+  {
+    label: "Email",
+    type: "email",
+    name: "email",
+    placeholder: "Enter your email",
+  },
+  {
+    label: "Password",
+    type: "password",
+    name: "password",
+    placeholder: "Enter your password",
+  },
+];
 
-// const initialState = { email: "", password: "" };
+const initialState = { email: "", password: "" };
 
-// ⚠️ Need back to the top page button?
-function SignUp() {
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [isLoading, setIsLoading] = useState(false);
-  // const [error, setError] = useState("");
-  // const [values, setValues] = useState(initialState);
+function AuthForm() {
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [values, setValues] = useState(initialState);
 
-  // const { email, password } = values;
+  const { email, password } = values;
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  // async function handleSubmit(e) {
-  //   e.preventDefault();
+  async function handleSubmit(e) {
+    e.preventDefault();
 
-  //   try {
-  //     setIsLoading(true);
-  //     setError("");
+    try {
+      setIsLoading(true);
+      setError("");
 
-  //     if (!email || !password) return;
+      if (!email || !password) return;
 
-  //     const { data, error } = await supabase.auth.signUp({
-  //       email,
-  //       password,
-  //     });
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+      });
 
-  //     if (error) throw new Error(`Something went wrong: ${error.message}`);
+      if (error) throw new Error(`Something went wrong: ${error.message}`);
 
-  //     if (data?.user) {
-  //       const { error } = await supabase
-  //         .from("profiles")
-  //         .insert({ userId: data?.user.id });
+      if (data?.user) {
+        const { error } = await supabase
+          .from("profiles")
+          .insert({ userId: data?.user.id });
 
-  //       if (error) throw new Error(`Something went wrong: ${error.message}`);
+        if (error) throw new Error(`Something went wrong: ${error.message}`);
 
-  //       navigate("/dashboard");
-  //     }
-  //   } catch (err) {
-  //     console.error(err);
-  //     setError(err.message);
-  //   } finally {
-  //     setIsLoading(false);
-  //   }
-  // }
+        navigate("/dashboard");
+      }
+    } catch (err) {
+      console.error(err);
+      setError(err.message);
+    } finally {
+      setIsLoading(false);
+    }
+  }
 
   return (
-    <div className="h-screen w-full px-12 py-7 font-primary font-normal text-base bg-green-500 text-white flex flex-col items-center justify-center overflow-y-scroll">
-      <h3 className="mb-4">
-        <Link className="text-3xl font-medium font-secondary" to="/">
-          Remotely 🌎
-        </Link>
-      </h3>
-      <p className="mb-12 text-2xl">Sign up now</p>
-
-      <AuthForm />
-
-      {/* {error ? (
+    <>
+      {error ? (
         <p className="text-red mb-1 flex items-center relative -left-[135px]">
           <CiWarning className="h-5 w-5 mr-1" />
           {error}
@@ -136,9 +123,9 @@ function SignUp() {
             Sign in!
           </Link>
         </div>
-      </form> */}
-    </div>
+      </form>
+    </>
   );
 }
 
-export default SignUp;
+export default AuthForm;

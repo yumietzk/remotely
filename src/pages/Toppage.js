@@ -1,25 +1,10 @@
 import { Link } from "react-router-dom";
-import image from "../assets/image2.png";
-import { useEffect, useState } from "react";
-import { supabase } from "../services/supabase";
 import { useUser } from "../contexts/UserProvider";
+import image from "../assets/image2.png";
 
 // ⚠️ ToppagenのフォントはDribbleのやつみたいに変更する
-// ⚠️ これはprivate, public routeがあるから後回し！
-function Toppage() {
+function TopPage() {
   const { user } = useUser();
-  // const [user, setUser] = useState(null);
-
-  // useEffect(() => {
-  //   async function getUser() {
-  //     const {
-  //       data: { user },
-  //     } = await supabase.auth.getUser();
-  //     setUser(user);
-  //   }
-
-  //   getUser();
-  // }, []);
 
   return (
     <div className="h-screen w-full font-primary font-normal text-base bg-green-500 text-white px-12 py-7">
@@ -34,9 +19,7 @@ function Toppage() {
       </p>
       <Link
         to={user ? "/dashboard" : "/signin"}
-        // 💡 gonna navigate to either dashboard page or sign up page, if already signed in, go to dashboard
-        className="px-5 py-3.5 rounded border border-white text-2xl transition-colors duration-300 hover:bg-gray-100 hover:border-gray-100 hover:text-black"
-        // onClick={handleClick}
+        className="px-5 py-3.5 rounded border border-white text-2xl transition-colors duration-300 hover:bg-white h hover:text-green-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent focus:ring-offset-green-500"
       >
         Get started!
       </Link>
@@ -48,4 +31,4 @@ function Toppage() {
   );
 }
 
-export default Toppage;
+export default TopPage;

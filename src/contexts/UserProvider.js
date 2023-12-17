@@ -21,6 +21,7 @@ function UserProvider({ children }) {
     const {
       data: { user },
     } = await supabase.auth.getUser();
+
     setUser(user);
   }
 
