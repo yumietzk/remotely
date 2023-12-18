@@ -7,14 +7,14 @@ import { data } from "../../data/sidebarData";
 function Header() {
   const { pathname } = useLocation();
   const {
-    profileData: { firstName },
+    profile: { first_name },
   } = useUser();
 
   const targetItem = data.find((item) => item.path === pathname?.slice(1));
   const title =
     targetItem.path === "dashboard"
-      ? firstName
-        ? `Good morning, ${firstName}!`
+      ? first_name
+        ? `Good morning, ${first_name}!`
         : ""
       : targetItem.nav;
 

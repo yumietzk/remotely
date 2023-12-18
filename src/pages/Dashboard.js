@@ -45,7 +45,8 @@ function renderIcon(text) {
 
 function Dashboard() {
   const navigate = useNavigate();
-  const { user, profileData } = useUser();
+  const { user } = useUser();
+  // console.log(user);
 
   // useEffect(() => {
   //   if (!user) navigate("/");

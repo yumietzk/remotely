@@ -11,12 +11,12 @@ export const inputFields = [
     name: "lastName",
     placeholder: "Enter your last name",
   },
-  {
-    label: "Email",
-    type: "email",
-    name: "email",
-    placeholder: "Enter your email",
-  },
+  // {
+  //   label: "Email",
+  //   type: "email",
+  //   name: "email",
+  //   placeholder: "Enter your email",
+  // },
   {
     label: "Which country are you based out of?",
     type: "text",

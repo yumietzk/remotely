@@ -4,7 +4,7 @@ import { useUser } from "../contexts/UserProvider";
 // Should be generic by passing props
 function Location() {
   const {
-    profileData: { country },
+    profile: { country },
   } = useUser();
 
   return (

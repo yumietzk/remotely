@@ -5,7 +5,7 @@ const UserContext = createContext();
 
 function UserProvider({ children }) {
   const [user, setUser] = useState("");
-  const [profileData, setProfileData] = useState("");
+  const [profile, setProfile] = useState("");
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -24,18 +24,21 @@ function UserProvider({ children }) {
   useEffect(() => {
     if (!user) return;
 
-    getProfiles();
+    getProfile();
   }, [user]);
 
   // 💡get user data here too
-  async function getProfiles() {
-    const { data, error } = await supabase.from("profiles").select();
+  async function getProfile() {
+    const { data, error } = await supabase
+      .from("profiles")
+      .select()
+      .eq("id", user.user.id);
 
     if (error) return;
-    setProfileData(data[0]);
+    setProfile(data[0]);
   }
 
-  const value = { user, profileData, getProfiles };
+  const value = { user, profile, getProfile };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 }
