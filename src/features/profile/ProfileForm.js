@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { useUser } from "../../contexts/UserProvider";
 import { supabase } from "../../services/supabase";
-import { inputFields } from "../../data/profileFormFields";
+import { useUser } from "../../contexts/UserProvider";
+import useProfile from "../../hooks/useProfile";
 import Button from "../../components/elements/Button";
 import TextInput from "../../components/form/TextInput";
 import ProfilePicture from "./ProfilePicture";
+import { inputFields } from "../../data/profileFormFields";
 
 const initialValues = {
   firstName: "",
@@ -19,14 +20,14 @@ function ProfileForm() {
   const [values, setValues] = useState(initialValues);
   const [imageUrl, setImageUrl] = useState("");
 
-  const { firstName, lastName, country } = values;
-
   const {
     user: {
       user: { id },
     },
-    profile,
   } = useUser();
+  const { profile } = useProfile();
+
+  const { firstName, lastName, country } = values;
 
   useEffect(() => {
     if (!profile) return;
@@ -50,7 +51,10 @@ function ProfileForm() {
       setError("");
 
       if (!imageUrl) {
-        if (!firstName || !lastName || !country) return;
+        if (!firstName || !lastName || !country) {
+          alert("You sould fill in every fields.");
+          return;
+        }
       }
 
       const updatedData = {
@@ -61,7 +65,6 @@ function ProfileForm() {
         image_url: imageUrl,
       };
 
-      // 💡 if the data is already in the database, compare that with a new data, and decide if we should update that
       const { error } = await supabase
         .from("profiles")
         .upsert(updatedData)
@@ -78,7 +81,6 @@ function ProfileForm() {
       setError(error.message);
     } finally {
       setIsLoading(false);
-      setValues(initialValues);
     }
   }
 

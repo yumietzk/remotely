@@ -5,7 +5,7 @@ const UserContext = createContext();
 
 function UserProvider({ children }) {
   const [user, setUser] = useState("");
-  const [profile, setProfile] = useState("");
+  // const [profile, setProfile] = useState("");
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -21,24 +21,24 @@ function UserProvider({ children }) {
     return () => subscription.unsubscribe();
   }, []);
 
-  useEffect(() => {
-    if (!user) return;
+  // useEffect(() => {
+  //   if (!user) return;
 
-    getProfile();
-  }, [user]);
+  //   getProfile();
+  // }, [user]);
 
-  // 💡get user data here too
-  async function getProfile() {
-    const { data, error } = await supabase
-      .from("profiles")
-      .select()
-      .eq("id", user.user.id);
+  // // 💡get user data here too
+  // async function getProfile() {
+  //   const { data, error } = await supabase
+  //     .from("profiles")
+  //     .select()
+  //     .eq("id", user.user.id);
 
-    if (error) return;
-    setProfile(data[0]);
-  }
+  //   if (error) return;
+  //   setProfile(data[0]);
+  // }
 
-  const value = { user, profile, getProfile };
+  const value = { user };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 }

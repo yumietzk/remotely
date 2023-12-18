@@ -1,20 +1,18 @@
 import { useLocation } from "react-router-dom";
-import { useUser } from "../../contexts/UserProvider";
+import useProfile from "../../hooks/useProfile";
 import Location from "../Location";
 import UserIcon from "../UserIcon";
 import { data } from "../../data/sidebarData";
 
 function Header() {
   const { pathname } = useLocation();
-  const {
-    profile: { first_name },
-  } = useUser();
+  const { profile } = useProfile();
 
   const targetItem = data.find((item) => item.path === pathname?.slice(1));
   const title =
     targetItem.path === "dashboard"
-      ? first_name
-        ? `Good morning, ${first_name}!`
+      ? profile?.first_name
+        ? `Good morning, ${profile?.first_name}!`
         : ""
       : targetItem.nav;
 
