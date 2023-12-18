@@ -3,10 +3,9 @@ import { useEffect, useState } from "react";
 import { supabase } from "../../services/supabase";
 import { useUser } from "../../contexts/UserProvider";
 
-function ProfilePicture({ imageUrl, setImageUrl }) {
-  const [filePath, setFilePath] = useState("");
+function ProfilePicture({ url, size, handleUpdate }) {
   const [uploading, setUploading] = useState(false);
-  const [pictureUrl, setPictureUrl] = useState(null);
+  const [pictureUrl, setPictureUrl] = useState("");
 
   const {
     user: {
@@ -15,22 +14,23 @@ function ProfilePicture({ imageUrl, setImageUrl }) {
   } = useUser();
 
   useEffect(() => {
-    if (imageUrl) downloadImage(imageUrl);
-  }, [imageUrl]);
+    if (url) downloadPicture(url);
+  }, [url]);
 
-  async function downloadImage(path) {
+  function downloadPicture(path) {
     try {
-      const { data, error } = await supabase.storage
-        .from("images")
-        .download(path);
+      const {
+        data: { publicUrl },
+        error,
+      } = supabase.storage.from("images").getPublicUrl(path);
 
       if (error) {
         throw error;
       }
 
-      const url = URL.createObjectURL(data);
-      setPictureUrl(url);
+      setPictureUrl(publicUrl);
     } catch (error) {
+      console.error(error);
       alert(error.messsage);
     }
   }
@@ -44,20 +44,20 @@ function ProfilePicture({ imageUrl, setImageUrl }) {
       }
 
       const file = e.target.files[0];
-      const filePath = `${id}-${file.name};`;
+      const currentTime = new Date().getTime();
+      const filePath = `${currentTime}_${id}_${file.name};`;
 
-      setFilePath(file.name);
-
-      const { error: uploadError } = await supabase.storage
+      const { error } = await supabase.storage
         .from("images")
         .upload(filePath, file);
 
-      if (uploadError) {
-        throw uploadError;
+      if (error) {
+        throw error;
       }
 
-      setImageUrl(filePath);
+      handleUpdate(e, filePath);
     } catch (error) {
+      console.error(error);
       alert(error.message);
     } finally {
       setUploading(false);
@@ -68,27 +68,27 @@ function ProfilePicture({ imageUrl, setImageUrl }) {
     <div>
       {pictureUrl ? (
         <img
+          className="object-cover rounded-full mb-3"
           src={pictureUrl}
           alt="Profile picture"
-          // style={{ height: size, width: size }}
+          style={{ height: size, width: size }}
         />
       ) : (
         <div
-
-        // style={{ height: size, width: size }}
+          className="rounded-full bg-green-50 border border-gray-100 mb-3"
+          style={{ height: size, width: size }}
         />
       )}
 
-      {filePath}
-
       <div>
-        <label className="button primary block">
-          {uploading ? "Uploading ..." : "Upload"}
+        <label className="inline-block border border-green-100 bg-green-50 rounded-lg px-4 py-1.5 text-current font-normal cursor-pointer transition duration-300 hover:border-green-200 hover:bg-green-100 active:outline-none active:ring-2 active:ring-accent active:ring-offset-2 active:ring-offset-white">
+          {uploading
+            ? "Uploading ..."
+            : pictureUrl
+            ? "Change picture"
+            : "Upload picture"}
           <input
-            style={{
-              visibility: "hidden",
-              position: "absolute",
-            }}
+            className="invisible absolute"
             type="file"
             accept="image/*"
             onChange={uploadPicture}

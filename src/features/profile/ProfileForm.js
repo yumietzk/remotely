@@ -12,6 +12,7 @@ const initialValues = {
   country: "",
 };
 
+// ⚠️ react toast message!!!
 function ProfileForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
@@ -21,7 +22,9 @@ function ProfileForm() {
   const { firstName, lastName, country } = values;
 
   const {
-    user: { id },
+    user: {
+      user: { id },
+    },
     profile,
   } = useUser();
 
@@ -30,71 +33,63 @@ function ProfileForm() {
 
     const { first_name, last_name, country, image_url } = profile;
 
-    setValues({
-      ...values,
+    setValues((v) => ({
+      ...v,
       firstName: first_name,
       lastName: last_name,
       country,
-    });
+    }));
     setImageUrl(image_url);
   }, [profile]);
 
-  async function handleSubmit(e) {
+  async function updateProfile(e, imageUrl) {
     e.preventDefault();
 
-    setIsLoading(true);
-    setError("");
+    try {
+      setIsLoading(true);
+      setError("");
 
-    if (!firstName || !lastName || !country) return;
+      if (!imageUrl) {
+        if (!firstName || !lastName || !country) return;
+      }
 
-    const updatedData = {
-      first_name: firstName,
-      last_name: lastName,
-      country,
-      image_url: imageUrl,
-    };
+      const updatedData = {
+        id,
+        first_name: firstName,
+        last_name: lastName,
+        country,
+        image_url: imageUrl,
+      };
 
-    // 💡 if the data is already in the database, compare that with a new data, and decide if we should update that
-    const { error } = await supabase
-      .from("profiles")
-      .upsert(updatedData)
-      .eq("id", id);
+      // 💡 if the data is already in the database, compare that with a new data, and decide if we should update that
+      const { error } = await supabase
+        .from("profiles")
+        .upsert(updatedData)
+        .eq("id", id);
 
-    if (error) {
+      if (error) {
+        throw error;
+      }
+
+      alert("Profile updated");
+      setImageUrl(imageUrl);
+    } catch (error) {
+      console.error(error);
       setError(error.message);
+    } finally {
+      setIsLoading(false);
+      setValues(initialValues);
     }
-
-    setIsLoading(false);
-    setValues(initialValues);
   }
 
   return (
-    <form className="flex flex-col space-y-12" onSubmit={handleSubmit}>
+    <form className="flex flex-col space-y-12" onSubmit={updateProfile}>
       <div className="flex flex-col space-y-7 font-medium">
-        {/* <label className="flex flex-col">
-            Profile picture
-            <input
-              className="font-normal"
-              type="file"
-              name="image"
-              onChange={handleUploadImage}
-            />
-            <img src={imageUrl} alt="" />
-          </label> */}
-
-        {/* <label className="flex flex-col">
-            Password
-            <input
-              className="rounded-lg px-2 py-1 border border-gray-100 text-current"
-              type="password"
-              name="password"
-              value={password}
-              placeholder="Enter your password"
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </label> */}
-
-        <ProfilePicture imageUrl={imageUrl} setImageUrl={setImageUrl} />
+        <ProfilePicture
+          url={imageUrl}
+          size={135}
+          handleUpdate={(e, url) => updateProfile(e, url)}
+        />
 
         {inputFields.map((field) => (
           <TextInput
