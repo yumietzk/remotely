@@ -9,7 +9,7 @@ import { createJobList } from "../utils/createJobList";
 
 const data = require("../data/testData.json");
 
-function SearchJobs() {
+function JobSearch() {
   const [status, setStatus] = useState({ isLoading: false, error: "" });
   const [jobs, setJobs] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -119,4 +119,4 @@ function SearchJobs() {
   );
 }
 
-export default SearchJobs;
+export default JobSearch;

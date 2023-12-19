@@ -17,15 +17,11 @@ function renderIcon(text) {
       return <CiGrid41 className={className} />;
     }
 
-    case "My Profile": {
-      return <CiUser className={className} />;
-    }
-
-    case "My Jobs": {
+    case "Application Tracker": {
       return <CiReceipt className={className} />;
     }
 
-    case "Search Jobs": {
+    case "Job Search": {
       return <CiSearch className={className} />;
     }
 
@@ -33,9 +29,13 @@ function renderIcon(text) {
       return <CiGlobe className={className} />;
     }
 
-    case "Account Settings": {
-      return <CiSettings className={className} />;
+    case "Profile": {
+      return <CiUser className={className} />;
     }
+
+    // case "Account Settings": {
+    //   return <CiSettings className={className} />;
+    // }
 
     case "Delete Account": {
       return <CiTrash className={className} />;

@@ -2,12 +2,12 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AppLayout from "./components/layout/AppLayout";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import Dashboard from "./pages/Dashboard";
-import SearchJobs from "./pages/SearchJobs";
+import JobSearch from "./pages/JobSearch";
 import News from "./pages/News";
-import UserAccount from "./pages/UserAccount";
+// import UserAccount from "./pages/UserAccount";
 // import CreatAccount from "./pages/CreatAccount";
 import Profile from "./pages/Profile";
-import MyJobs from "./pages/MyJobs";
+import ApplicationTracker from "./pages/ApplicationTracker";
 import TopPage from "./pages/TopPage";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
@@ -22,11 +22,11 @@ function AppRoutes() {
         <Route element={<ProtectedRoute />}>
           <Route element={<AppLayout />}>
             <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/myJobs" element={<MyJobs />} />
-            <Route path="/searchJobs" element={<SearchJobs />} />
+            <Route path="/application" element={<ApplicationTracker />} />
+            <Route path="/search" element={<JobSearch />} />
             <Route path="/news" element={<News />} />
-            <Route path="/account" element={<UserAccount />} />
+            <Route path="/profile" element={<Profile />} />
+            {/* <Route path="/account" element={<UserAccount />} /> */}
             <Route path="/delete" element={<Dashboard />} />
           </Route>
         </Route>
