@@ -1,6 +1,7 @@
 import SidebarList from "./SidebarList";
 import { data } from "../../data/sidebarData";
 
+// ⚠️ make it collapsable
 function Sidebar() {
   return (
     <nav className="w-max max-w-xs h-full p-5 text-center">

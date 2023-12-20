@@ -52,7 +52,7 @@ module.exports = {
       },
       gridTemplateColumns: {
         "job-list": "repeat(3, 300px)",
-        "kanban-board": "repeat(6, 280px)",
+        "kanban-board": "repeat(6, 260px)",
         // "job-list": "repeat(auto-fit, minmax(310px, 1fr))",
       },
     },

@@ -6,7 +6,7 @@ function SelectedFilter({ item, handleDeleteSelected }) {
       {/* ⚠️ ここのremove buttonをfigure out later */}
       <Button
         classes="flex justify-center items-center mr-2 font-semibold rounded-full"
-        callback={() => handleDeleteSelected(item)}
+        handleClick={() => handleDeleteSelected(item)}
       >
         x
       </Button>

@@ -6,7 +6,7 @@ function Pagination({ currentPage, pages, onNextPage, onPreviousPage }) {
     <div className="mt-11 flex justify-center items-center space-x-4">
       <Button
         classes="rounded-full focus:ring-offset-green-100"
-        callback={onPreviousPage}
+        handleClick={onPreviousPage}
         disabled={currentPage === 1}
       >
         <CiCircleChevLeft
@@ -31,7 +31,7 @@ function Pagination({ currentPage, pages, onNextPage, onPreviousPage }) {
 
       <Button
         classes="rounded-full focus:ring-offset-green-100"
-        callback={onNextPage}
+        handleClick={onNextPage}
         disabled={currentPage === pages}
       >
         <CiCircleChevRight
