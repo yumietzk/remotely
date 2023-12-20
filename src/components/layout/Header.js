@@ -17,8 +17,8 @@ function Header() {
       : targetItem.nav;
 
   return (
-    <header className="text-white-primary flex items-center mb-10">
-      <h2 className="flex-none mr-16 font-semibold text-2xl">{title}</h2>
+    <header className="w-full text-white-primary flex justify-between items-center mb-10">
+      <h2 className="font-semibold text-2xl">{title}</h2>
       <div className="flex-1 flex justify-end">
         <UserIcon />
         <Location />

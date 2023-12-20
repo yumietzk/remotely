@@ -4,7 +4,7 @@ import Button from "../../components/elements/Button";
 
 function TrackerTable({ status }) {
   return (
-    <div className="py-2.5 overflow-visible">
+    <div className="py-2.5">
       <div className="mb-10 flex items-center">
         <h3 className="font-medium mr-2">{status}</h3>
         <p className="bg-gray-200 w-7 h-7 rounded-full text-white flex items-center justify-center">
@@ -15,7 +15,7 @@ function TrackerTable({ status }) {
         </Button>
       </div>
 
-      <div className="flex flex-col space-y-6 overflow-visible">
+      <div className="flex flex-col space-y-6">
         <ApplicationCard />
         <ApplicationCard />
       </div>

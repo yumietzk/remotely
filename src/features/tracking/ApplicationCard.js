@@ -9,7 +9,7 @@ function ApplicationCard() {
   const [showModal, setShowModal] = useState(false);
 
   return (
-    <div className="relative overflow-visible">
+    <div className="relative">
       <div className="bg-white rounded-md py-5 px-6 z-0">
         <div className="flex justify-between items-center mb-3">
           <img
