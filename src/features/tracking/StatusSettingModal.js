@@ -6,6 +6,8 @@ const availableStatus = [
   "Applied",
   "First Interview",
   "Second Interview",
+  "Final Interview",
+  "Offered",
 ];
 
 function StatusSettingModal({ setShowModal }) {
@@ -26,6 +28,7 @@ function StatusSettingModal({ setShowModal }) {
           <Button
             key={status}
             classes="bg-white px-5 py-1.5 rounded-full focus:ring-offset-green-100"
+            handleClick={() => {}}
           >
             {status}
           </Button>

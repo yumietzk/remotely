@@ -99,7 +99,7 @@ function JobSearch() {
   }
 
   return (
-    <>
+    <div className="flex-1">
       <SubHeader
         setSearchTerm={setSearchTerm}
         filterList={filterList}
@@ -115,7 +115,7 @@ function JobSearch() {
         filterList={filterList}
         handleDeleteSelected={handleDeleteSelected}
       />
-    </>
+    </div>
   );
 }
 

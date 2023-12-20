@@ -11,7 +11,7 @@ const trackingStatus = [
 
 function ApplicationTracker() {
   return (
-    <div className="min-h-full grid grid-cols-kanban-board gap-x-10 overflow-x-scroll">
+    <div className="flex-1 grid grid-cols-kanban-board gap-x-10 overflow-x-scroll">
       {trackingStatus.map((status) => (
         <TrackerTable key={status} status={status} />
       ))}

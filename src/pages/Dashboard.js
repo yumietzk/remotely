@@ -63,7 +63,7 @@ function Dashboard() {
   }
 
   return (
-    <div className="grid grid-rows-2 grid-cols-2 gap-6">
+    <div className="flex-1 grid grid-rows-2 grid-cols-2 gap-6">
       <div className="col-span-2 grid grid-cols-4 gap-4">
         {/* 💡 calling stage 1 or 2 might be also good */}
         {/* <div>07 Saved</div> */}
@@ -72,7 +72,7 @@ function Dashboard() {
           return (
             <div
               key={item.status}
-              className="bg-white rounded-xl flex items-center justify-between py-4 px-5"
+              className="bg-white h-fit rounded-xl flex items-center justify-between py-4 px-5"
             >
               <div className="flex flex-col">
                 <span className="text-2xl font-medium">{item.number}</span>
