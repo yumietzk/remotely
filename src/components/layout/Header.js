@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-import useProfile from "../../hooks/useProfile";
+import { useProfile } from "../../hooks/useProfile";
 import Location from "../Location";
 import UserIcon from "../UserIcon";
 import { data } from "../../data/sidebarData";

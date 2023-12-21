@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../../services/supabase";
 import { useUser } from "../../contexts/UserProvider";
-import useProfile from "../../hooks/useProfile";
+import { useProfile } from "../../hooks/useProfile";
 import Button from "../../components/elements/Button";
 import TextInput from "../../components/form/TextInput";
 import ProfilePicture from "./ProfilePicture";

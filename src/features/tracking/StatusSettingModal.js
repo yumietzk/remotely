@@ -10,7 +10,7 @@ const availableStatus = [
   "Offered",
 ];
 
-function StatusSettingModal({ setShowModal }) {
+function StatusSettingModal({ setShowModal, handleChangeStatus }) {
   return (
     <div className="w-[220px] absolute top-0 -right-32 z-10 bg-green-100 rounded-xl shadow-md py-4 px-5">
       <div className="flex items-center justify-between mb-6">
@@ -28,7 +28,7 @@ function StatusSettingModal({ setShowModal }) {
           <Button
             key={status}
             classes="bg-white px-5 py-1.5 rounded-full focus:ring-offset-green-100"
-            handleClick={() => {}}
+            handleClick={() => handleChangeStatus(status)}
           >
             {status}
           </Button>

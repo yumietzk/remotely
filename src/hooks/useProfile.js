@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { supabase } from "../services/supabase";
 import { useUser } from "../contexts/UserProvider";
 
-function useProfile() {
-  const [profile, setProfile] = useState();
+export function useProfile() {
+  const [profile, setProfile] = useState({});
 
   const {
     user: {
@@ -35,5 +35,3 @@ function useProfile() {
 
   return { profile };
 }
-
-export default useProfile;

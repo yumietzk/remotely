@@ -3,12 +3,12 @@ import ApplicationCard from "./ApplicationCard";
 import Button from "../../components/elements/Button";
 import { data } from "../../data/testTrackingJobs";
 
-function getFilteredData(status) {
-  return data.filter((item) => item.status === status);
-}
+// function getFilteredData(status) {
+//   return data.filter((item) => item.status === status);
+// }
 
-function TrackerTable({ status }) {
-  const filteredData = getFilteredData(status);
+function TrackerTable({ status, jobs }) {
+  // const filteredData = getFilteredData(status);
 
   return (
     <div className="py-2.5">
@@ -23,8 +23,8 @@ function TrackerTable({ status }) {
       </div>
 
       <div className="flex flex-col space-y-6">
-        {filteredData.map((item) => (
-          <ApplicationCard key={item.id} data={item} />
+        {jobs.map((job) => (
+          <ApplicationCard key={job.id} data={job} />
         ))}
       </div>
     </div>

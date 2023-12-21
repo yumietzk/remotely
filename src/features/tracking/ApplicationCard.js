@@ -1,14 +1,35 @@
 import { HiOutlineDotsHorizontal, HiOutlineLink } from "react-icons/hi";
-// import { data } from "../../data/testTrackingJobs";
 import Button from "../../components/elements/Button";
 import LinkButton from "../../components/elements/LinkButton";
 import { useState } from "react";
 import StatusSettingModal from "./StatusSettingModal";
+import { supabase } from "../../services/supabase";
+import { useTrackingJobs } from "../../hooks/useTrackingJobs";
 
 function ApplicationCard({ data }) {
   const [showModal, setShowModal] = useState(false);
+  // const { getTrackingJobs } = useTrackingJobs();
 
-  const { status, title, company_name, company_logo } = data;
+  const { id, title, company_name, company_logo, link_url } = data;
+
+  async function handleChangeStatus(status) {
+    try {
+      const { error } = await supabase
+        .from("trackings")
+        .update({ status })
+        .eq("id", id);
+
+      if (error) {
+        throw error;
+      }
+
+      // getTrackingJobs();
+      alert("Status updated");
+    } catch (error) {
+      console.error(error);
+      alert(error.message);
+    }
+  }
 
   return (
     <div className="relative">
@@ -27,7 +48,10 @@ function ApplicationCard({ data }) {
         <div>
           <div className="flex items-center mb-1">
             <h4 className="mr-2">{title}</h4>
-            <LinkButton classes="rounded-full active:ring-accent" url="">
+            <LinkButton
+              classes="rounded-full active:ring-accent"
+              url={link_url}
+            >
               <HiOutlineLink className="h-4 w-4" />
             </LinkButton>
           </div>
@@ -35,7 +59,12 @@ function ApplicationCard({ data }) {
         </div>
       </div>
 
-      {showModal && <StatusSettingModal setShowModal={setShowModal} />}
+      {showModal && (
+        <StatusSettingModal
+          setShowModal={setShowModal}
+          handleChangeStatus={handleChangeStatus}
+        />
+      )}
     </div>
   );
 }

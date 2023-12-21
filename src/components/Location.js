@@ -1,5 +1,5 @@
 import { CiLocationOn } from "react-icons/ci";
-import useProfile from "../hooks/useProfile";
+import { useProfile } from "../hooks/useProfile";
 
 function Location() {
   const { profile } = useProfile();
