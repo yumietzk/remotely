@@ -14,6 +14,7 @@ function JobCard({ job }) {
   } = useUser();
 
   const {
+    id: jobId,
     url,
     title,
     company_name,
@@ -25,7 +26,10 @@ function JobCard({ job }) {
 
   async function handleCreateTrackingJob() {
     try {
+      const newId = `${jobId}${new Date().getTime().toString().slice(-5)}`;
+
       const newData = {
+        id: +newId,
         user_id: id,
         status: "No Status",
         company_name,

@@ -9,7 +9,6 @@ function getFilteredData(status) {
 
 function TrackerTable({ status }) {
   const filteredData = getFilteredData(status);
-  console.log(filteredData);
 
   return (
     <div className="py-2.5">
