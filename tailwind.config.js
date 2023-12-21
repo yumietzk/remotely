@@ -25,6 +25,7 @@ module.exports = {
       },
       // accent: "#dff376",
       accent: "#0baf56",
+      "job-card": "#e0edf8",
     },
     extend: {
       // colors: {
