@@ -12,6 +12,7 @@ function ApplicationCard({ data }) {
 
   const { id, title, company_name, company_logo, link_url } = data;
 
+  // ⚠️ ここで変えても新しいデータが自動的にページに反映されていない、componentがリレンダーされていない
   async function handleChangeStatus(status) {
     try {
       const { error } = await supabase
@@ -24,6 +25,7 @@ function ApplicationCard({ data }) {
       }
 
       // getTrackingJobs();
+      setShowModal(false);
       alert("Status updated");
     } catch (error) {
       console.error(error);
