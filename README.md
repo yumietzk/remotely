@@ -1,6 +1,6 @@
 # Remotely
 
-A job board platform where you can search for remote Software Engineer jobs and track your job applications.
+A job board platform where you can search for remote Software Engineer jobs and track job applications all in one place.
 
 ## Tech Stack
 
@@ -16,7 +16,7 @@ A job board platform where you can search for remote Software Engineer jobs and 
 
 ## Folder Structure
 
-I followed resources below to group folder by features
+I followed resources below to group folder by features:
 
 - [Evolution of a React folder structure](https://profy.dev/article/react-folder-structure)
 - [Bulletproof React](https://github.com/alan2207/bulletproof-react/blob/master/docs/project-structure.md)
