@@ -27,6 +27,8 @@ function JobSearch() {
   );
 
   useEffect(() => {
+    console.log("Read job data");
+
     setStatus((status) => ({ ...status, isLoading: true, error: "" }));
     // ⚠️ 本来は、まずここで全部のjobを引っ張ってきた後に、このavailable listを計算する感じ。
     // 💡 In the below case, extract jobs available in Japan
