@@ -5,6 +5,10 @@ import { truncateString } from "../../utils/truncateString";
 function ArticleCard({ news, tempImage }) {
   const { title, description, image_url, link, creator, pubDate } = news;
 
+  function handleImageError(e) {
+    e.target.src = tempImage;
+  }
+
   return (
     <div className="p-2 flex flex-col justify-between">
       <div>
@@ -12,6 +16,7 @@ function ArticleCard({ news, tempImage }) {
           className="rounded-3xl mb-10 h-[225px] w-full"
           src={image_url || tempImage}
           alt={title}
+          onError={handleImageError}
         />
 
         <div className="text-sm font-light mb-5 flex justify-between">
@@ -24,7 +29,7 @@ function ArticleCard({ news, tempImage }) {
 
         <h3 className="font-semibold text-lg mb-5">{title}</h3>
 
-        <p className="font-light">{truncateString(description)}</p>
+        <p className="font-light">{truncateString(description || title)}</p>
       </div>
 
       <div className="mt-11 flex justify-end">

@@ -1,4 +1,8 @@
 export function truncateString(str, length = 150) {
+  if (!str) {
+    return "";
+  }
+
   const trimmedString = str.trim();
 
   if (trimmedString.length > length) {
