@@ -55,9 +55,14 @@ function JobCard({ job }) {
     <div className="p-1.5 rounded-2xl bg-white">
       <div className="bg-job-card rounded-2xl p-4 h-56 flex flex-col justify-between">
         <div className="mb-6 flex justify-between items-center">
-          <p className="bg-green-400 text-white px-2.5 py-2 rounded-3xl text-sm font-medium">
-            {formatDate(publication_date)}
-          </p>
+          {formatDate(publication_date) ? (
+            <p className="bg-green-400 text-white px-2.5 py-2 rounded-3xl text-sm font-medium">
+              {formatDate(publication_date)}
+            </p>
+          ) : (
+            <p></p>
+          )}
+
           <Button
             classes="rounded-full focus:ring-offset-job-card"
             handleClick={handleCreateTrackingJob}
@@ -79,9 +84,13 @@ function JobCard({ job }) {
         </div>
 
         <div>
-          <span className="border border-gray-100 px-2 py-1.5 rounded-3xl text-xs font-medium">
-            {formatJobType(job_type)}
-          </span>
+          {formatJobType(job_type) ? (
+            <span className="border border-gray-100 px-2 py-1.5 rounded-3xl text-xs font-medium">
+              {formatJobType(job_type)}
+            </span>
+          ) : (
+            <span></span>
+          )}
         </div>
       </div>
 

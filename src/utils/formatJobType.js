@@ -1,4 +1,8 @@
 export function formatJobType(type) {
+  if (!type) {
+    return "";
+  }
+
   if (type.includes("_")) {
     return type
       .split("_")

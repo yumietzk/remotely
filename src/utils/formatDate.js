@@ -1,4 +1,8 @@
 export function formatDate(orgDate) {
+  if (!orgDate) {
+    return "";
+  }
+
   const publisedDate = new Date(orgDate);
   const publisedDateArr = publisedDate.toString().split(" ");
   const month = publisedDateArr[1];

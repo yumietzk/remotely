@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import SubHeader from "../features/jobs/SubHeader";
 import JobTable from "../features/jobs/JobTable";
 import {
@@ -7,72 +8,51 @@ import {
 } from "../utils/manageSelectedFilter";
 import { createJobList } from "../utils/createJobList";
 
-const data = require("../data/testData.json");
+// 💡 In the below case, extract jobs available in Japan
+// const availableJobsList = data.jobs.filter(
+//   (job) =>
+//     job.candidate_required_location === "Worldwide" ||
+//     job.candidate_required_location.includes("Asia") ||
+//     job.candidate_required_location.includes("Easter Asia") ||
+//     job.candidate_required_location.includes("Japan")
+// );
 
 function JobSearch() {
-  const [status, setStatus] = useState({ isLoading: false, error: "" });
-  const [jobs, setJobs] = useState([]);
+  async function fetchJobs() {
+    const res = await fetch(
+      // ⚠️ Will figure out how many we fetch later!!!
+      "https://remotive.com/api/remote-jobs?category=software-dev"
+    );
+
+    return res.json();
+  }
+
+  const { isPending, isError, data, error } = useQuery({
+    queryKey: ["jobs"],
+    queryFn: fetchJobs,
+    gcTime: 43200000, // 12 hours
+    staleTime: 21600000, // 6 hours
+  });
+
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedJobType, setSelectedJobType] = useState([]);
   const [selectedSkill, setSelectedSkill] = useState([]);
 
-  const { isLoading, error } = status;
+  if (isPending) {
+    return <span>Loading...</span>;
+  }
+
+  if (isError) {
+    return <span>Error: {error.message}</span>;
+  }
 
   const filterList = [...selectedJobType, ...selectedSkill];
   const newJobs = createJobList(
-    jobs,
+    data.jobs,
     selectedJobType,
     selectedSkill,
     searchTerm
   );
-
-  useEffect(() => {
-    console.log("Read job data");
-
-    setStatus((status) => ({ ...status, isLoading: true, error: "" }));
-    // ⚠️ 本来は、まずここで全部のjobを引っ張ってきた後に、このavailable listを計算する感じ。
-    // 💡 In the below case, extract jobs available in Japan
-    // const availableJobsList = data.jobs.filter(
-    //   (job) =>
-    //     job.candidate_required_location === "Worldwide" ||
-    //     job.candidate_required_location.includes("Asia") ||
-    //     job.candidate_required_location.includes("Easter Asia") ||
-    //     job.candidate_required_location.includes("Japan")
-    // );
-    setJobs(data.jobs);
-
-    setStatus((status) => ({ ...status, isLoading: false }));
-
-    // async function fetchJobs() {
-    //   try {
-    //     setStatus((status) => ({ ...status, isLoading: true, error: "" }));
-
-    //     const res = await fetch(
-    //       // ⚠️ Will figure out how many we fetch later!!!
-    //       "https://remotive.com/api/remote-jobs?category=software-dev"
-    //     );
-    //     const data = await res.json();
-    //     // console.log(data);
-
-    //     // ⚠️ This depends on where the uesr is based on
-    //     // const availableJobsList = data.jobs.filter(
-    //     //   (job) => job.candidate_required_location === "Worldwide"
-    //     //   // job.candidate_required_location.includes("Asia") ||
-    //     //   // job.candidate_required_location.includes("Easter Asia") ||
-    //     //   // job.candidate_required_location.includes("Japan")
-    //     // );
-
-    //     setJobs(data.jobs);
-    //   } catch (err) {
-    //     console.error(err);
-    //     setStatus((status) => ({ ...status, error: err.message }));
-    //   } finally {
-    //     setStatus((status) => ({ ...status, isLoading: false }));
-    //   }
-    // }
-
-    // fetchJobs();
-  }, []);
 
   function handleSelectedJobType(label) {
     const newSelected = manageSelectedFilter(selectedJobType, label);
@@ -110,7 +90,9 @@ function JobSearch() {
       />
 
       <JobTable
-        isLoading={isLoading}
+        isLoading={isPending}
+        isError={isError}
+        error={error}
         jobs={newJobs}
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
