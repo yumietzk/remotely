@@ -16,7 +16,7 @@ const initialValues = {
 // ⚠️ react toast message!!!
 function ProfileForm() {
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [updateProfileError, setUpdateProfileError] = useState("");
   const [values, setValues] = useState(initialValues);
   const [imageUrl, setImageUrl] = useState("");
 
@@ -25,7 +25,8 @@ function ProfileForm() {
       user: { id },
     },
   } = useUser();
-  const { profile } = useProfile();
+  // const { profile } = useProfile();
+  const { isPending, isError, data: profile, error } = useProfile();
 
   const { firstName, lastName, country } = values;
 
@@ -43,12 +44,20 @@ function ProfileForm() {
     setImageUrl(image_url);
   }, [profile]);
 
+  if (isPending) {
+    return <span>Loading...</span>;
+  }
+
+  if (isError) {
+    return <span>Error: {error.message}</span>;
+  }
+
   async function updateProfile(e, imageUrl) {
     e.preventDefault();
 
     try {
       setIsLoading(true);
-      setError("");
+      setUpdateProfileError("");
 
       if (!imageUrl) {
         if (!firstName || !lastName || !country) {
@@ -65,20 +74,20 @@ function ProfileForm() {
         image_url: imageUrl,
       };
 
-      const { error } = await supabase
+      const { error: updateError } = await supabase
         .from("profiles")
         .upsert(updatedData)
         .eq("id", id);
 
-      if (error) {
-        throw error;
+      if (updateError) {
+        throw updateError;
       }
 
       alert("Profile updated");
       setImageUrl(imageUrl);
     } catch (error) {
       console.error(error);
-      setError(error.message);
+      setUpdateProfileError(error.message);
     } finally {
       setIsLoading(false);
     }
@@ -94,6 +103,7 @@ function ProfileForm() {
         />
 
         {inputFields.map((field) => (
+          // 💡 Fix the warning!!
           <TextInput
             key={field.label}
             labelClasses="flex flex-col"

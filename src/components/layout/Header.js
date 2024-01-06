@@ -6,7 +6,7 @@ import { data } from "../../data/sidebarData";
 
 function Header() {
   const { pathname } = useLocation();
-  const { profile } = useProfile();
+  const { data: profile } = useProfile();
 
   const targetItem = data.find((item) => item.path === pathname?.slice(1));
   const title =

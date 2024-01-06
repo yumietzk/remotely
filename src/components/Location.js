@@ -2,7 +2,7 @@ import { CiLocationOn } from "react-icons/ci";
 import { useProfile } from "../hooks/useProfile";
 
 function Location() {
-  const { profile } = useProfile();
+  const { data: profile } = useProfile();
 
   return (
     <div className="flex-none flex items-center">

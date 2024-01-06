@@ -30,6 +30,7 @@ function JobSearch() {
   const { isPending, isError, data, error } = useQuery({
     queryKey: ["jobs"],
     queryFn: fetchJobs,
+    // ⭐️ It's recommended that you do not hit the API too often.
     gcTime: 43200000, // 12 hours
     staleTime: 21600000, // 6 hours
   });
