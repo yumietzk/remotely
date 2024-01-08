@@ -6,31 +6,15 @@ import StatusSettingModal from "./StatusSettingModal";
 import { supabase } from "../../services/supabase";
 import { useTrackingJobs } from "../../hooks/useTrackingJobs";
 
-function ApplicationCard({ data }) {
+function ApplicationCard({ data, updateJob }) {
   const [showModal, setShowModal] = useState(false);
-  // const { getTrackingJobs } = useTrackingJobs();
+  // const { updateJob } = useTrackingJobs();
 
   const { id, title, company_name, company_logo, link_url } = data;
 
-  // ⚠️ ここで変えても新しいデータが自動的にページに反映されていない、componentがリレンダーされていない
-  async function handleChangeStatus(status) {
-    try {
-      const { error } = await supabase
-        .from("trackings")
-        .update({ status })
-        .eq("id", id);
-
-      if (error) {
-        throw error;
-      }
-
-      // getTrackingJobs();
-      setShowModal(false);
-      alert("Status updated");
-    } catch (error) {
-      console.error(error);
-      alert(error.message);
-    }
+  function handleChange(status) {
+    updateJob(id, status);
+    setShowModal(false);
   }
 
   return (
@@ -64,7 +48,7 @@ function ApplicationCard({ data }) {
       {showModal && (
         <StatusSettingModal
           setShowModal={setShowModal}
-          handleChangeStatus={handleChangeStatus}
+          handleChange={handleChange}
         />
       )}
     </div>

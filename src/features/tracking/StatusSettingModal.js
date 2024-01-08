@@ -1,5 +1,6 @@
 import { CiCircleRemove, CiTrash } from "react-icons/ci";
 import Button from "../../components/elements/Button";
+import { useTrackingJobs } from "../../hooks/useTrackingJobs";
 
 const availableStatus = [
   "No Status",
@@ -10,7 +11,9 @@ const availableStatus = [
   "Offered",
 ];
 
-function StatusSettingModal({ setShowModal, handleChangeStatus }) {
+function StatusSettingModal({ setShowModal, handleChange }) {
+  // const { getTrackingJobs } = useTrackingJobs();
+
   return (
     <div className="w-[220px] absolute top-1 -right-32 z-10 bg-white border border-gray-50 rounded-xl shadow-md py-4 px-5">
       <div className="flex items-center justify-between mb-6">
@@ -28,7 +31,7 @@ function StatusSettingModal({ setShowModal, handleChangeStatus }) {
           <Button
             key={status}
             classes="bg-white px-3 py-1.5 rounded-full hover:bg-gray-50 focus:ring-offset-green-100"
-            handleClick={() => handleChangeStatus(status)}
+            handleClick={() => handleChange(status)}
           >
             {status}
           </Button>

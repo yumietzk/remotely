@@ -29,7 +29,7 @@ function getCardBgColor(index) {
   }
 }
 
-function TrackerTable({ status, jobs, index }) {
+function TrackerTable({ status, jobs, index, updateJob }) {
   // const filteredData = getFilteredData(status);
 
   return (
@@ -50,7 +50,7 @@ function TrackerTable({ status, jobs, index }) {
         } p-1.5 rounded-xl`}
       >
         {jobs.map((job) => (
-          <ApplicationCard key={job.id} data={job} />
+          <ApplicationCard key={job.id} data={job} updateJob={updateJob} />
         ))}
       </div>
     </div>

@@ -13,7 +13,7 @@ export function useProfile() {
   } = useUser();
 
   async function getProfile() {
-    console.log("useQuery getProfile");
+    // console.log("useQuery getProfile");
 
     const { data, error } = await supabase
       .from("profiles")
