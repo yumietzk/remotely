@@ -12,6 +12,7 @@ module.exports = {
       white: colors.white,
       red: "#f71208",
       gray: {
+        50: "#f3f4f6",
         100: "#b1bfbc",
         200: "#888f8c",
       },
@@ -44,6 +45,10 @@ module.exports = {
       //     2: "#fbe2f4",
       //     3: "#ffe1cc",
       //     4: "#d4f6ed",
+      // #91d5ec
+      // #fd9f9f
+      // #aee7a0
+      // #a3a0e8
       //   },
       // },
       fontFamily: {
