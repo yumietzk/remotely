@@ -106,9 +106,9 @@ function AuthForm({ type }) {
               type={field.type}
               name={field.name}
               placeholder={field.placeholder}
-              value={values[field.name]}
-              handleChange={(e) =>
-                setValues({ ...values, [field.name]: e.target.value })
+              orgValue={values[field.name]}
+              handleChange={(value) =>
+                setValues({ ...values, [field.name]: value })
               }
             >
               {field.label}

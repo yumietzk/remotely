@@ -2,6 +2,8 @@ import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import ApplicationCard from "./ApplicationCard";
 import Button from "../../components/elements/Button";
 import { data } from "../../data/testTrackingJobs";
+import { useState } from "react";
+import TitleSettingModal from "./TitleSettingModal";
 
 // function getFilteredData(status) {
 //   return data.filter((item) => item.status === status);
@@ -30,18 +32,32 @@ function getCardBgColor(index) {
 }
 
 function TrackerTable({ status, jobs, index, updateJob }) {
+  const [showModal, setShowModal] = useState(false);
   // const filteredData = getFilteredData(status);
 
   return (
     <div className="h-full flex flex-col py-2.5">
-      <div className="mb-3 flex items-center">
-        <h3 className="font-medium mr-2">{status}</h3>
-        <p className="bg-gray-200 w-7 h-7 rounded-full text-white flex items-center justify-center">
-          5
-        </p>
-        <Button classes="ml-auto rounded-full border-none focus:ring-offset-green-100">
-          <HiOutlineDotsHorizontal className="h-6 w-6" />
-        </Button>
+      <div className="relative mb-3">
+        <div className="flex items-center">
+          <h3 className="font-medium mr-2">{status}</h3>
+          <p className="bg-gray-200 w-7 h-7 rounded-full text-white flex items-center justify-center">
+            {jobs.length}
+          </p>
+          <Button classes="ml-auto rounded-full border-none focus:ring-offset-green-100">
+            <HiOutlineDotsHorizontal className="h-6 w-6" />
+          </Button>
+        </div>
+
+        {/* {showModal && (
+          <TitleSettingModal
+            setShowModal={setShowModal}
+            // handleChange={handleChange}
+          />
+        )} */}
+        <TitleSettingModal
+          setShowModal={setShowModal}
+          // handleChange={handleChange}
+        />
       </div>
 
       <div
