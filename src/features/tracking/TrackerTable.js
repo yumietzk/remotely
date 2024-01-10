@@ -1,8 +1,8 @@
+import { useState } from "react";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import ApplicationCard from "./ApplicationCard";
 import Button from "../../components/elements/Button";
 import { data } from "../../data/testTrackingJobs";
-import { useState } from "react";
 import TitleSettingModal from "./TitleSettingModal";
 
 // function getFilteredData(status) {
@@ -32,7 +32,8 @@ function getCardBgColor(index) {
 }
 
 function TrackerTable({ status, jobs, index, updateJob }) {
-  const [showModal, setShowModal] = useState(false);
+  // const [showModal, setShowModal] = useState(false);
+  // const [statusTitle, setStatusTitle] = useState(status);
   // const filteredData = getFilteredData(status);
 
   return (
@@ -43,21 +44,21 @@ function TrackerTable({ status, jobs, index, updateJob }) {
           <p className="bg-gray-200 w-7 h-7 rounded-full text-white flex items-center justify-center">
             {jobs.length}
           </p>
-          <Button classes="ml-auto rounded-full border-none focus:ring-offset-green-100">
+          {/* <Button
+            classes="ml-auto rounded-full border-none focus:ring-offset-green-100"
+            handleClick={() => setShowModal(!showModal)}
+          >
             <HiOutlineDotsHorizontal className="h-6 w-6" />
-          </Button>
+          </Button> */}
         </div>
 
         {/* {showModal && (
           <TitleSettingModal
             setShowModal={setShowModal}
+            setStatusTitle={setStatusTitle}
             // handleChange={handleChange}
           />
         )} */}
-        <TitleSettingModal
-          setShowModal={setShowModal}
-          // handleChange={handleChange}
-        />
       </div>
 
       <div

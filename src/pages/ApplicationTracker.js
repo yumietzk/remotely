@@ -4,7 +4,7 @@ import { supabase } from "../services/supabase";
 import { useUser } from "../contexts/UserProvider";
 import TrackerTable from "../features/tracking/TrackerTable";
 
-const trackingStatus = [
+let trackingStatus = [
   "No Status",
   "Applied",
   "First Interview",
