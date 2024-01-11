@@ -1,10 +1,15 @@
+import Chart from "./Chart";
+
 function ApplicationChart() {
   return (
-    <div className="bg-white rounded-xl">
+    <div className="h-fit bg-white rounded-xl">
       <h3 className="font-medium px-7 py-5 border-b border-green-100">
         Application Chart
       </h3>
-      <div></div>
+
+      <Chart />
+
+      <p>You moved to the interview stage xx%!!</p>
     </div>
   );
 }
