@@ -1,14 +1,13 @@
+import { useNavigate } from "react-router-dom";
 import {
   CiPaperplane,
   CiMobile3,
   CiDesktop,
   CiFaceSmile,
-  CiFaceFrown,
 } from "react-icons/ci";
 import { supabase } from "../services/supabase";
-import { useNavigate } from "react-router-dom";
-import { useUser } from "../contexts/UserProvider";
-import { useEffect } from "react";
+import ApplicationChart from "../features/dashboard/ApplicationChart";
+import SavedJobs from "../features/dashboard/SavedJobs";
 
 const metrics = [
   { number: 10, status: "Applied" },
@@ -45,12 +44,6 @@ function renderIcon(text) {
 
 function Dashboard() {
   const navigate = useNavigate();
-  const { user } = useUser();
-  // console.log(user);
-
-  // useEffect(() => {
-  //   if (!user) navigate("/");
-  // }, [user, navigate]);
 
   async function handleSignOut() {
     const { error } = await supabase.auth.signOut();
@@ -63,16 +56,15 @@ function Dashboard() {
   }
 
   return (
-    <div className="flex-1 grid grid-rows-2 grid-cols-2 gap-6">
-      <div className="col-span-2 grid grid-cols-4 gap-4">
+    <div className="flex-1 grid grid-rows-[min-content_1fr] grid-cols-2 gap-6">
+      <div className="col-span-2 grid grid-cols-4 gap-6">
         {/* 💡 calling stage 1 or 2 might be also good */}
-        {/* <div>07 Saved</div> */}
 
         {metrics.map((item, i) => {
           return (
             <div
               key={item.status}
-              className="bg-white h-fit rounded-xl flex items-center justify-between py-4 px-5"
+              className="bg-white rounded-xl flex items-center justify-between p-6"
             >
               <div className="flex flex-col">
                 <span className="text-2xl font-medium">{item.number}</span>
@@ -82,15 +74,10 @@ function Dashboard() {
             </div>
           );
         })}
+      </div>
 
-        {/* <div>03 Declined</div> */}
-        {/* CiFaceFrown */}
-      </div>
-      <div className="bg-white rounded-xl">Glaph</div>
-      <div className="bg-white rounded-xl">
-        Saved jobs from recent
-        <button onClick={handleSignOut}>Sign out</button>
-      </div>
+      <ApplicationChart />
+      <SavedJobs />
     </div>
   );
 }
