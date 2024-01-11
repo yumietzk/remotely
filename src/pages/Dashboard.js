@@ -1,13 +1,11 @@
 import { useNavigate } from "react-router-dom";
-import {
-  CiPaperplane,
-  CiMobile3,
-  CiDesktop,
-  CiFaceSmile,
-} from "react-icons/ci";
+
 import { supabase } from "../services/supabase";
 import ApplicationChart from "../features/dashboard/ApplicationChart";
 import SavedJobs from "../features/dashboard/SavedJobs";
+import { useUser } from "../contexts/UserProvider";
+import { useEffect, useState } from "react";
+import KeyMetrics from "../features/dashboard/KeyMetrics";
 
 const metrics = [
   { number: 10, status: "Applied" },
@@ -16,34 +14,39 @@ const metrics = [
   { number: 1, status: "Offered" },
 ];
 
-function renderIcon(text) {
-  const className = "w-11 h-11 p-3 bg-accent text-white rounded-full";
-
-  switch (text) {
-    case "Applied": {
-      return <CiPaperplane className={className} />;
-    }
-
-    case "Phone Interview": {
-      return <CiMobile3 className={className} />;
-    }
-
-    case "Technical Interview": {
-      return <CiDesktop className={className} />;
-    }
-
-    case "Offered": {
-      return <CiFaceSmile className={className} />;
-    }
-
-    default: {
-      return null;
-    }
-  }
-}
-
 function Dashboard() {
+  // 💡 Can extract as a hook
+  const [trackingJobs, setTrackingJobs] = useState([]);
+
   const navigate = useNavigate();
+
+  const {
+    user: {
+      user: { id: userId },
+    },
+  } = useUser();
+
+  useEffect(() => {
+    async function getTrackingJobs() {
+      try {
+        const { data, error } = await supabase
+          .from("trackings")
+          .select()
+          .eq("user_id", userId);
+
+        if (error) {
+          throw error;
+        }
+
+        setTrackingJobs(data);
+      } catch (error) {
+        console.error(error);
+        alert(error.message);
+      }
+    }
+
+    getTrackingJobs();
+  }, []);
 
   async function handleSignOut() {
     const { error } = await supabase.auth.signOut();
@@ -57,27 +60,11 @@ function Dashboard() {
 
   return (
     <div className="flex-1 grid grid-rows-[min-content_1fr] grid-cols-2 gap-6">
-      <div className="col-span-2 grid grid-cols-4 gap-6">
-        {/* 💡 calling stage 1 or 2 might be also good */}
-
-        {metrics.map((item, i) => {
-          return (
-            <div
-              key={item.status}
-              className="bg-white rounded-xl flex items-center justify-between p-6"
-            >
-              <div className="flex flex-col">
-                <span className="text-2xl font-medium">{item.number}</span>
-                <span className="text-sm text-gray-200">{item.status}</span>
-              </div>
-              {renderIcon(item.status)}
-            </div>
-          );
-        })}
-      </div>
+      {/* 💡 calling stage 1 or 2 might be also good */}
+      <KeyMetrics trackingJobs={trackingJobs} />
 
       <ApplicationChart />
-      <SavedJobs />
+      <SavedJobs trackingJobs={trackingJobs} />
     </div>
   );
 }
