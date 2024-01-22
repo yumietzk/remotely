@@ -1,45 +1,29 @@
-import { Pie, PieChart, ResponsiveContainer } from "recharts";
+import { Cell, Legend, Pie, PieChart, Tooltip } from "recharts";
 
-const data = [
-  {
-    name: "No Status",
-    value: 7,
-  },
-  {
-    name: "Applied",
-    value: 4,
-  },
-  {
-    name: "First Interview",
-    value: 2,
-  },
-  {
-    name: "Second Interview",
-    value: 1,
-  },
-  {
-    name: "Final Interview",
-    value: 0,
-  },
-  {
-    name: "Offered",
-    value: 0,
-  },
-];
+const colors = ["#8f7cc7", "#6ccfbf", "#b08667", "#b079af", "#99cd5a"];
 
-function Chart() {
+function Chart({ data }) {
+  // Calculate the minimum of width and height
+  const minSize = Math.min(250, 250);
+
   return (
-    <div className="px-9 py-7 flex justify-center items-center">
-      <PieChart width={300} height={300}>
+    <div className="pt-7 flex justify-center items-center mb-14">
+      <PieChart width={400} height={400}>
         <Pie
           data={data}
           dataKey="value"
           cx="50%"
           cy="50%"
-          outerRadius={100}
-          fill="#0baf56"
+          outerRadius={minSize / 2} // Set outerRadius dynamically
+          fill="#8f7cc7"
           label
-        />
+        >
+          {data.map((item, index) => (
+            <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
+          ))}
+        </Pie>
+        <Tooltip />
+        <Legend verticalAlign="top" height={100} />
       </PieChart>
     </div>
   );

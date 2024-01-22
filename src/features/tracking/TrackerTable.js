@@ -10,7 +10,7 @@ import TitleSettingModal from "./TitleSettingModal";
 // }
 
 function getCardBgColor(index) {
-  const remainder = index % 4;
+  const remainder = index % 5;
 
   switch (remainder) {
     case 0: {
@@ -24,6 +24,9 @@ function getCardBgColor(index) {
     }
     case 3: {
       return "bg-[#fbe2f4]";
+    }
+    case 4: {
+      return "bg-[#f2ffcc]";
     }
     default: {
       return "bg-[#e3dbfa]";

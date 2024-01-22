@@ -7,13 +7,6 @@ import { useUser } from "../contexts/UserProvider";
 import { useEffect, useState } from "react";
 import KeyMetrics from "../features/dashboard/KeyMetrics";
 
-const metrics = [
-  { number: 10, status: "Applied" },
-  { number: 3, status: "Phone Interview" },
-  { number: 1, status: "Technical Interview" },
-  { number: 1, status: "Offered" },
-];
-
 function Dashboard() {
   // 💡 Can extract as a hook
   const [trackingJobs, setTrackingJobs] = useState([]);
@@ -63,7 +56,7 @@ function Dashboard() {
       {/* 💡 calling stage 1 or 2 might be also good */}
       <KeyMetrics trackingJobs={trackingJobs} />
 
-      <ApplicationChart />
+      <ApplicationChart trackingJobs={trackingJobs} />
       <SavedJobs trackingJobs={trackingJobs} />
     </div>
   );
