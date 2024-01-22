@@ -1,8 +1,6 @@
 import Chart from "./Chart";
 
 function ApplicationChart({ trackingJobs }) {
-  console.log(trackingJobs);
-
   const applied = trackingJobs.filter((job) => job.status === "Applied");
   const firstIntervew = trackingJobs.filter(
     (job) => job.status === "First Interview"

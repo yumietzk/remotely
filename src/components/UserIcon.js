@@ -9,9 +9,7 @@ function UserIcon() {
   const [showModal, setShowModal] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
 
-  // const navigate = useNavigate();
-
-  const { data: profile } = useProfile();
+  const { isPending, isError, data: profile, error } = useProfile();
 
   useEffect(() => {
     if (!profile) return;
@@ -19,6 +17,14 @@ function UserIcon() {
     const { image_url } = profile;
     if (image_url) downloadPicture(image_url);
   }, [profile]);
+
+  if (isPending) {
+    return <span>...</span>;
+  }
+
+  if (isError) {
+    return <span>Error: {error.message}</span>;
+  }
 
   function downloadPicture(path) {
     try {
