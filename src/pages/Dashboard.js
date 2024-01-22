@@ -41,16 +41,6 @@ function Dashboard() {
     getTrackingJobs();
   }, []);
 
-  async function handleSignOut() {
-    const { error } = await supabase.auth.signOut();
-
-    if (error) {
-      alert("You couldn't log out!");
-    } else {
-      navigate("/");
-    }
-  }
-
   return (
     <div className="flex-1 grid grid-rows-[min-content_1fr] grid-cols-2 gap-6">
       {/* 💡 calling stage 1 or 2 might be also good */}

@@ -1,14 +1,28 @@
 import { CiLogout } from "react-icons/ci";
+import { supabase } from "../services/supabase";
+import { useNavigate } from "react-router-dom";
 
-function UserModal({ onMouseLeave }) {
+function UserModal() {
+  const navigate = useNavigate();
+
+  async function handleSignOut() {
+    const { error } = await supabase.auth.signOut();
+
+    if (error) {
+      alert("You couldn't log out!");
+    } else {
+      navigate("/");
+    }
+  }
+
   return (
-    <div
-      className="bg-white border border-gray-100 rounded-md w-40 p-4 absolute top-10 -left-6 z-10 flex items-center"
-      onMouseLeave={onMouseLeave}
+    <button
+      className="bg-white border border-gray-100 rounded-md w-28 py-2.5 px-3 absolute top-16 -left-7 z-10 flex items-center justify-between"
+      onClick={() => handleSignOut()}
     >
       <CiLogout />
       Sign out
-    </div>
+    </button>
   );
 }
 

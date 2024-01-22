@@ -18,10 +18,10 @@ function Header() {
 
   return (
     <header className="w-full h-8 text-white-primary flex justify-between items-center mb-10">
-      <h2 className="font-semibold text-2xl">{title}</h2>
+      <h2 className="font-semibold text-[26px]">{title}</h2>
       <div className="flex-1 flex justify-end">
-        <UserIcon />
         <Location />
+        <UserIcon />
       </div>
     </header>
   );
