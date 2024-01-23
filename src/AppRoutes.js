@@ -4,8 +4,6 @@ import ProtectedRoute from "./routes/ProtectedRoute";
 import Dashboard from "./pages/Dashboard";
 import JobSearch from "./pages/JobSearch";
 import News from "./pages/News";
-// import UserAccount from "./pages/UserAccount";
-// import CreatAccount from "./pages/CreatAccount";
 import Profile from "./pages/Profile";
 import ApplicationTracker from "./pages/ApplicationTracker";
 import TopPage from "./pages/TopPage";
@@ -26,8 +24,6 @@ function AppRoutes() {
             <Route path="/search" element={<JobSearch />} />
             <Route path="/news" element={<News />} />
             <Route path="/profile" element={<Profile />} />
-            {/* <Route path="/account" element={<UserAccount />} /> */}
-            <Route path="/delete" element={<Dashboard />} />
           </Route>
         </Route>
         <Route path="*" element={<p>There's nothing here!! 😜</p>} />
