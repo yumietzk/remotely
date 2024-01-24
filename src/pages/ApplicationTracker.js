@@ -58,8 +58,24 @@ function ApplicationTracker() {
         throw error;
       }
 
-      alert("Status updated");
       getTrackingJobs();
+      alert("Status updated");
+    } catch (error) {
+      console.error(error);
+      alert(error.message);
+    }
+  }
+
+  async function removeJob(id) {
+    try {
+      const { error } = await supabase.from("trackings").delete().eq("id", id);
+
+      if (error) {
+        throw error;
+      }
+
+      getTrackingJobs();
+      alert("Remove a job");
     } catch (error) {
       console.error(error);
       alert(error.message);
@@ -67,22 +83,21 @@ function ApplicationTracker() {
   }
 
   return (
-    <div className="flex-1 bg-white border border-green-100 p-4 rounded-xl">
-      <div className="h-full grid grid-cols-kanban-board gap-x-6 overflow-x-scroll">
-        {trackingStatus.map((status, i) => {
-          const jobs = trackingJobs.filter((job) => job.status === status);
+    <div className="flex-1 bg-white border border-green-100 p-4 rounded-xl grid grid-cols-kanban-board gap-x-6 overflow-x-scroll">
+      {trackingStatus.map((status, i) => {
+        const jobs = trackingJobs.filter((job) => job.status === status);
 
-          return (
-            <TrackerTable
-              key={status}
-              status={status}
-              jobs={jobs}
-              index={i}
-              updateJob={updateJob}
-            />
-          );
-        })}
-      </div>
+        return (
+          <TrackerTable
+            key={status}
+            status={status}
+            jobs={jobs}
+            index={i}
+            updateJob={updateJob}
+            removeJob={removeJob}
+          />
+        );
+      })}
     </div>
   );
 }

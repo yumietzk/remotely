@@ -1,19 +1,21 @@
+import { useState } from "react";
 import { HiOutlineDotsHorizontal, HiOutlineLink } from "react-icons/hi";
+import StatusSettingModal from "./StatusSettingModal";
 import Button from "../../components/elements/Button";
 import LinkButton from "../../components/elements/LinkButton";
-import { useState } from "react";
-import StatusSettingModal from "./StatusSettingModal";
-import { supabase } from "../../services/supabase";
-import { useTrackingJobs } from "../../hooks/useTrackingJobs";
 
-function ApplicationCard({ data, updateJob }) {
+function ApplicationCard({ data, updateJob, removeJob }) {
   const [showModal, setShowModal] = useState(false);
-  // const { updateJob } = useTrackingJobs();
 
   const { id, title, company_name, company_logo, link_url } = data;
 
-  function handleChange(status) {
+  function handleUpdate(status) {
     updateJob(id, status);
+    setShowModal(false);
+  }
+
+  function handleRemove() {
+    removeJob(id);
     setShowModal(false);
   }
 
@@ -48,7 +50,8 @@ function ApplicationCard({ data, updateJob }) {
       {showModal && (
         <StatusSettingModal
           setShowModal={setShowModal}
-          handleChange={handleChange}
+          handleUpdate={handleUpdate}
+          handleRemove={handleRemove}
         />
       )}
     </div>

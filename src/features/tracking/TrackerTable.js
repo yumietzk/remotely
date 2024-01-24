@@ -1,13 +1,4 @@
-import { useState } from "react";
-import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import ApplicationCard from "./ApplicationCard";
-import Button from "../../components/elements/Button";
-import { data } from "../../data/testTrackingJobs";
-import TitleSettingModal from "./TitleSettingModal";
-
-// function getFilteredData(status) {
-//   return data.filter((item) => item.status === status);
-// }
 
 function getCardBgColor(index) {
   const remainder = index % 5;
@@ -34,34 +25,14 @@ function getCardBgColor(index) {
   }
 }
 
-function TrackerTable({ status, jobs, index, updateJob }) {
-  // const [showModal, setShowModal] = useState(false);
-  // const [statusTitle, setStatusTitle] = useState(status);
-  // const filteredData = getFilteredData(status);
-
+function TrackerTable({ status, jobs, index, updateJob, removeJob }) {
   return (
-    <div className="h-full flex flex-col py-2.5">
-      <div className="relative mb-3">
-        <div className="flex items-center">
-          <h3 className="font-medium mr-2">{status}</h3>
-          <p className="bg-gray-200 w-7 h-7 rounded-full text-white flex items-center justify-center">
-            {jobs.length}
-          </p>
-          {/* <Button
-            classes="ml-auto rounded-full border-none focus:ring-offset-green-100"
-            handleClick={() => setShowModal(!showModal)}
-          >
-            <HiOutlineDotsHorizontal className="h-6 w-6" />
-          </Button> */}
-        </div>
-
-        {/* {showModal && (
-          <TitleSettingModal
-            setShowModal={setShowModal}
-            setStatusTitle={setStatusTitle}
-            // handleChange={handleChange}
-          />
-        )} */}
+    <div className="relative h-full flex flex-col py-2.5">
+      <div className="flex items-center mb-3">
+        <h3 className="font-medium mr-2">{status}</h3>
+        <p className="bg-gray-200 w-7 h-7 rounded-full text-white flex items-center justify-center">
+          {jobs.length}
+        </p>
       </div>
 
       <div
@@ -70,7 +41,12 @@ function TrackerTable({ status, jobs, index, updateJob }) {
         } p-1.5 rounded-xl`}
       >
         {jobs.map((job) => (
-          <ApplicationCard key={job.id} data={job} updateJob={updateJob} />
+          <ApplicationCard
+            key={job.id}
+            data={job}
+            updateJob={updateJob}
+            removeJob={removeJob}
+          />
         ))}
       </div>
     </div>
