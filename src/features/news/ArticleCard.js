@@ -20,7 +20,6 @@ function ArticleCard({ news, tempImage }) {
         />
 
         <div className="text-sm font-light mb-5 flex justify-between">
-          {/* ⭐️ pubdateの順に並び替えする？ */}
           <span className="">{formatDate(pubDate)}</span>
           <span className="">
             {creator ? (creator[0] === "admin-dominor" ? "" : creator[0]) : ""}

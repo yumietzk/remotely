@@ -1,4 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
+import Loading from "../components/elements/Loading";
+import Error from "../components/elements/Error";
 import ArticleList from "../features/news/ArticleList";
 
 function News() {
@@ -10,18 +12,23 @@ function News() {
     return res.json();
   }
 
-  const { isPending, isError, data, error } = useQuery({
+  const { isPending, isError, fetchStatus, data, error } = useQuery({
     queryKey: ["news"],
     queryFn: fetchNews,
     staleTime: 180000, // 3 minutes
   });
 
+  // If the component is first mounted and the user has no network connection, the network error message will be rendered.
+  if (isPending && fetchStatus === "paused") {
+    return <Error message="Please check the internet connection ☹️" />;
+  }
+
   if (isPending) {
-    return <span>Loading...</span>;
+    return <Loading />;
   }
 
   if (isError) {
-    return <span>Error: {error.message}</span>;
+    return <Error message={error.message} />;
   }
 
   return (
