@@ -1,5 +1,7 @@
 # Remotely
 
+🚧 Work in progress..
+
 A job board platform where you can search for remote Software Engineer jobs and track job applications all in one place.
 
 ## Tech Stack

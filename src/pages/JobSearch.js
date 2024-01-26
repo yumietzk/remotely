@@ -1,33 +1,25 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import SubHeader from "../features/jobs/SubHeader";
-import JobTable from "../features/jobs/JobTable";
 import {
   deleteItem,
   manageSelectedFilter,
 } from "../utils/manageSelectedFilter";
 import { createJobList } from "../utils/createJobList";
+import Loading from "../components/elements/Loading";
+import Error from "../components/elements/Error";
+import SubHeader from "../features/jobs/SubHeader";
+import JobTable from "../features/jobs/JobTable";
 
-// 💡 In the below case, extract jobs available in Japan
-// const availableJobsList = data.jobs.filter(
-//   (job) =>
-//     job.candidate_required_location === "Worldwide" ||
-//     job.candidate_required_location.includes("Asia") ||
-//     job.candidate_required_location.includes("Easter Asia") ||
-//     job.candidate_required_location.includes("Japan")
-// );
+async function fetchJobs() {
+  const res = await fetch(
+    "https://remotive.com/api/remote-jobs?category=software-dev"
+  );
+
+  return res.json();
+}
 
 function JobSearch() {
-  async function fetchJobs() {
-    const res = await fetch(
-      // ⚠️ Will figure out how many we fetch later!!!
-      "https://remotive.com/api/remote-jobs?category=software-dev"
-    );
-
-    return res.json();
-  }
-
-  const { isPending, isError, data, error } = useQuery({
+  const { isPending, isError, fetchStatus, data, error } = useQuery({
     queryKey: ["jobs"],
     queryFn: fetchJobs,
     // ⭐️ It's recommended that you do not hit the API too often.
@@ -39,12 +31,17 @@ function JobSearch() {
   const [selectedJobType, setSelectedJobType] = useState([]);
   const [selectedSkill, setSelectedSkill] = useState([]);
 
+  // If the component is first mounted and the user has no network connection, the network error message will be rendered.
+  if (isPending && fetchStatus === "paused") {
+    return <Error message="Please check the internet connection ☹️" />;
+  }
+
   if (isPending) {
-    return <span>Loading...</span>;
+    return <Loading />;
   }
 
   if (isError) {
-    return <span>Error: {error.message}</span>;
+    return <Error message={error.message} />;
   }
 
   const filterList = [...selectedJobType, ...selectedSkill];
