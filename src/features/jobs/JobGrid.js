@@ -26,6 +26,12 @@ function JobGrid({ jobs }) {
     setCurrentPage((cur) => cur - 1);
   }
 
+  if (currentJobList.length === 0) {
+    return (
+      <p>No jobs are currently available. Please try searching again 🙂</p>
+    );
+  }
+
   return (
     <div>
       <JobList jobs={currentJobList} />

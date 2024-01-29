@@ -2,7 +2,7 @@ import JobCard from "./JobCard";
 
 function JobList({ jobs }) {
   return (
-    // ⚠️ job-listのrepeat回数と横幅はブレイクポイント、画面幅によって変える
+    // ⚠️ Will change grid-cols-job-list later
     <div className="w-full grid grid-cols-job-list gap-6">
       {/* width 310, height 400 */}
       {jobs.map((job) => {
