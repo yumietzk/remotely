@@ -55,6 +55,7 @@ function JobCard({ job }) {
     <div className="p-1.5 rounded-2xl bg-white">
       <div className="bg-job-card rounded-2xl p-4 h-56 flex flex-col justify-between">
         <div className="mb-6 flex justify-between items-center">
+          {/* Published date */}
           {formatDate(publication_date) ? (
             <p className="bg-green-400 text-white px-2.5 py-2 rounded-3xl text-sm font-medium">
               {formatDate(publication_date)}
@@ -63,6 +64,7 @@ function JobCard({ job }) {
             <p></p>
           )}
 
+          {/* Save button */}
           <Button
             classes="rounded-full focus:ring-offset-job-card"
             handleClick={handleCreateTrackingJob}
@@ -71,6 +73,7 @@ function JobCard({ job }) {
           </Button>
         </div>
 
+        {/* Company name, logo, job title,  */}
         <div>
           <p className="text-sm font-medium">{company_name}</p>
           <div className="flex justify-between items-center">
@@ -83,6 +86,7 @@ function JobCard({ job }) {
           </div>
         </div>
 
+        {/* Job type */}
         <div>
           {formatJobType(job_type) ? (
             <span className="border border-gray-100 px-2 py-1.5 rounded-3xl text-xs font-medium">
@@ -95,7 +99,10 @@ function JobCard({ job }) {
       </div>
 
       <div className="flex justify-between items-center px-4 py-5">
-        <p className="text-lg font-semibold">{salary || "N/A"}</p>
+        {/* Salary */}
+        <p className="text-lg font-semibold">{salary || "💰"}</p>
+
+        {/* Detail button */}
         <div>
           <LinkButton
             classes="bg-gray-200 px-3.5 py-2 rounded-3xl text-sm text-white hover:bg-black active:ring-offset-white active:ring-black"

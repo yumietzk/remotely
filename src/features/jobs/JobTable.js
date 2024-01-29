@@ -23,7 +23,7 @@ function JobTable({
 
   return (
     <main className="w-full">
-      {/* ⚠️ 横幅広げた時に今の状態だと不自然な空間ができる時がある */}
+      {/* ⚠️ Will come back later to fix CSS */}
       <TableTop
         filterList={filterList}
         handleDeleteSelected={handleDeleteSelected}

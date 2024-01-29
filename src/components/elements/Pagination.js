@@ -1,7 +1,13 @@
 import { CiCircleChevLeft, CiCircleChevRight } from "react-icons/ci";
 import Button from "./Button";
 
-function Pagination({ currentPage, pages, onNextPage, onPreviousPage }) {
+function Pagination({
+  currentPage,
+  pages,
+  onSetPage,
+  onNextPage,
+  onPreviousPage,
+}) {
   return (
     <div className="mt-11 flex justify-center items-center space-x-4">
       <Button
@@ -18,14 +24,16 @@ function Pagination({ currentPage, pages, onNextPage, onPreviousPage }) {
 
       <div className="space-x-2.5">
         {Array.from({ length: pages }, (v, i) => i + 1).map((num) => (
-          <span
+          <button
             key={num}
             className={
               num === currentPage ? "text-current font-medium" : "text-gray-100"
             }
+            onClick={() => onSetPage(num)}
+            disabled={num === currentPage}
           >
             {num}
-          </span>
+          </button>
         ))}
       </div>
 
