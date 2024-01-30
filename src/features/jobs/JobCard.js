@@ -1,15 +1,18 @@
-import { CiBookmark } from "react-icons/ci";
-import LinkButton from "../../components/elements/LinkButton";
-import Button from "../../components/elements/Button";
+import { useEffect, useState } from "react";
+import { PiBookmarkSimpleLight, PiBookmarkSimpleFill } from "react-icons/pi";
+import { supabase } from "../../services/supabase";
+import { useUser } from "../../contexts/UserProvider";
 import { formatDate } from "../../utils/formatDate";
 import { formatJobType } from "../../utils/formatJobType";
-import { useUser } from "../../contexts/UserProvider";
-import { supabase } from "../../services/supabase";
+import LinkButton from "../../components/elements/LinkButton";
+import Button from "../../components/elements/Button";
 
 function JobCard({ job }) {
+  const [isSaved, setIsSaved] = useState(false);
+
   const {
     user: {
-      user: { id },
+      user: { id: userId },
     },
   } = useUser();
 
@@ -24,13 +27,40 @@ function JobCard({ job }) {
     salary,
   } = job;
 
+  // Check if the job is saved
+  useEffect(() => {
+    checkIfSaved();
+  }, []);
+
+  async function checkIfSaved() {
+    try {
+      // Get all trackings data first
+      // ⭐️ custom hook適用
+      const { data, error } = await supabase
+        .from("trackings")
+        .select()
+        .eq("user_id", userId);
+
+      if (error) {
+        throw error;
+      }
+
+      // Check if the job is saved
+      const isSaved = data.some((item) => item.id === jobId);
+      setIsSaved(isSaved);
+    } catch (error) {
+      console.error(error);
+      alert(error.message);
+    }
+  }
+
   async function handleCreateTrackingJob() {
     try {
-      const newId = `${jobId}${new Date().getTime().toString().slice(-5)}`;
+      // const newId = `${jobId}${new Date().getTime().toString().slice(-5)}`;
 
       const newData = {
-        id: +newId,
-        user_id: id,
+        id: jobId,
+        user_id: userId,
         status: "No Status",
         company_name,
         title,
@@ -44,6 +74,7 @@ function JobCard({ job }) {
         throw error;
       }
 
+      checkIfSaved();
       alert("Save a job");
     } catch (error) {
       console.error(error);
@@ -53,7 +84,7 @@ function JobCard({ job }) {
 
   return (
     <div className="p-1.5 rounded-2xl bg-white">
-      <div className="bg-job-card rounded-2xl p-4 h-56 flex flex-col justify-between">
+      <div className="bg-job-card rounded-2xl p-4 h-60 flex flex-col justify-between">
         <div className="mb-6 flex justify-between items-center">
           {/* Published date */}
           {formatDate(publication_date) ? (
@@ -65,17 +96,22 @@ function JobCard({ job }) {
           )}
 
           {/* Save button */}
+          {/* ⚠️ Update to disable button if already applied */}
           <Button
             classes="rounded-full focus:ring-offset-job-card"
             handleClick={handleCreateTrackingJob}
           >
-            <CiBookmark className="bg-white w-9 h-9 p-2 rounded-full" />
+            {isSaved ? (
+              <PiBookmarkSimpleFill className="bg-white w-9 h-9 p-2 rounded-full" />
+            ) : (
+              <PiBookmarkSimpleLight className="bg-white w-9 h-9 p-2 rounded-full" />
+            )}
           </Button>
         </div>
 
         {/* Company name, logo, job title,  */}
-        <div>
-          <p className="text-sm font-medium">{company_name}</p>
+        <div className="mb-1">
+          <p className="text-sm font-medium mb-1">{company_name}</p>
           <div className="flex justify-between items-center">
             <p className="text-lg font-semibold mr-1.5">{title}</p>
             <img
