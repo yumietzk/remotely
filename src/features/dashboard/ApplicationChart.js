@@ -13,7 +13,9 @@ function ApplicationChart({ trackingJobs }) {
   );
   const offered = trackingJobs.filter((job) => job.status === "Offered");
 
-  const movedInterview = trackingJobs.filter((job) => job.status !== "Applied");
+  // Extract the jobs that are applied and moved to the interview stage
+  const appliedJobs = trackingJobs.filter((job) => job.status !== "No Status");
+  const movedInterview = appliedJobs.filter((job) => job.status !== "Applied");
 
   const data = [
     {
@@ -49,27 +51,35 @@ function ApplicationChart({ trackingJobs }) {
 
       <div>
         {filteredData.length === 0 ? (
-          <p>You haven't applied any jobs yet.</p>
+          <p className="px-9 py-7 text-gray-200">
+            You haven't applied any jobs yet.
+          </p>
         ) : (
           <>
             <Chart data={filteredData} />
 
             <div className="px-9 pb-7">
-              <p>
-                You've got {data[4].value}{" "}
-                {data[4].value === 0
-                  ? "offer."
-                  : data[4].value === 1
-                  ? "offer!"
-                  : "offers!"}
-              </p>
-              <p>
-                You move to the interview stage{" "}
-                {Math.trunc(
-                  (movedInterview.length / trackingJobs.length) * 100
-                )}
-                % ({movedInterview.length} out of {trackingJobs.length})!
-              </p>
+              {data[4].value !== 0 && (
+                <p>
+                  You've got {data[4].value}{" "}
+                  {data[4].value === 1 ? "offer!" : "offers!"}
+                </p>
+              )}
+
+              {movedInterview.length === 0 ? (
+                <p>
+                  You've applied {data[0].value}{" "}
+                  {data[0].value === 1 ? "job" : "jobs"} so far.
+                </p>
+              ) : (
+                <p>
+                  You moved to the interview stage{" "}
+                  {Math.trunc(
+                    (movedInterview.length / appliedJobs.length) * 100
+                  )}
+                  % ({movedInterview.length} out of {appliedJobs.length})!
+                </p>
+              )}
             </div>
           </>
         )}

@@ -1,26 +1,26 @@
-import {
-  CiPaperplane,
-  CiMobile3,
-  CiDesktop,
-  CiFaceSmile,
-} from "react-icons/ci";
+import { CiMobile3, CiDesktop, CiFaceSmile, CiUser } from "react-icons/ci";
 
-const metrics = ["Applied", "First Interview", "Final Interview", "Offered"];
+const metrics = [
+  "First Interview",
+  "Second Interview",
+  "Final Interview",
+  "Offered",
+];
 
 function renderIcon(text) {
   const className = "w-11 h-11 p-3 bg-accent text-white rounded-full";
 
   switch (text) {
-    case "Applied": {
-      return <CiPaperplane className={className} />;
-    }
-
     case "First Interview": {
       return <CiMobile3 className={className} />;
     }
 
-    case "Final Interview": {
+    case "Second Interview": {
       return <CiDesktop className={className} />;
+    }
+
+    case "Final Interview": {
+      return <CiUser className={className} />;
     }
 
     case "Offered": {
