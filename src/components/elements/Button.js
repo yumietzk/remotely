@@ -7,7 +7,7 @@ function Button({
 }) {
   return (
     <button
-      className={`${classes} transition duration-300 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2`}
+      className={`${classes} transition duration-300 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 ${disabled && "cursor-not-allowed"}`}
       type={type}
       onClick={handleClick}
       disabled={disabled}

@@ -9,6 +9,7 @@ import Button from "../../components/elements/Button";
 
 function JobCard({ job }) {
   const [isSaved, setIsSaved] = useState(false);
+  const [canRemove, setCanRemove] = useState(true);
 
   const {
     user: {
@@ -24,15 +25,15 @@ function JobCard({ job }) {
     company_logo,
     job_type,
     publication_date,
-    salary,
+    // salary,
   } = job;
 
-  // Check if the job is saved
+  // Check if the job is saved, and if so check the status
   useEffect(() => {
-    checkIfSaved();
+    checkStatus();
   }, []);
 
-  async function checkIfSaved() {
+  async function checkStatus() {
     try {
       // Get all trackings data first
       // ⭐️ custom hook適用
@@ -46,36 +47,63 @@ function JobCard({ job }) {
       }
 
       // Check if the job is saved
-      const isSaved = data.some((item) => item.id === jobId);
-      setIsSaved(isSaved);
+      const targetData = data.find((item) => item.id === jobId);
+
+      if (targetData) {
+        setIsSaved(true);
+        setCanRemove(targetData.status === "No Status");
+      } else {
+        setIsSaved(false);
+        setCanRemove(true);
+      }
     } catch (error) {
       console.error(error);
       alert(error.message);
     }
   }
 
-  async function handleCreateTrackingJob() {
+  // Can toggle if not applied yet
+  async function handleToggleSave() {
     try {
-      // const newId = `${jobId}${new Date().getTime().toString().slice(-5)}`;
+      if (isSaved) {
+        // Remove a job from saved
 
-      const newData = {
-        id: jobId,
-        user_id: userId,
-        status: "No Status",
-        company_name,
-        title,
-        company_logo,
-        link_url: url,
-      };
+        const { error } = await supabase
+          .from("trackings")
+          .delete()
+          .eq("user_id", userId)
+          .eq("id", jobId);
 
-      const { error } = await supabase.from("trackings").insert(newData);
+        if (error) {
+          throw error;
+        }
 
-      if (error) {
-        throw error;
+        alert("Remove a job from saved");
+      } else {
+        // Save a job
+
+        // const newId = `${jobId}${new Date().getTime().toString().slice(-5)}`;
+
+        const newData = {
+          id: jobId,
+          user_id: userId,
+          status: "No Status",
+          company_name,
+          title,
+          company_logo,
+          link_url: url,
+        };
+
+        const { error } = await supabase.from("trackings").insert(newData);
+
+        if (error) {
+          throw error;
+        }
+
+        alert("Save a job");
       }
 
-      checkIfSaved();
-      alert("Save a job");
+      checkStatus();
     } catch (error) {
       console.error(error);
       alert(error.message);
@@ -96,15 +124,22 @@ function JobCard({ job }) {
           )}
 
           {/* Save button */}
-          {/* ⚠️ Update to disable button if already applied */}
+          {/* The button doesn't work if the job is already applied */}
           <Button
-            classes="rounded-full focus:ring-offset-job-card"
-            handleClick={handleCreateTrackingJob}
+            classes="relative group rounded-full focus:ring-offset-job-card"
+            handleClick={handleToggleSave}
+            disabled={!canRemove}
           >
             {isSaved ? (
               <PiBookmarkSimpleFill className="bg-white w-9 h-9 p-2 rounded-full" />
             ) : (
               <PiBookmarkSimpleLight className="bg-white w-9 h-9 p-2 rounded-full" />
+            )}
+
+            {!canRemove && (
+              <span className="w-max bg-black text-white text-sm py-1 px-2 rounded-lg absolute -left-[110%] bottom-[120%] z-10 invisible transition duration-300 group-hover:visible">
+                Already applied
+              </span>
             )}
           </Button>
         </div>
@@ -134,9 +169,9 @@ function JobCard({ job }) {
         </div>
       </div>
 
-      <div className="flex justify-between items-center px-4 py-5">
+      <div className="flex justify-end items-center px-4 py-5">
         {/* Salary */}
-        <p className="text-lg font-semibold">{salary || "💰"}</p>
+        {/* <p className="text-lg font-semibold">{salary || "💰"}</p> */}
 
         {/* Detail button */}
         <div>
