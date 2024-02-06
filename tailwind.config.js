@@ -54,7 +54,6 @@ module.exports = {
       fontFamily: {
         primary: ["Inter"],
         secondary: ["Playfair Display"],
-        // primary: ["Quicksand"],
       },
       gridTemplateColumns: {
         "job-list": "repeat(3, 300px)",
@@ -65,18 +64,3 @@ module.exports = {
   },
   plugins: [require("@tailwindcss/forms")],
 };
-
-// Colors:
-// #e0e8da
-// #dff376
-// #bfc54e
-// #0cbf5e
-// #273b33
-
-// #778e82
-
-// #dee7e2
-// #f0f4f3
-
-// #b1bfbc
-// #888f8c

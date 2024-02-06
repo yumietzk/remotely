@@ -77,7 +77,8 @@ function ApplicationChart({ trackingJobs }) {
                   {Math.trunc(
                     (movedInterview.length / appliedJobs.length) * 100
                   )}
-                  % ({movedInterview.length} out of {appliedJobs.length})!
+                  % ({movedInterview.length} out of {appliedJobs.length}{" "}
+                  {appliedJobs.length > 1 ? "applications" : "application"})!
                 </p>
               )}
             </div>
