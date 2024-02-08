@@ -38,7 +38,7 @@ function Dashboard() {
   }, []);
 
   return (
-    <div className="flex-1 grid grid-rows-[min-content_1fr] grid-cols-2 gap-6">
+    <div className="flex-1 px-11 grid grid-rows-[min-content_1fr] grid-cols-2 gap-6">
       <KeyMetrics trackingJobs={trackingJobs} />
 
       <ApplicationChart trackingJobs={trackingJobs} />

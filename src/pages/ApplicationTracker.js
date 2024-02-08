@@ -83,21 +83,24 @@ function ApplicationTracker() {
   }
 
   return (
-    <div className="flex-1 bg-white border border-green-100 p-4 rounded-xl grid grid-cols-kanban-board gap-x-6 overflow-x-scroll">
-      {trackingStatus.map((status, i) => {
-        const jobs = trackingJobs.filter((job) => job.status === status);
+    // これ追加したけど、縦方向に伸びなくなったので直す
+    <div className="flex-1 px-11">
+      <div className="bg-white border border-green-100 p-4 rounded-xl grid grid-cols-kanban-board gap-x-6 overflow-x-scroll">
+        {trackingStatus.map((status, i) => {
+          const jobs = trackingJobs.filter((job) => job.status === status);
 
-        return (
-          <TrackerTable
-            key={status}
-            status={status}
-            jobs={jobs}
-            index={i}
-            updateJob={updateJob}
-            removeJob={removeJob}
-          />
-        );
-      })}
+          return (
+            <TrackerTable
+              key={status}
+              status={status}
+              jobs={jobs}
+              index={i}
+              updateJob={updateJob}
+              removeJob={removeJob}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 }
