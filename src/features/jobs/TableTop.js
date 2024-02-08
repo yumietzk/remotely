@@ -24,8 +24,6 @@ function TableTop({
         handleDeleteSelected={handleDeleteSelected}
       />
 
-      {/* <Sort /> */}
-
       {searchTerm && (
         <Button
           classes="border-none rounded-full absolute -left-7 focus:ring-offset-green-100"

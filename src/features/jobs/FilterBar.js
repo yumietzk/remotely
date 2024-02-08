@@ -1,5 +1,5 @@
-import FilterList from "./FilterList";
 import { jobType, skill } from "../../data/filterOptions";
+import FilterList from "./FilterList";
 
 function FilterBar({ filterList, handleSelectedJobType, handleSelectedSkill }) {
   return (

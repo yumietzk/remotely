@@ -22,7 +22,7 @@ function JobSearch() {
   const { isPending, isError, fetchStatus, data, error } = useQuery({
     queryKey: ["jobs"],
     queryFn: fetchJobs,
-    // ⭐️ It's recommended that you do not hit the API too often.
+    // It's recommended that you do not hit the API too often.
     gcTime: 43200000, // 12 hours
     staleTime: 21600000, // 6 hours
   });
@@ -45,6 +45,7 @@ function JobSearch() {
   }
 
   const filterList = [...selectedJobType, ...selectedSkill];
+  // Create new job list based on search term and filter list
   const newJobs = createJobList(
     data.jobs,
     selectedJobType,
@@ -52,18 +53,21 @@ function JobSearch() {
     searchTerm
   );
 
+  // Manage which item is selected in the job type filter
   function handleSelectedJobType(label) {
     const newSelected = manageSelectedFilter(selectedJobType, label);
 
     setSelectedJobType(newSelected);
   }
 
+  // Manage which item is selected in the skill filter
   function handleSelectedSkill(label) {
     const newSelected = manageSelectedFilter(selectedSkill, label);
 
     setSelectedSkill(newSelected);
   }
 
+  // Delete an item from the selected items in both the job type and skill filter
   function handleDeleteSelected(item) {
     if (selectedJobType.includes(item)) {
       const newSelected = deleteItem(selectedJobType, item);

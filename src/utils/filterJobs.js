@@ -16,9 +16,9 @@ export function filterJobs(jobs, selectedJobType, selectedSkill) {
     )
     .filter((job) => {
       return selectedSkill.length > 0
-        ? job.tags.some((item) => {
-            return formattedSelectedSkill.includes(formatString(item));
-          })
+        ? job.tags.some((item) =>
+            formattedSelectedSkill.includes(formatString(item))
+          )
         : true;
     });
 }
