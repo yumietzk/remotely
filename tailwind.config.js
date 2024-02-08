@@ -56,7 +56,10 @@ module.exports = {
         secondary: ["Playfair Display"],
       },
       gridTemplateColumns: {
-        "job-list": "repeat(3, 300px)",
+        "job-grid-xl": "1fr 932px 1fr",
+        // "job-grid-xl": "1fr 978px 1fr",
+        "job-list-xl": "repeat(3, 300px)",
+        "job-list-2xl": "repeat(auto-fill, 310px)",
         "kanban-board": "repeat(6, 260px)",
         // "job-list": "repeat(auto-fit, minmax(310px, 1fr))",
       },

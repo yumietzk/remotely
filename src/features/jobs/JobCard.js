@@ -6,6 +6,7 @@ import { formatDate } from "../../utils/formatDate";
 import { formatJobType } from "../../utils/formatJobType";
 import LinkButton from "../../components/elements/LinkButton";
 import Button from "../../components/elements/Button";
+import { truncateString } from "../../utils/truncateString";
 
 function JobCard({ job }) {
   const [isSaved, setIsSaved] = useState(false);
@@ -112,7 +113,7 @@ function JobCard({ job }) {
 
   return (
     <div className="p-1.5 rounded-2xl bg-white">
-      <div className="bg-job-card rounded-2xl p-4 h-60 flex flex-col justify-between">
+      <div className="bg-job-card rounded-2xl p-4 h-64 2xl:h-[265px] flex flex-col justify-between">
         <div className="mb-6 flex justify-between items-center">
           {/* Published date */}
           {formatDate(publication_date) ? (
@@ -146,9 +147,13 @@ function JobCard({ job }) {
 
         {/* Company name, logo, job title,  */}
         <div className="mb-1">
-          <p className="text-sm font-medium mb-1">{company_name}</p>
+          <p className="text-sm font-medium text-green-400 mb-1">
+            {company_name}
+          </p>
           <div className="flex justify-between items-center">
-            <p className="text-lg font-semibold mr-1.5">{title}</p>
+            <p className="text-lg font-semibold mr-1.5">
+              {truncateString(title, 50)}
+            </p>
             <img
               className="w-11 h-11 rounded-full"
               src={company_logo}

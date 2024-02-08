@@ -23,7 +23,6 @@ function JobTable({
 
   return (
     <main className="w-full">
-      {/* ⚠️ Will come back later to fix CSS */}
       <TableTop
         filterList={filterList}
         handleDeleteSelected={handleDeleteSelected}

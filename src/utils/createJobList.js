@@ -10,11 +10,11 @@ export function createJobList(
   let newJobList = jobs;
 
   if (selectedJobType.length > 0 || selectedSkill.length > 0) {
-    newJobList = filterJobs(jobs, selectedJobType, selectedSkill);
+    newJobList = filterJobs(newJobList, selectedJobType, selectedSkill);
   }
 
   if (searchTerm) {
-    newJobList = searchJobs(jobs, searchTerm);
+    newJobList = searchJobs(newJobList, searchTerm);
   }
 
   return newJobList;
