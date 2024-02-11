@@ -1,53 +1,63 @@
-import { CiCircleChevLeft, CiCircleChevRight } from "react-icons/ci";
-import Button from "./Button";
+// Expected pagination:
 
-function Pagination({
-  currentPage,
-  pages,
-  onSetPage,
-  onNextPage,
-  onPreviousPage,
-}) {
+// Selected page 1: [1, 2, 3, "...", 20]
+// Selected page 2: [1, 2, 3, 4, "...", 20]
+// Selected page 3: [1, 2, 3, 4, 5, "...", 20]
+// Selected page 4: [1, 2, 3, 4, 5, 6, "...", 20]
+// Selected page 5: [1, 2, 3, 4, 5, 6, 7, "...", 20]
+// Selected page 6: [1, "...", 4, 5, 6, 7, 8, "...", 20]
+
+// Selected page 15: [1, "...", 13, 14, 15, 16, 17, "...", 20]
+// Selected page 16: [1, "...", 14, 15, 16, 17, 18, 19, 20]
+// Selected page 17: [1, "...", 15, 16, 17, 18, 19, 20]
+// Selected page 18: [1, "...", 16, 17, 18, 19, 20]
+// Selected page 19: [1, "...", 17, 18, 19, 20]
+// Selected page 20: [1, "...", 18, 19, 20]
+
+function Pagination({ currentPage, totalPages, handleSetPage }) {
+  let pagination;
+
+  if (totalPages <= 1) {
+    pagination = [1];
+  } else {
+    const center = [
+      currentPage - 2,
+      currentPage - 1,
+      currentPage,
+      currentPage + 1,
+      currentPage + 2,
+    ];
+
+    let filteredCenter = center.filter((page) => page > 1 && page < totalPages);
+
+    const includeThreeLeft = currentPage === 5;
+    const includeThreeRight = currentPage === totalPages - 4;
+    const includeLeftDots = currentPage > 5;
+    const includeRightDots = currentPage < totalPages - 4;
+
+    if (includeThreeLeft) filteredCenter.unshift(2);
+    if (includeThreeRight) filteredCenter.push(totalPages - 1);
+
+    if (includeLeftDots) filteredCenter.unshift("...");
+    if (includeRightDots) filteredCenter.push("...");
+
+    pagination = [1, ...filteredCenter, totalPages];
+  }
+
   return (
-    <div className="mt-11 flex justify-center items-center space-x-4">
-      <Button
-        classes="rounded-full focus:ring-offset-green-100"
-        handleClick={onPreviousPage}
-        disabled={currentPage === 1}
-      >
-        <CiCircleChevLeft
-          className={`w-8 h-8 ${
-            currentPage === 1 ? "text-gray-100" : "text-current"
-          }`}
-        />
-      </Button>
-
-      <div className="space-x-2.5">
-        {Array.from({ length: pages }, (v, i) => i + 1).map((num) => (
-          <button
-            key={num}
-            className={
-              num === currentPage ? "text-current font-medium" : "text-gray-100"
-            }
-            onClick={() => onSetPage(num)}
-            disabled={num === currentPage}
-          >
-            {num}
-          </button>
-        ))}
-      </div>
-
-      <Button
-        classes="rounded-full focus:ring-offset-green-100"
-        handleClick={onNextPage}
-        disabled={currentPage === pages}
-      >
-        <CiCircleChevRight
-          className={`w-8 h-8 ${
-            currentPage === pages ? "text-gray-100" : "text-current"
-          }`}
-        />
-      </Button>
+    <div className="space-x-2.5">
+      {pagination.map((num, i) => (
+        <button
+          key={`${num}-${i}`}
+          className={
+            num === currentPage ? "text-current font-medium" : "text-gray-100"
+          }
+          onClick={() => handleSetPage(num)}
+          disabled={num === currentPage || num === "..."}
+        >
+          {num}
+        </button>
+      ))}
     </div>
   );
 }

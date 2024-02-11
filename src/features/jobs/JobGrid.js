@@ -1,13 +1,13 @@
 import { useState } from "react";
 import JobList from "./JobList";
-import Pagination from "../../components/elements/Pagination";
+import PaginationContainer from "./PaginationContainer";
 
 function JobGrid({ jobs }) {
   const [currentPage, setCurrentPage] = useState(1);
 
   // Display 12 jobs per page
   const jobsPerPage = 12;
-  const pages = Math.ceil(jobs.length / jobsPerPage);
+  const totalPages = Math.ceil(jobs.length / jobsPerPage);
 
   const currentJobList = jobs.slice(
     jobsPerPage * (currentPage - 1),
@@ -36,9 +36,9 @@ function JobGrid({ jobs }) {
     <div>
       <JobList jobs={currentJobList} />
 
-      <Pagination
+      <PaginationContainer
         currentPage={currentPage}
-        pages={pages}
+        totalPages={totalPages}
         onSetPage={handleSetPage}
         onNextPage={handleNextPage}
         onPreviousPage={handlePreviousPage}
