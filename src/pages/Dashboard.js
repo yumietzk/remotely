@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import { supabase } from "../services/supabase";
 import { useUser } from "../contexts/UserProvider";
 import KeyMetrics from "../features/dashboard/KeyMetrics";
@@ -30,7 +31,7 @@ function Dashboard() {
         setTrackingJobs(data);
       } catch (error) {
         console.error(error);
-        alert(error.message);
+        toast.error(error.message);
       }
     }
 

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import { supabase } from "../../services/supabase";
 import { useUser } from "../../contexts/UserProvider";
 import { useProfile } from "../../hooks/useProfile";
@@ -61,7 +62,7 @@ function ProfileForm() {
 
       if (!imageUrl) {
         if (!firstName || !lastName || !country) {
-          alert("You sould fill in every fields.");
+          toast.error("You sould fill in every fields.");
           return;
         }
       }
@@ -83,7 +84,7 @@ function ProfileForm() {
         throw updateError;
       }
 
-      alert("Profile updated");
+      toast.success("Updated a profile");
       setImageUrl(imageUrl);
     } catch (error) {
       console.error(error);

@@ -1,5 +1,6 @@
 // import { useTrackingJobs } from "../hooks/useTrackingJobs";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import { supabase } from "../services/supabase";
 import { useUser } from "../contexts/UserProvider";
 import TrackerTable from "../features/tracking/TrackerTable";
@@ -43,7 +44,7 @@ function ApplicationTracker() {
       setTrackingJobs(data);
     } catch (error) {
       console.error(error);
-      alert(error.message);
+      toast.error(error.message);
     }
   }
 
@@ -59,10 +60,10 @@ function ApplicationTracker() {
       }
 
       getTrackingJobs();
-      alert("Status updated");
+      toast.success("Updated the status");
     } catch (error) {
       console.error(error);
-      alert(error.message);
+      toast.error(error.message);
     }
   }
 
@@ -75,10 +76,10 @@ function ApplicationTracker() {
       }
 
       getTrackingJobs();
-      alert("Remove a job");
+      toast.success("Removed an application");
     } catch (error) {
       console.error(error);
-      alert(error.message);
+      toast.error(error.message);
     }
   }
 

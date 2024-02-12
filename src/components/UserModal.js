@@ -1,4 +1,5 @@
 import { CiLogout } from "react-icons/ci";
+import { toast } from "react-toastify";
 import { supabase } from "../services/supabase";
 import { useNavigate } from "react-router-dom";
 
@@ -9,7 +10,7 @@ function UserModal() {
     const { error } = await supabase.auth.signOut();
 
     if (error) {
-      alert("You couldn't log out!");
+      toast.error("You couldn't log out!");
     } else {
       navigate("/");
     }

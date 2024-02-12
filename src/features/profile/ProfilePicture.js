@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import { supabase } from "../../services/supabase";
 import { useUser } from "../../contexts/UserProvider";
 
@@ -31,7 +32,7 @@ function ProfilePicture({ url, size, handleUpdate }) {
       setPictureUrl(publicUrl);
     } catch (error) {
       console.error(error);
-      alert(error.messsage);
+      toast.error(error.messsage);
     }
   }
 
@@ -58,7 +59,7 @@ function ProfilePicture({ url, size, handleUpdate }) {
       handleUpdate(e, filePath);
     } catch (error) {
       console.error(error);
-      alert(error.message);
+      toast.error(error.message);
     } finally {
       setUploading(false);
     }

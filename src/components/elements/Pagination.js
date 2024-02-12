@@ -1,5 +1,7 @@
 // Expected pagination:
 
+import Button from "./Button";
+
 // Selected page 1: [1, 2, 3, "...", 20]
 // Selected page 2: [1, 2, 3, 4, "...", 20]
 // Selected page 3: [1, 2, 3, 4, 5, "...", 20]
@@ -47,16 +49,15 @@ function Pagination({ currentPage, totalPages, handleSetPage }) {
   return (
     <div className="space-x-2.5">
       {pagination.map((num, i) => (
-        <button
-          key={`${num}-${i}`}
-          className={
+        <Button
+          classes={
             num === currentPage ? "text-current font-medium" : "text-gray-100"
           }
-          onClick={() => handleSetPage(num)}
+          handleClick={() => handleSetPage(num)}
           disabled={num === currentPage || num === "..."}
         >
           {num}
-        </button>
+        </Button>
       ))}
     </div>
   );

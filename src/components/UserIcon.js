@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CiUser } from "react-icons/ci";
+import { toast } from "react-toastify";
 import UserModal from "./UserModal";
 import { useProfile } from "../hooks/useProfile";
 import { supabase } from "../services/supabase";
@@ -40,7 +41,7 @@ function UserIcon() {
       setImageUrl(publicUrl);
     } catch (error) {
       console.error(error);
-      alert(error.messsage);
+      toast.error(error.messsage);
     }
   }
 

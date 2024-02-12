@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { PiBookmarkSimpleLight, PiBookmarkSimpleFill } from "react-icons/pi";
+import { toast } from "react-toastify";
 import { supabase } from "../../services/supabase";
 import { useUser } from "../../contexts/UserProvider";
 import { formatDate } from "../../utils/formatDate";
@@ -59,7 +60,7 @@ function JobCard({ job }) {
       }
     } catch (error) {
       console.error(error);
-      alert(error.message);
+      toast.error(error.message);
     }
   }
 
@@ -68,7 +69,6 @@ function JobCard({ job }) {
     try {
       if (isSaved) {
         // Remove a job from saved
-
         const { error } = await supabase
           .from("trackings")
           .delete()
@@ -79,12 +79,9 @@ function JobCard({ job }) {
           throw error;
         }
 
-        alert("Remove a job from saved");
+        toast.success("Removed a job from the saved");
       } else {
         // Save a job
-
-        // const newId = `${jobId}${new Date().getTime().toString().slice(-5)}`;
-
         const newData = {
           id: jobId,
           user_id: userId,
@@ -101,13 +98,13 @@ function JobCard({ job }) {
           throw error;
         }
 
-        alert("Save a job");
+        toast.success("Saved a job");
       }
 
       checkStatus();
     } catch (error) {
       console.error(error);
-      alert(error.message);
+      toast.error(error.message);
     }
   }
 
