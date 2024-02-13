@@ -4,7 +4,7 @@ import Button from "../../components/elements/Button";
 function Modal({ title, setShowModal, children, width = "220px" }) {
   return (
     <div
-      className={`w-[${width}] absolute top-1 -right-32 z-10 bg-white border border-gray-50 rounded-xl shadow-md py-4 px-5`}
+      className={`w-[${width}] absolute top-1 right-1 z-10 bg-white border border-gray-50 rounded-xl shadow-md py-4 px-5`}
     >
       <div className="flex items-center justify-between mb-6">
         <p className="mr-9 font-medium">{title}</p>

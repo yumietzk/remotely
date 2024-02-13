@@ -26,8 +26,8 @@ function ProfileForm() {
       user: { id },
     },
   } = useUser();
-  // const { profile } = useProfile();
-  const { isPending, isError, data: profile, error } = useProfile();
+  const { profile } = useProfile();
+  // const { isPending, isError, data: profile, error } = useProfile();
 
   const { firstName, lastName, country } = values;
 
@@ -45,13 +45,13 @@ function ProfileForm() {
     setImageUrl(image_url);
   }, [profile]);
 
-  if (isPending) {
-    return <span>Loading...</span>;
-  }
+  // if (isPending) {
+  //   return <span>Loading...</span>;
+  // }
 
-  if (isError) {
-    return <span>Error: {error.message}</span>;
-  }
+  // if (isError) {
+  //   return <span>Error: {error.message}</span>;
+  // }
 
   async function updateProfile(e, imageUrl) {
     e.preventDefault();

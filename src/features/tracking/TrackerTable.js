@@ -27,8 +27,8 @@ function getCardBgColor(index) {
 
 function TrackerTable({ status, jobs, index, updateJob, removeJob }) {
   return (
-    <div className="relative h-full flex flex-col py-2.5">
-      <div className="flex items-center mb-3">
+    <div className="relative h-full flex flex-col py-2.5 overflow-y-hidden">
+      <div className="h-7 flex items-center mb-3">
         <h3 className="font-medium mr-2">{status}</h3>
         <p className="bg-gray-200 w-7 h-7 rounded-full text-white flex items-center justify-center">
           {jobs.length}
@@ -36,7 +36,7 @@ function TrackerTable({ status, jobs, index, updateJob, removeJob }) {
       </div>
 
       <div
-        className={`flex-1 flex flex-col space-y-2 ${
+        className={`flex-1 overflow-y-scroll flex flex-col space-y-2 ${
           status === "No Status" ? "bg-gray-50" : getCardBgColor(index)
         } p-1.5 rounded-xl`}
       >
