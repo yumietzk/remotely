@@ -1,11 +1,12 @@
-// import { useTrackingJobs } from "../hooks/useTrackingJobs";
-import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { useJobs } from "../hooks/useJobs";
+import { useTrackingJobs } from "../hooks/useTrackingJobs";
 import { supabase } from "../services/supabase";
-import { useUser } from "../contexts/UserProvider";
+import Loading from "../components/elements/Loading";
+import Error from "../components/elements/Error";
 import TrackerTable from "../features/tracking/TrackerTable";
 
-let trackingStatus = [
+const trackingStatus = [
   "No Status",
   "Applied",
   "First Interview",
@@ -15,44 +16,27 @@ let trackingStatus = [
 ];
 
 function ApplicationTracker() {
-  // const { trackingJobs } = useTrackingJobs();
+  const { isPending, isError, fetchStatus, data: allJobs, error } = useJobs();
+  const { trackingJobs, getTrackingJobs } = useTrackingJobs();
 
-  // 💡 custom hook後から
-  const [trackingJobs, setTrackingJobs] = useState([]);
-
-  const {
-    user: {
-      user: { id: userId },
-    },
-  } = useUser();
-
-  useEffect(() => {
-    getTrackingJobs();
-  }, []);
-
-  async function getTrackingJobs() {
-    try {
-      const { data, error } = await supabase
-        .from("trackings")
-        .select()
-        .eq("user_id", userId);
-
-      if (error) {
-        throw error;
-      }
-
-      setTrackingJobs(data);
-    } catch (error) {
-      console.error(error);
-      toast.error(error.message);
-    }
+  // If the component is first mounted and the user has no network connection, the network error message will be rendered.
+  if (isPending && fetchStatus === "paused") {
+    return <Error message="Please check the internet connection ☹️" />;
   }
 
-  async function updateJob(id, status) {
+  if (isPending) {
+    return <Loading />;
+  }
+
+  if (isError) {
+    return <Error message={error.message} />;
+  }
+
+  async function updateJob(id, status, archived = "false") {
     try {
       const { error } = await supabase
         .from("trackings")
-        .update({ status })
+        .update({ status, archived })
         .eq("id", id);
 
       if (error) {
@@ -60,7 +44,10 @@ function ApplicationTracker() {
       }
 
       getTrackingJobs();
-      toast.success("Updated the status");
+
+      if (!archived) {
+        toast.success("Updated the status");
+      }
     } catch (error) {
       console.error(error);
       toast.error(error.message);
@@ -83,6 +70,10 @@ function ApplicationTracker() {
     }
   }
 
+  const archivedJobs = trackingJobs.filter(
+    (item) => !allJobs.jobs.some((job) => job.id === item.id)
+  );
+
   return (
     <div className="flex-1 mx-11 bg-white border border-green-100 p-4 rounded-xl grid grid-cols-kanban-board gap-x-6 overflow-x-scroll overflow-y-hidden">
       {trackingStatus.map((status, i) => {
@@ -93,6 +84,7 @@ function ApplicationTracker() {
             key={status}
             status={status}
             jobs={jobs}
+            archivedJobs={archivedJobs}
             index={i}
             updateJob={updateJob}
             removeJob={removeJob}

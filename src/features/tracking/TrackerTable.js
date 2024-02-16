@@ -1,31 +1,13 @@
-import ApplicationCard from "./ApplicationCard";
+import TrackerJobColumn from "./TrackerJobColumn";
 
-function getCardBgColor(index) {
-  const remainder = index % 5;
-
-  switch (remainder) {
-    case 0: {
-      return "bg-[#e3dbfa]";
-    }
-    case 1: {
-      return "bg-[#d4f6ed]";
-    }
-    case 2: {
-      return "bg-[#ffe1cc]";
-    }
-    case 3: {
-      return "bg-[#fbe2f4]";
-    }
-    case 4: {
-      return "bg-[#f2ffcc]";
-    }
-    default: {
-      return "bg-[#e3dbfa]";
-    }
-  }
-}
-
-function TrackerTable({ status, jobs, index, updateJob, removeJob }) {
+function TrackerTable({
+  status,
+  jobs,
+  archivedJobs,
+  index,
+  updateJob,
+  removeJob,
+}) {
   return (
     <div className="relative h-full flex flex-col py-2.5 overflow-y-hidden">
       <div className="h-7 flex items-center mb-3">
@@ -35,20 +17,14 @@ function TrackerTable({ status, jobs, index, updateJob, removeJob }) {
         </p>
       </div>
 
-      <div
-        className={`flex-1 overflow-y-scroll flex flex-col space-y-2 ${
-          status === "No Status" ? "bg-gray-50" : getCardBgColor(index)
-        } p-1.5 rounded-xl`}
-      >
-        {jobs.map((job) => (
-          <ApplicationCard
-            key={job.id}
-            data={job}
-            updateJob={updateJob}
-            removeJob={removeJob}
-          />
-        ))}
-      </div>
+      <TrackerJobColumn
+        status={status}
+        jobs={jobs}
+        archivedJobs={archivedJobs}
+        index={index}
+        updateJob={updateJob}
+        removeJob={removeJob}
+      />
     </div>
   );
 }

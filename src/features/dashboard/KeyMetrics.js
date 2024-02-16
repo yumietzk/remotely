@@ -33,12 +33,12 @@ function renderIcon(text) {
   }
 }
 
-function KeyMetrics({ trackingJobs }) {
+function KeyMetrics({ jobs }) {
   return (
     <div className="col-span-2 grid grid-cols-4 gap-6">
       {metrics.map((item) => {
-        const jobs = trackingJobs.filter((job) => job.status === item);
-        const numOfJobs = jobs.length;
+        const newJobs = jobs.filter((job) => job.status === item);
+        const numOfJobs = newJobs.length;
 
         return (
           <div

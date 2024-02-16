@@ -1,20 +1,16 @@
 import Chart from "./Chart";
 
-function ApplicationChart({ trackingJobs }) {
-  const applied = trackingJobs.filter((job) => job.status === "Applied");
-  const firstIntervew = trackingJobs.filter(
-    (job) => job.status === "First Interview"
-  );
-  const secondIntervew = trackingJobs.filter(
+function ApplicationChart({ jobs }) {
+  const applied = jobs.filter((job) => job.status === "Applied");
+  const firstIntervew = jobs.filter((job) => job.status === "First Interview");
+  const secondIntervew = jobs.filter(
     (job) => job.status === "Second Interview"
   );
-  const finalIntervew = trackingJobs.filter(
-    (job) => job.status === "Final Interview"
-  );
-  const offered = trackingJobs.filter((job) => job.status === "Offered");
+  const finalIntervew = jobs.filter((job) => job.status === "Final Interview");
+  const offered = jobs.filter((job) => job.status === "Offered");
 
   // Extract the jobs that are applied and moved to the interview stage
-  const appliedJobs = trackingJobs.filter((job) => job.status !== "No Status");
+  const appliedJobs = jobs.filter((job) => job.status !== "No Status");
   const movedInterview = appliedJobs.filter((job) => job.status !== "Applied");
 
   const data = [

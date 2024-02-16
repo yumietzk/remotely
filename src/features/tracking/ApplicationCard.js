@@ -4,7 +4,7 @@ import StatusSettingModal from "./StatusSettingModal";
 import Button from "../../components/elements/Button";
 import LinkButton from "../../components/elements/LinkButton";
 
-function ApplicationCard({ data, updateJob, removeJob }) {
+function ApplicationCard({ data, updateJob, removeJob, showArchived }) {
   const [showModal, setShowModal] = useState(false);
 
   const { id, title, company_name, company_logo, link_url } = data;
@@ -34,14 +34,23 @@ function ApplicationCard({ data, updateJob, removeJob }) {
         </div>
 
         <div>
+          {showArchived && (
+            <span className="text-red text-sm mb-0.5">
+              This job is archived.
+            </span>
+          )}
+
           <div className="flex items-center mb-1">
             <h4 className="mr-2">{title}</h4>
-            <LinkButton
-              classes="rounded-full active:ring-accent"
-              url={link_url}
-            >
-              <HiOutlineLink className="h-4 w-4" />
-            </LinkButton>
+
+            {!showArchived && (
+              <LinkButton
+                classes="rounded-full active:ring-accent"
+                url={link_url}
+              >
+                <HiOutlineLink className="h-4 w-4" />
+              </LinkButton>
+            )}
           </div>
           <p className="text-sm text-gray-200">{company_name}</p>
         </div>

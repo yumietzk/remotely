@@ -1,7 +1,7 @@
 import SavedJobRow from "./SavedJobRow";
 
-function SavedJobList({ trackingJobs }) {
-  const noStatusJobs = trackingJobs.filter((job) => job.status === "No Status");
+function SavedJobList({ jobs }) {
+  const noStatusJobs = jobs.filter((job) => job.status === "No Status");
 
   if (noStatusJobs.length === 0) {
     return (

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useJobs } from "../hooks/useJobs";
 import {
   deleteItem,
   manageSelectedFilter,
@@ -10,22 +10,8 @@ import Error from "../components/elements/Error";
 import SubHeader from "../features/jobs/SubHeader";
 import JobTable from "../features/jobs/JobTable";
 
-async function fetchJobs() {
-  const res = await fetch(
-    "https://remotive.com/api/remote-jobs?category=software-dev"
-  );
-
-  return res.json();
-}
-
 function JobSearch() {
-  const { isPending, isError, fetchStatus, data, error } = useQuery({
-    queryKey: ["jobs"],
-    queryFn: fetchJobs,
-    // It's recommended that you do not hit the API too often.
-    gcTime: 43200000, // 12 hours
-    staleTime: 21600000, // 6 hours
-  });
+  const { isPending, isError, fetchStatus, data, error } = useJobs();
 
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedJobType, setSelectedJobType] = useState([]);
@@ -53,21 +39,18 @@ function JobSearch() {
     searchTerm
   );
 
-  // Manage which item is selected in the job type filter
   function handleSelectedJobType(label) {
     const newSelected = manageSelectedFilter(selectedJobType, label);
 
     setSelectedJobType(newSelected);
   }
 
-  // Manage which item is selected in the skill filter
   function handleSelectedSkill(label) {
     const newSelected = manageSelectedFilter(selectedSkill, label);
 
     setSelectedSkill(newSelected);
   }
 
-  // Delete an item from the selected items in both the job type and skill filter
   function handleDeleteSelected(item) {
     if (selectedJobType.includes(item)) {
       const newSelected = deleteItem(selectedJobType, item);

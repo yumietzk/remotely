@@ -38,7 +38,6 @@ function JobCard({ job }) {
   async function checkStatus() {
     try {
       // Get all trackings data first
-      // ⭐️ custom hook適用
       const { data, error } = await supabase
         .from("trackings")
         .select()
@@ -90,6 +89,7 @@ function JobCard({ job }) {
           title,
           company_logo,
           link_url: url,
+          archived: false,
         };
 
         const { error } = await supabase.from("trackings").insert(newData);
