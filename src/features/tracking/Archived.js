@@ -20,7 +20,7 @@ function Archived({ data, updateJob, removeJob }) {
         </Button>
         <Button
           classes="bg-white text-black px-3.5 py-1.5 rounded-lg hover:bg-accent focus:ring-offset-gray-200"
-          handleClick={() => updateJob(id, status, true)}
+          handleClick={() => updateJob(id, status, true, "archive")}
         >
           Keep it
         </Button>

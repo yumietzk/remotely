@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { PiBookmarkSimpleLight, PiBookmarkSimpleFill } from "react-icons/pi";
 import { toast } from "react-toastify";
+import { useTrackingJobs } from "../../hooks/useTrackingJobs";
 import { supabase } from "../../services/supabase";
 import { useUser } from "../../contexts/UserProvider";
 import { formatDate } from "../../utils/formatDate";
@@ -12,6 +13,9 @@ import { truncateString } from "../../utils/truncateString";
 function JobCard({ job }) {
   const [isSaved, setIsSaved] = useState(false);
   const [canRemove, setCanRemove] = useState(true);
+  const [targetId, setTargetId] = useState("");
+
+  const { trackingJobs, getTrackingJobs } = useTrackingJobs();
 
   const {
     user: {
@@ -30,36 +34,23 @@ function JobCard({ job }) {
     // salary,
   } = job;
 
-  // Check if the job is saved, and if so check the status
   useEffect(() => {
     checkStatus();
-  }, []);
+  }, [trackingJobs]);
 
-  async function checkStatus() {
-    try {
-      // Get all trackings data first
-      const { data, error } = await supabase
-        .from("trackings")
-        .select()
-        .eq("user_id", userId);
+  // Check if the job is saved, and if so, check if the status is "No Status"
+  function checkStatus() {
+    const targetData = trackingJobs.find(
+      (item) => +String(item.id).slice(0, 7) === jobId
+    );
 
-      if (error) {
-        throw error;
-      }
-
-      // Check if the job is saved
-      const targetData = data.find((item) => item.id === jobId);
-
-      if (targetData) {
-        setIsSaved(true);
-        setCanRemove(targetData.status === "No Status");
-      } else {
-        setIsSaved(false);
-        setCanRemove(true);
-      }
-    } catch (error) {
-      console.error(error);
-      toast.error(error.message);
+    if (targetData) {
+      setIsSaved(true);
+      setCanRemove(targetData.status === "No Status");
+      setTargetId(targetData.id);
+    } else {
+      setIsSaved(false);
+      setCanRemove(true);
     }
   }
 
@@ -72,7 +63,7 @@ function JobCard({ job }) {
           .from("trackings")
           .delete()
           .eq("user_id", userId)
-          .eq("id", jobId);
+          .eq("id", targetId);
 
         if (error) {
           throw error;
@@ -81,8 +72,11 @@ function JobCard({ job }) {
         toast.success("Removed a job from the saved");
       } else {
         // Save a job
+        const now = `${Date.now()}`.slice(-8);
+        const newId = `${jobId}${now}`;
+
         const newData = {
-          id: jobId,
+          id: newId,
           user_id: userId,
           status: "No Status",
           company_name,
@@ -101,7 +95,7 @@ function JobCard({ job }) {
         toast.success("Saved a job");
       }
 
-      checkStatus();
+      getTrackingJobs();
     } catch (error) {
       console.error(error);
       toast.error(error.message);

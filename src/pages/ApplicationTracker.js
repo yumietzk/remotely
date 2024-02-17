@@ -32,7 +32,7 @@ function ApplicationTracker() {
     return <Error message={error.message} />;
   }
 
-  async function updateJob(id, status, archived = "false") {
+  async function updateJob(id, status, archived, type = "update") {
     try {
       const { error } = await supabase
         .from("trackings")
@@ -45,7 +45,7 @@ function ApplicationTracker() {
 
       getTrackingJobs();
 
-      if (!archived) {
+      if (type === "update") {
         toast.success("Updated the status");
       }
     } catch (error) {
@@ -71,7 +71,8 @@ function ApplicationTracker() {
   }
 
   const archivedJobs = trackingJobs.filter(
-    (item) => !allJobs.jobs.some((job) => job.id === item.id)
+    (item) =>
+      !allJobs.jobs.some((job) => job.id === +String(item.id).slice(0, 7))
   );
 
   return (

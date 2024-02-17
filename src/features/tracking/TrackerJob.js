@@ -7,7 +7,7 @@ function TrackerJob({ data, archivedJobs, removeJob, updateJob }) {
 
   let isArchived = false;
   if (!showArchived) {
-    isArchived = archivedJobs.some((item) => item.id === data.id);
+    isArchived = archivedJobs.some((item) => +String(item.id).slice(0, 7) === +String(data.id).slice(0, 7));
   }
 
   return !showArchived && isArchived ? (

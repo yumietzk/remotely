@@ -41,13 +41,20 @@ function TrackerJobColumn({
 
   jobs.forEach(
     (item) =>
-      archivedJobs.some((job) => job.id === item.id) &&
+      archivedJobs.some(
+        (job) => +String(job.id).slice(0, 7) === +String(item.id).slice(0, 7)
+      ) &&
       !item.archived &&
       sortedJobs.push(item)
   );
 
   const remainder = jobs
-    .filter((item) => !sortedJobs.some((job) => job.id === item.id))
+    .filter(
+      (item) =>
+        !sortedJobs.some(
+          (job) => +String(job.id).slice(0, 7) === +String(item.id).slice(0, 7)
+        )
+    )
     .sort((a, b) => Number(a.archived) - Number(b.archived));
   sortedJobs = [...sortedJobs, ...remainder];
 

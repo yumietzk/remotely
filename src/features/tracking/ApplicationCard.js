@@ -7,10 +7,10 @@ import LinkButton from "../../components/elements/LinkButton";
 function ApplicationCard({ data, updateJob, removeJob, showArchived }) {
   const [showModal, setShowModal] = useState(false);
 
-  const { id, title, company_name, company_logo, link_url } = data;
+  const { id, title, company_name, company_logo, link_url, archived } = data;
 
   function handleUpdate(status) {
-    updateJob(id, status);
+    updateJob(id, status, archived);
     setShowModal(false);
   }
 

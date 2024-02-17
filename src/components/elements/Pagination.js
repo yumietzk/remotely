@@ -48,8 +48,9 @@ function Pagination({ currentPage, totalPages, handleSetPage }) {
 
   return (
     <div className="space-x-2.5">
-      {pagination.map((num, i) => (
+      {pagination.map((num) => (
         <Button
+          key={num}
           classes={
             num === currentPage ? "text-current font-medium" : "text-gray-100"
           }
