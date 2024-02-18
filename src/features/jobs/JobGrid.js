@@ -1,9 +1,29 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import JobList from "./JobList";
 import PaginationContainer from "./PaginationContainer";
 
 function JobGrid({ jobs }) {
   const [currentPage, setCurrentPage] = useState(1);
+
+  const isMounted = useRef(false);
+  const jobRef = useRef(null);
+
+  useEffect(() => {
+    // Prevent useEffect from running on mount
+    if (isMounted.current) {
+      scrollToTop();
+    } else {
+      isMounted.current = true;
+    }
+  }, [currentPage]);
+
+  function scrollToTop() {
+    if (jobRef.current) {
+      jobRef.current.scrollIntoView({
+        behavior: "smooth",
+      });
+    }
+  }
 
   // Display 12 jobs per page
   const jobsPerPage = 12;
@@ -33,7 +53,7 @@ function JobGrid({ jobs }) {
   }
 
   return (
-    <div>
+    <div ref={jobRef}>
       <JobList jobs={currentJobList} />
 
       <PaginationContainer
