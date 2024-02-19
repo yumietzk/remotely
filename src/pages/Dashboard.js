@@ -29,11 +29,15 @@ function Dashboard() {
   );
 
   return (
-    <div className="flex-1 px-11 grid grid-rows-[min-content_1fr] grid-cols-2 gap-6">
-      <KeyMetrics jobs={newData} />
+    <div className="flex-1 px-11">
+      <h2 className="font-semibold text-[26px] mt-10">Dashboard</h2>
 
-      <ApplicationChart jobs={newData} />
-      <SavedJobs jobs={newData} />
+      <div className="pt-14 grid grid-rows-[min-content_800px] grid-cols-2 gap-y-12 gap-x-9">
+        <KeyMetrics jobs={newData} />
+
+        <ApplicationChart jobs={newData} />
+        <SavedJobs jobs={newData} />
+      </div>
     </div>
   );
 }

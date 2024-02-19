@@ -5,14 +5,14 @@ function SavedJobList({ jobs }) {
 
   if (noStatusJobs.length === 0) {
     return (
-      <p className="px-9 py-7 text-gray-200">
+      <p className="px-9 py-14 text-gray-200">
         Let's find a job that you're interested in!
       </p>
     );
   }
 
   return (
-    <ul className="px-9 py-7 space-y-12">
+    <ul className="flex-1 px-9 py-7 space-y-12 overflow-y-scroll">
       {noStatusJobs.map((item) => (
         <SavedJobRow key={item.id} job={item} />
       ))}

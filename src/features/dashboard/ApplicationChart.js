@@ -41,13 +41,13 @@ function ApplicationChart({ jobs }) {
 
   return (
     <div className="h-fit bg-white rounded-xl">
-      <h3 className="font-medium px-7 py-5 border-b border-green-100">
+      <h3 className="text-lg font-medium px-7 py-5 border-b border-green-100">
         Application Chart
       </h3>
 
       <div>
         {filteredData.length === 0 ? (
-          <p className="px-9 py-7 text-gray-200">
+          <p className="px-9 py-14 text-gray-200">
             You haven't applied any jobs yet.
           </p>
         ) : (

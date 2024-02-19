@@ -25,8 +25,8 @@ function JobGrid({ jobs }) {
     }
   }
 
-  // Display 12 jobs per page
-  const jobsPerPage = 12;
+  // Display 18 jobs per page
+  const jobsPerPage = 18;
   const totalPages = Math.ceil(jobs.length / jobsPerPage);
 
   const currentJobList = jobs.slice(
