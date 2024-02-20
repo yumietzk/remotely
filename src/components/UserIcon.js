@@ -1,17 +1,12 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { CiUser } from "react-icons/ci";
+// import { CiUser } from "react-icons/ci";
 import { toast } from "react-toastify";
-import UserModal from "./UserModal";
-import { useProfile } from "../hooks/useProfile";
 import { supabase } from "../services/supabase";
+import UserModal from "./UserModal";
 
-function UserIcon() {
+function UserIcon({ profile }) {
   const [showModal, setShowModal] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
-
-  const { profile } = useProfile();
-  // const { isPending, isError, data: profile, error } = useProfile();
 
   useEffect(() => {
     if (!profile) return;
@@ -19,14 +14,6 @@ function UserIcon() {
     const { image_url } = profile;
     if (image_url) downloadPicture(image_url);
   }, [profile]);
-
-  // if (isPending) {
-  //   return <span>...</span>;
-  // }
-
-  // if (isError) {
-  //   return <span>Error: {error.message}</span>;
-  // }
 
   function downloadPicture(path) {
     try {
@@ -55,7 +42,7 @@ function UserIcon() {
        */}
       <button onClick={() => setShowModal(!showModal)}>
         <img
-          className="object-cover rounded-full h-14 w-14"
+          className="object-cover rounded-full h-[49px] w-[49px]"
           src={imageUrl}
           alt="Profile"
         />

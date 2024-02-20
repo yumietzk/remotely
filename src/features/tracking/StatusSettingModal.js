@@ -11,15 +11,21 @@ const availableStatus = [
   "Offered",
 ];
 
-function StatusSettingModal({ setShowModal, handleUpdate, handleRemove }) {
+function StatusSettingModal({
+  currentStatus,
+  setShowModal,
+  handleUpdate,
+  handleRemove,
+}) {
   return (
     <Modal title="Move to" setShowModal={setShowModal}>
       <div className="flex flex-col items-start space-y-3 text-sm">
         {availableStatus.map((status) => (
           <Button
             key={status}
-            classes="bg-white px-3 py-1.5 rounded-full hover:bg-gray-50 focus:ring-offset-green-100"
+            classes="bg-white px-3 py-1.5 rounded-full disabled:text-gray-100 hover:bg-gray-50 disabled:hover:bg-transparent focus:ring-offset-green-100"
             handleClick={() => handleUpdate(status)}
+            disabled={currentStatus === status}
           >
             {status}
           </Button>

@@ -7,7 +7,8 @@ import LinkButton from "../../components/elements/LinkButton";
 function ApplicationCard({ data, updateJob, removeJob, showArchived }) {
   const [showModal, setShowModal] = useState(false);
 
-  const { id, title, company_name, company_logo, link_url, archived } = data;
+  const { id, title, company_name, company_logo, link_url, status, archived } =
+    data;
 
   function handleUpdate(status) {
     updateJob(id, status, archived);
@@ -58,6 +59,7 @@ function ApplicationCard({ data, updateJob, removeJob, showArchived }) {
 
       {showModal && (
         <StatusSettingModal
+          currentStatus={status}
           setShowModal={setShowModal}
           handleUpdate={handleUpdate}
           handleRemove={handleRemove}

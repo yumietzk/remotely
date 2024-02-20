@@ -1,12 +1,10 @@
 import { useLocation } from "react-router-dom";
-import { useProfile } from "../../hooks/useProfile";
 import Location from "../Location";
 import UserIcon from "../UserIcon";
 import { data } from "../../data/sidebarData";
 
-function Header() {
+function Header({ profile }) {
   const { pathname } = useLocation();
-  const { profile } = useProfile();
 
   const targetItem = data.find((item) => item.path === pathname?.slice(1));
 
@@ -37,8 +35,8 @@ function Header() {
         {title}
       </h2>
       <div className="flex-1 flex justify-end">
-        <Location />
-        <UserIcon />
+        <Location profile={profile} />
+        <UserIcon profile={profile} />
       </div>
     </header>
   );

@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { supabase } from "../../services/supabase";
 import { useUser } from "../../contexts/UserProvider";
-import { useProfile } from "../../hooks/useProfile";
 import Button from "../../components/elements/Button";
 import TextInput from "../../components/form/TextInput";
 import ProfilePicture from "./ProfilePicture";
@@ -14,8 +13,7 @@ const initialValues = {
   country: "",
 };
 
-// ⚠️ react toast message!!!
-function ProfileForm() {
+function ProfileForm({ profile, getProfile }) {
   const [isLoading, setIsLoading] = useState(false);
   const [updateProfileError, setUpdateProfileError] = useState("");
   const [values, setValues] = useState(initialValues);
@@ -26,8 +24,6 @@ function ProfileForm() {
       user: { id },
     },
   } = useUser();
-  const { profile } = useProfile();
-  // const { isPending, isError, data: profile, error } = useProfile();
 
   const { firstName, lastName, country } = values;
 
@@ -44,14 +40,6 @@ function ProfileForm() {
     }));
     setImageUrl(image_url);
   }, [profile]);
-
-  // if (isPending) {
-  //   return <span>Loading...</span>;
-  // }
-
-  // if (isError) {
-  //   return <span>Error: {error.message}</span>;
-  // }
 
   async function updateProfile(e, imageUrl) {
     e.preventDefault();
@@ -86,6 +74,8 @@ function ProfileForm() {
 
       toast.success("Updated a profile");
       setImageUrl(imageUrl);
+
+      getProfile();
     } catch (error) {
       console.error(error);
       setUpdateProfileError(error.message);
