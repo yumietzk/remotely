@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
-import Location from "../Location";
-import UserIcon from "../UserIcon";
+import Location from "./Location";
+import UserIcon from "./UserIcon";
 import { data } from "../../data/sidebarData";
 
 function Header({ profile }) {

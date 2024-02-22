@@ -32,7 +32,7 @@ function News() {
   }
 
   return (
-    <div className="flex-1 w-full px-11">
+    <div className="flex-1 w-full px-11 overflow-y-scroll">
       <h1 className="text-4xl font-bold mb-3 text-center">
         The latest tech news
       </h1>

@@ -141,7 +141,7 @@ function AuthForm({ type }) {
           <p className="mr-1">{message[1]}</p>
           <Link
             to={link}
-            className="text-green-300 transition duration-300 hover:text-green-500"
+            className="text-green-300 transition duration-300 hover:text-green-500 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-green-100"
           >
             {message[2]}
           </Link>

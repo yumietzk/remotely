@@ -41,7 +41,7 @@ function ApplicationCard({ data, updateJob, removeJob, showArchived }) {
             </span>
           )}
 
-          <div className="flex items-center mb-1">
+          <div className="flex justify-between items-center mb-1">
             <h4 className="mr-2">{title}</h4>
 
             {!showArchived && (

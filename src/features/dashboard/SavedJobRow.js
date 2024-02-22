@@ -2,7 +2,7 @@ import { HiOutlineLink } from "react-icons/hi";
 import LinkButton from "../../components/elements/LinkButton";
 
 function SavedJobRow({ job }) {
-  const { company_name, company_logo, title, url } = job;
+  const { company_name, company_logo, title, link_url } = job;
 
   return (
     <li className="flex items-center">
@@ -18,7 +18,7 @@ function SavedJobRow({ job }) {
       </div>
 
       <div>
-        <LinkButton classes="rounded-full active:ring-accent" url={url}>
+        <LinkButton classes="rounded-full active:ring-accent" url={link_url}>
           <HiOutlineLink className="h-5 w-5" />
         </LinkButton>
       </div>

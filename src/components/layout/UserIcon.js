@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 // import { CiUser } from "react-icons/ci";
 import { toast } from "react-toastify";
-import { supabase } from "../services/supabase";
+import { supabase } from "../../services/supabase";
 import UserModal from "./UserModal";
 
 function UserIcon({ profile }) {
@@ -40,7 +40,10 @@ function UserIcon({ profile }) {
     >
       {/* <CiUser className="text-white-primary font-normal w-8 h-8 border border-white-secondary rounded-full" />
        */}
-      <button onClick={() => setShowModal(!showModal)}>
+      <button
+        className="border-none rounded-full transition duration-300 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-green-50"
+        onClick={() => setShowModal(!showModal)}
+      >
         <img
           className="object-cover rounded-full h-[49px] w-[49px]"
           src={imageUrl}

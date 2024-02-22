@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { supabase } from "../../services/supabase";
 import { useUser } from "../../contexts/UserProvider";
@@ -7,6 +7,8 @@ import { useUser } from "../../contexts/UserProvider";
 function ProfilePicture({ url, size, handleUpdate }) {
   const [uploading, setUploading] = useState(false);
   const [pictureUrl, setPictureUrl] = useState("");
+
+  const inputRef = useRef(null);
 
   const {
     user: {
@@ -34,6 +36,10 @@ function ProfilePicture({ url, size, handleUpdate }) {
       console.error(error);
       toast.error(error.messsage);
     }
+  }
+
+  function fileUpload() {
+    inputRef.current.click();
   }
 
   async function uploadPicture(e) {
@@ -82,20 +88,25 @@ function ProfilePicture({ url, size, handleUpdate }) {
       )}
 
       <div>
-        <label className="inline-block border border-green-100 bg-green-50 rounded-lg px-4 py-1.5 text-current font-normal cursor-pointer transition duration-300 hover:border-green-200 hover:bg-green-100 active:outline-none active:ring-2 active:ring-accent active:ring-offset-2 active:ring-offset-white">
+        <button
+          className="border border-green-100 bg-green-50 rounded-lg px-4 py-1.5 text-current font-normal cursor-pointer transition duration-300 hover:border-green-200 hover:bg-green-100 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-white"
+          type="button"
+          onClick={fileUpload}
+        >
           {uploading
             ? "Uploading ..."
             : pictureUrl
             ? "Change picture"
             : "Upload picture"}
-          <input
-            className="invisible absolute"
-            type="file"
-            accept="image/*"
-            onChange={uploadPicture}
-            disabled={uploading}
-          />
-        </label>
+        </button>
+        <input
+          className="invisible absolute"
+          ref={inputRef}
+          type="file"
+          accept="image/*"
+          onChange={uploadPicture}
+          disabled={uploading}
+        />
       </div>
     </div>
   );

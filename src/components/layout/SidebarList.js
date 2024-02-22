@@ -5,7 +5,6 @@ import {
   CiReceipt,
   CiSearch,
   CiGlobe,
-  CiSettings,
   CiTrash,
 } from "react-icons/ci";
 
@@ -33,10 +32,6 @@ function renderIcon(text) {
       return <CiUser className={className} />;
     }
 
-    // case "Account Settings": {
-    //   return <CiSettings className={className} />;
-    // }
-
     case "Delete Account": {
       return <CiTrash className={className} />;
     }
@@ -54,12 +49,13 @@ function SidebarList({ item }) {
   const { nav, path } = item;
 
   return (
-    <li
-      className={`py-3 px-3.5 rounded-xl cursor-pointer transition duration-300 hover:bg-green-500 hover:text-white ${
-        currentPath === path && "bg-green-500 text-white"
-      }`}
-    >
-      <Link to={path} className="flex items-center">
+    <li>
+      <Link
+        to={path}
+        className={`flex items-center py-3 px-3.5 rounded-xl cursor-pointer ${
+          currentPath === path && "bg-green-500 text-white"
+        } transition duration-300 hover:bg-green-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2`}
+      >
         {renderIcon(nav)}
         {nav}
       </Link>
