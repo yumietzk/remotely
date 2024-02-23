@@ -49,8 +49,8 @@ function ProfileForm({ profile, getProfile }) {
       setUpdateProfileError("");
 
       if (!imageUrl) {
-        if (!firstName || !lastName || !country) {
-          toast.error("You sould fill in every fields.");
+        if (!firstName || !country) {
+          toast.error("You sould fill in every required fields.");
           return;
         }
       }
@@ -94,13 +94,10 @@ function ProfileForm({ profile, getProfile }) {
         />
 
         {inputFields.map((field) => (
-          // 💡 Fix the warning!!
           <TextInput
             key={field.label}
             labelClasses="flex flex-col"
-            type={field.type}
-            name={field.name}
-            placeholder={field.placeholder}
+            field={field}
             orgValue={values[field.name]}
             handleChange={(value) =>
               setValues({ ...values, [field.name]: value })

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-// import { CiUser } from "react-icons/ci";
+import { CiUser } from "react-icons/ci";
 import { toast } from "react-toastify";
 import { supabase } from "../../services/supabase";
 import UserModal from "./UserModal";
@@ -34,25 +34,23 @@ function UserIcon({ profile }) {
   }
 
   return (
-    <div
-      className="flex-none flex justify-center items-center relative"
-      // onMouseEnter={() => setIsShown(true)}
-    >
-      {/* <CiUser className="text-white-primary font-normal w-8 h-8 border border-white-secondary rounded-full" />
-       */}
+    <div className="flex-none flex justify-center items-center relative">
       <button
         className="border-none rounded-full transition duration-300 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-green-50"
         onClick={() => setShowModal(!showModal)}
       >
-        <img
-          className="object-cover rounded-full h-[49px] w-[49px]"
-          src={imageUrl}
-          alt="Profile"
-        />
+        {imageUrl ? (
+          <img
+            className="object-cover rounded-full h-[49px] w-[49px]"
+            src={imageUrl}
+            alt="Profile"
+          />
+        ) : (
+          <CiUser className="h-7 w-7" />
+        )}
       </button>
 
-      {/* ⚠️ Figure out mouse leave later */}
-      {showModal && <UserModal />}
+      {showModal && <UserModal imageUrl={imageUrl} />}
     </div>
   );
 }

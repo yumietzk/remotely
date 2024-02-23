@@ -6,7 +6,10 @@ function Profile() {
 
   return (
     <div className="bg-white w-9/12 mx-auto py-9 px-10 rounded-lg">
-      <h2 className="text-xl font-semibold mb-8">Profile Settings</h2>
+      <div className="flex justify-between items-end mb-8">
+        <h2 className="text-xl font-semibold">Profile Settings</h2>
+        <p className="text-sm">* Required field</p>
+      </div>
 
       <ProfileForm profile={profile} getProfile={getProfile} />
     </div>

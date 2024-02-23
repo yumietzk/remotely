@@ -3,6 +3,7 @@ export const inputFields = [
     label: "First name",
     type: "text",
     name: "firstName",
+    required: true,
     placeholder: "Enter your first name",
   },
   {
@@ -11,16 +12,11 @@ export const inputFields = [
     name: "lastName",
     placeholder: "Enter your last name",
   },
-  // {
-  //   label: "Email",
-  //   type: "email",
-  //   name: "email",
-  //   placeholder: "Enter your email",
-  // },
   {
     label: "Which country are you based out of?",
     type: "text",
     name: "country",
+    required: true,
     placeholder: "Enter the country you are based out of",
   },
 ];

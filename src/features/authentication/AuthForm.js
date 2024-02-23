@@ -11,12 +11,14 @@ const inputFields = [
     label: "Email",
     type: "email",
     name: "email",
+    required: true,
     placeholder: "Enter your email",
   },
   {
     label: "Password",
     type: "password",
     name: "password",
+    required: true,
     placeholder: "Enter your password",
   },
 ];
@@ -65,7 +67,7 @@ function AuthForm({ type }) {
       if (signUpError) {
         setError(signUpError.message);
       } else {
-        navigate("/dashboard");
+        navigate("/profile");
       }
     } else if (type === "signIn") {
       const { error: signInError } = await supabase.auth.signInWithPassword({
@@ -103,9 +105,7 @@ function AuthForm({ type }) {
               key={field.label}
               labelClasses="flex flex-col"
               inputClasses="w-96 focus:ring-offset-green-100"
-              type={field.type}
-              name={field.name}
-              placeholder={field.placeholder}
+              field={field}
               orgValue={values[field.name]}
               handleChange={(value) =>
                 setValues({ ...values, [field.name]: value })
