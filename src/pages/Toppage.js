@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import { useUser } from "../contexts/UserProvider";
 import image from "../assets/image2.png";
 
-// ⚠️ ToppagenのフォントはDribbleのやつみたいに変更する
 function TopPage() {
   const { user } = useUser();
 

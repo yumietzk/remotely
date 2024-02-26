@@ -11,9 +11,7 @@ function AppLayout() {
   const [profile, setProfile] = useState({});
 
   const {
-    user: {
-      user: { id },
-    },
+    user: { id },
   } = useUser();
 
   useEffect(() => {

@@ -20,9 +20,7 @@ function ProfileForm({ profile, getProfile }) {
   const [imageUrl, setImageUrl] = useState("");
 
   const {
-    user: {
-      user: { id },
-    },
+    user: { id },
   } = useUser();
 
   const { firstName, lastName, country } = values;

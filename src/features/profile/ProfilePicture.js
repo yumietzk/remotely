@@ -11,9 +11,7 @@ function ProfilePicture({ url, size, handleUpdate }) {
   const inputRef = useRef(null);
 
   const {
-    user: {
-      user: { id },
-    },
+    user: { id },
   } = useUser();
 
   useEffect(() => {

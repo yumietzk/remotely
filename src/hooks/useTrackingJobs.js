@@ -7,9 +7,7 @@ export function useTrackingJobs() {
   const [trackingJobs, setTrackingJobs] = useState([]);
 
   const {
-    user: {
-      user: { id: userId },
-    },
+    user: { id },
   } = useUser();
 
   useEffect(() => {
@@ -21,7 +19,7 @@ export function useTrackingJobs() {
       const { data, error } = await supabase
         .from("trackings")
         .select()
-        .eq("user_id", userId);
+        .eq("user_id", id);
 
       if (error) {
         throw error;

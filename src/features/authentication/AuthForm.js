@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { CiWarning } from "react-icons/ci";
-import { FcGoogle } from "react-icons/fc";
 import { supabase } from "../../services/supabase";
 import TextInput from "../../components/form/TextInput";
 import Button from "../../components/elements/Button";
+import GoogleAuth from "./GoogleAuth";
 
 const inputFields = [
   {
@@ -28,15 +28,15 @@ const initialState = { email: "", password: "" };
 const items = {
   signUp: {
     button: "Sign up",
-    googleButton: "Sign up with Google",
+    googleButton: "Sign in with Google",
     link: "/signin",
     message: ["or", "Have an account?", "Sign in!"],
   },
   signIn: {
     button: "Sign in",
-    googleButton: "Google",
+    googleButton: "Sign in with Google",
     link: "/signup",
-    message: ["Or continue with", "Don't have an account?", "Sign up!"],
+    message: ["or", "Don't have an account?", "Sign up!"],
   },
 };
 
@@ -53,37 +53,42 @@ function AuthForm({ type }) {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    setIsLoading(true);
-    setError("");
+    try {
+      setIsLoading(true);
+      setError("");
 
-    if (!email || !password) return;
+      if (!email || !password) return;
 
-    if (type === "signUp") {
-      const { error: signUpError } = await supabase.auth.signUp({
-        email,
-        password,
-      });
+      if (type === "signUp") {
+        const { error: signUpError } = await supabase.auth.signUp({
+          email,
+          password,
+        });
 
-      if (signUpError) {
-        setError(signUpError.message);
-      } else {
+        if (signUpError) {
+          throw signUpError;
+        }
+
         navigate("/profile");
-      }
-    } else if (type === "signIn") {
-      const { error: signInError } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
+      } else if (type === "signIn") {
+        const { error: signInError } = await supabase.auth.signInWithPassword({
+          email,
+          password,
+        });
 
-      if (signInError) {
-        setError(signInError.message);
-      } else {
+        if (signInError) {
+          throw signInError;
+        }
+
         navigate("/dashboard");
       }
+    } catch (error) {
+      console.error(error);
+      setError(error.message);
+    } finally {
+      setValues(initialState);
+      setIsLoading(false);
     }
-
-    setValues(initialState);
-    setIsLoading(false);
   }
 
   return (
@@ -95,47 +100,43 @@ function AuthForm({ type }) {
         </p>
       ) : null}
 
-      <form
-        className="bg-green-100 py-10 px-11 rounded-md text-green-500 flex flex-col space-y-10"
-        onSubmit={handleSubmit}
-      >
-        <div className="flex flex-col space-y-7 font-medium">
-          {inputFields.map((field) => (
-            <TextInput
-              key={field.label}
-              labelClasses="flex flex-col"
-              inputClasses="w-96 focus:ring-offset-green-100"
-              field={field}
-              orgValue={values[field.name]}
-              handleChange={(value) =>
-                setValues({ ...values, [field.name]: value })
-              }
-            >
-              {field.label}
-            </TextInput>
-          ))}
-        </div>
+      <div className="bg-green-100 py-10 px-11 rounded-md text-green-500 flex flex-col space-y-10">
+        <form className="flex flex-col space-y-10" onSubmit={handleSubmit}>
+          <div className="flex flex-col space-y-7 font-medium">
+            {inputFields.map((field) => (
+              <TextInput
+                key={field.label}
+                labelClasses="flex flex-col"
+                inputClasses="w-96 focus:ring-offset-green-100"
+                field={field}
+                orgValue={values[field.name]}
+                handleChange={(value) =>
+                  setValues({ ...values, [field.name]: value })
+                }
+              >
+                {field.label}
+              </TextInput>
+            ))}
+          </div>
 
-        <Button
-          classes={`border-none ${
-            isLoading ? "bg-gray-100" : "bg-green-400"
-          } text-white py-2 rounded-lg ${
-            !isLoading && "hover:bg-green-500"
-          } focus:ring-offset-green-100`}
-          type="submit"
-          disabled={isLoading}
-        >
-          {isLoading ? "Loading..." : button}
-        </Button>
+          <Button
+            classes={`border-none ${
+              isLoading ? "bg-gray-100" : "bg-green-400"
+            } text-white py-2 rounded-lg ${
+              !isLoading && "hover:bg-green-500"
+            } focus:ring-offset-green-100`}
+            type="submit"
+            disabled={isLoading}
+          >
+            {isLoading ? "Loading..." : button}
+          </Button>
+        </form>
 
         <p className="flex items-center before:h-[1px] before:grow before:bg-gray-100 before:mr-3 after:h-[1px] after:grow after:bg-gray-100 after:ml-3">
           {message[0]}
         </p>
 
-        <Button classes="border border-gray-200 py-2 rounded-lg flex items-center justify-center hover:bg-white focus:ring-offset-green-100">
-          <FcGoogle className="mr-3 h-6 w-6" />
-          {googleButton}
-        </Button>
+        <GoogleAuth googleButton={googleButton} />
 
         <div className="flex items-center justify-center">
           <p className="mr-1">{message[1]}</p>
@@ -146,7 +147,7 @@ function AuthForm({ type }) {
             {message[2]}
           </Link>
         </div>
-      </form>
+      </div>
     </>
   );
 }

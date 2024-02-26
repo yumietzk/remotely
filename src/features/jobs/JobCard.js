@@ -18,9 +18,7 @@ function JobCard({ job }) {
   const { trackingJobs, getTrackingJobs } = useTrackingJobs();
 
   const {
-    user: {
-      user: { id: userId },
-    },
+    user: { id: userId },
   } = useUser();
 
   const {
