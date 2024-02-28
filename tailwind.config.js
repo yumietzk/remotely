@@ -24,46 +24,27 @@ module.exports = {
         400: "#566e44",
         500: "#1d2417",
       },
-      // accent: "#dff376",
       accent: "#0baf56",
       "job-card": "#e0edf8",
     },
     extend: {
-      // colors: {
-      //   white: {
-      //     primary: "#fafaf9",
-      //     secondary: "#a8a29e",
-      //   },
-      //   black: "#1c1917",
-      //   background: {
-      //     primary: "#f5f5f4",
-      //     secondary: "#09090b",
-      //     white: "#fff",
-      //   },
-      //   accent: {
-      //     1: "#e3dbfa",
-      //     2: "#fbe2f4",
-      //     3: "#ffe1cc",
-      //     4: "#d4f6ed",
-      // #91d5ec
-      // #fd9f9f
-      // #aee7a0
-      // #a3a0e8
-      //   },
-      // },
       fontFamily: {
         primary: ["Inter"],
         secondary: ["Playfair Display"],
       },
       gridTemplateColumns: {
         "job-grid-xl": "1fr 932px 1fr",
-        // "job-grid-xl": "1fr 978px 1fr",
         "job-list-xl": "repeat(3, 300px)",
         "job-list-2xl": "repeat(auto-fill, 310px)",
         "kanban-board": "repeat(6, 260px)",
-        // "job-list": "repeat(auto-fit, minmax(310px, 1fr))",
       },
     },
   },
   plugins: [require("@tailwindcss/forms")],
 };
+
+// sm: 640px
+// md: 768px
+// lg: 1024px
+// xl: 1280px
+// 2xl: 1536px
