@@ -41,12 +41,12 @@ function UserIcon({ profile }) {
       >
         {imageUrl ? (
           <img
-            className="object-cover rounded-full h-[49px] w-[49px]"
+            className="object-cover rounded-full h-11 w-11 lg:h-[49px] lg:w-[49px]"
             src={imageUrl}
             alt="Profile"
           />
         ) : (
-          <CiUser className="h-7 w-7" />
+          <CiUser className="h-6 w-6 lg:h-7 lg:w-7" />
         )}
       </button>
 

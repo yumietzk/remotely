@@ -24,12 +24,12 @@ function Header({ profile }) {
       : targetItem.nav;
 
   return (
-    <header className="w-full px-11 h-8 text-white-primary flex justify-between items-center mb-10">
+    <header className="w-full px-11 h-8 text-white-primary flex justify-between items-center mb-7 lg:mb-10">
       <h2
         className={`${
           targetItem.path === "dashboard"
-            ? "text-[21px] font-medium"
-            : "text-[26px] font-semibold"
+            ? "text-lg lg:text-[21px] font-medium"
+            : "text-xl lg:text-[26px] font-semibold"
         }`}
       >
         {title}

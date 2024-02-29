@@ -5,8 +5,8 @@ function Location({ profile }) {
     <div className="flex-none flex items-center mr-4">
       {profile?.country && (
         <>
-          <CiLocationOn className="w-7 h-7 mr-1" />
-          <p>{profile.country}</p>
+          <CiLocationOn className="w-6 h-6 lg:w-7 lg:h-7 mr-1" />
+          <p className="text-sm lg:text-base">{profile.country}</p>
         </>
       )}
     </div>

@@ -1,15 +1,38 @@
-// import { CiMenuBurger } from "react-icons/ci";
+import { useEffect, useState } from "react";
 import SidebarList from "./SidebarList";
 import { data } from "../../data/sidebarData";
 
-// ⚠️ make it collapsable
 function Sidebar() {
+  const [screenWidth, setScreenWidth] = useState("");
+  const [isCollapsed, setIsCollapsed] = useState(false);
+
+  useEffect(() => {
+    function handleResize() {
+      setScreenWidth(window.innerWidth);
+    }
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    if (!screenWidth) return;
+
+    if (screenWidth < 1024) {
+      setIsCollapsed(true);
+    } else {
+      setIsCollapsed(false);
+    }
+  }, [screenWidth]);
+
   return (
-    <nav className="w-max max-w-xs h-full p-5 text-center">
-      <h1 className="text-2xl font-medium font-secondary mb-7">Remotely 🌎</h1>
+    <nav className="w-max max-w-xs h-full px-2.5 py-5 xl:p-5 text-center">
+      <h1 className="text-2xl font-medium font-secondary mb-7">
+        {isCollapsed ? "🌎" : "Remotely 🌎"}
+      </h1>
       <ul className="space-y-2 list-none">
         {data.map((item) => (
-          <SidebarList key={item.nav} item={item} />
+          <SidebarList key={item.nav} item={item} isCollapsed={isCollapsed} />
         ))}
       </ul>
     </nav>

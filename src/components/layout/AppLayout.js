@@ -37,15 +37,17 @@ function AppLayout() {
   }
 
   return (
-    <div className="h-screen w-screen flex font-primary font-normal text-base text-green-500 z-0">
-      <Sidebar />
+    <div className="h-screen w-screen font-primary font-normal text-base text-green-500 z-0">
+      <div className="h-full max-w-[1440px] w-full mx-auto flex">
+        <Sidebar />
 
-      <div className="flex-1 bg-green-50 w-full h-full overflow-hidden py-9 rounded-l-3xl flex flex-col">
-        <Header profile={profile} />
-        <Outlet context={[profile, getProfile]} />
+        <div className="flex-1 bg-green-50 w-full h-full overflow-hidden py-7 lg:py-9 rounded-l-3xl flex flex-col">
+          <Header profile={profile} />
+          <Outlet context={[profile, getProfile]} />
+        </div>
+
+        <ToastContainer autoClose={5000} />
       </div>
-
-      <ToastContainer autoClose={5000} />
     </div>
   );
 }
