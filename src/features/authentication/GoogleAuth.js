@@ -8,7 +8,8 @@ function GoogleAuth({ googleButton }) {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
-          redirectTo: "http://localhost:3000/dashboard",
+          redirectTo: "http://remotelyapp.vercel.app/dashboard",
+          // redirectTo: "http://localhost:3000/dashboard",
         },
       });
 
