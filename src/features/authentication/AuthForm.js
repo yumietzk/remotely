@@ -100,14 +100,14 @@ function AuthForm({ type }) {
         </p>
       ) : null}
 
-      <div className="bg-green-100 py-10 px-11 rounded-md text-green-500 flex flex-col space-y-10">
+      <div className="sm:bg-green-100 py-4 px-5 sm:py-10 sm:px-11 rounded-md text-green-500 flex flex-col space-y-10">
         <form className="flex flex-col space-y-10" onSubmit={handleSubmit}>
           <div className="flex flex-col space-y-7 font-medium">
             {inputFields.map((field) => (
               <TextInput
                 key={field.label}
-                labelClasses="flex flex-col"
-                inputClasses="w-96 focus:ring-offset-green-100"
+                labelClasses="flex flex-col text-white sm:text-current"
+                inputClasses="w-[300px] sm:w-96 focus:ring-offset-green-500 sm:focus:ring-offset-green-100"
                 field={field}
                 orgValue={values[field.name]}
                 handleChange={(value) =>
@@ -121,10 +121,10 @@ function AuthForm({ type }) {
 
           <Button
             classes={`border-none ${
-              isLoading ? "bg-gray-100" : "bg-green-400"
+              isLoading ? "bg-gray-100" : "bg-green-300 sm:bg-green-400"
             } text-white py-2 rounded-lg ${
-              !isLoading && "hover:bg-green-500"
-            } focus:ring-offset-green-100`}
+              !isLoading && "hover:bg-green-400 sm:hover:bg-green-500"
+            } focus:ring-offset-green-500 sm:focus:ring-offset-green-100`}
             type="submit"
             disabled={isLoading}
           >
@@ -132,17 +132,17 @@ function AuthForm({ type }) {
           </Button>
         </form>
 
-        <p className="flex items-center before:h-[1px] before:grow before:bg-gray-100 before:mr-3 after:h-[1px] after:grow after:bg-gray-100 after:ml-3">
+        <p className="flex items-center text-white sm:text-current before:h-[1px] before:grow before:bg-gray-100 before:mr-3 after:h-[1px] after:grow after:bg-gray-100 after:ml-3">
           {message[0]}
         </p>
 
         <GoogleAuth googleButton={googleButton} />
 
         <div className="flex items-center justify-center">
-          <p className="mr-1">{message[1]}</p>
+          <p className="text-white sm:text-current mr-1">{message[1]}</p>
           <Link
             to={link}
-            className="text-green-300 transition duration-300 hover:text-green-500 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-green-100"
+            className="text-green-100 sm:text-green-300 transition duration-300 hover:text-green-200 sm:hover:text-green-500 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-green-500 sm:focus:ring-offset-green-100"
           >
             {message[2]}
           </Link>
