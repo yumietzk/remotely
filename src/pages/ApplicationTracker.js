@@ -76,7 +76,7 @@ function ApplicationTracker() {
   );
 
   return (
-    <div className="flex-1 mx-11 bg-white border border-green-100 p-4 rounded-xl grid grid-cols-kanban-board gap-x-6 overflow-x-scroll overflow-y-hidden">
+    <div className="flex-1 mx-5 lg:mx-11 bg-white border border-green-100 px-3 py-3.5 lg:p-4 rounded-xl grid grid-cols-kanban-board lg:grid-cols-kanban-board-lg gap-x-2 lg:gap-x-6 overflow-x-scroll overflow-y-hidden">
       {trackingStatus.map((status, i) => {
         const jobs = trackingJobs.filter((job) => job.status === status);
 

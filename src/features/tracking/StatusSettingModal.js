@@ -19,7 +19,7 @@ function StatusSettingModal({
 }) {
   return (
     <Modal title="Move to" setShowModal={setShowModal}>
-      <div className="flex flex-col items-start space-y-3 text-sm">
+      <div className="flex flex-col items-start space-y-3 text-xs lg:text-sm">
         {availableStatus.map((status) => (
           <Button
             key={status}
@@ -35,7 +35,7 @@ function StatusSettingModal({
       <hr className="my-5 border-b-[0.9px] border-gray-100" />
 
       <Button
-        classes="w-full text-sm flex justify-between items-center py-2 px-3 rounded-lg hover:bg-gray-50 focus:ring-offset-green-100"
+        classes="w-full text-xs lg:text-sm flex justify-between items-center py-2 px-3 rounded-lg hover:bg-gray-50 focus:ring-offset-green-100"
         handleClick={handleRemove}
       >
         <CiTrash className="h-5 w-5" />

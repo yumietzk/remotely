@@ -41,7 +41,7 @@ function ApplicationChart({ jobs }) {
 
   return (
     <div className="h-fit bg-white rounded-xl">
-      <h3 className="text-lg font-medium px-7 py-5 border-b border-green-100">
+      <h3 className="lg:text-lg font-medium px-5 py-3 lg:px-7 lg:py-5 border-b border-green-100">
         Application Chart
       </h3>
 

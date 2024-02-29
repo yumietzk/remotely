@@ -8,7 +8,8 @@ const metrics = [
 ];
 
 function renderIcon(text) {
-  const className = "w-11 h-11 p-3 bg-accent text-white rounded-full";
+  const className =
+    "w-11 h-11 p-3 bg-accent text-white rounded-full mb-3 lg:mb-0";
 
   switch (text) {
     case "First Interview": {
@@ -35,7 +36,7 @@ function renderIcon(text) {
 
 function KeyMetrics({ jobs }) {
   return (
-    <div className="col-span-2 grid grid-cols-4 gap-6">
+    <div className="lg:col-span-2 grid grid-cols-4 gap-3.5 xl:gap-6">
       {metrics.map((item) => {
         const newJobs = jobs.filter((job) => job.status === item);
         const numOfJobs = newJobs.length;
@@ -43,7 +44,7 @@ function KeyMetrics({ jobs }) {
         return (
           <div
             key={item}
-            className="bg-white rounded-xl flex items-center justify-between p-6"
+            className="bg-white rounded-xl flex flex-col-reverse lg:flex-row items-start lg:items-center justify-between p-6"
           >
             <div className="flex flex-col">
               <span className="text-2xl font-medium">{numOfJobs}</span>

@@ -94,7 +94,7 @@ function ProfileForm({ profile, getProfile }) {
         {inputFields.map((field) => (
           <TextInput
             key={field.label}
-            labelClasses="flex flex-col"
+            labelClasses="flex flex-col text-sm lg:text-base"
             field={field}
             orgValue={values[field.name]}
             handleChange={(value) =>
@@ -109,7 +109,9 @@ function ProfileForm({ profile, getProfile }) {
       <Button
         classes={`w-6/12 mx-auto border-none ${
           isLoading ? "bg-gray-100" : "bg-green-400"
-        } text-white py-2 rounded-lg ${!isLoading && "hover:bg-green-500"}`}
+        } text-white text-sm lg:text-base py-2 rounded-lg ${
+          !isLoading && "hover:bg-green-500"
+        }`}
         type="submit"
         disabled={isLoading}
       >

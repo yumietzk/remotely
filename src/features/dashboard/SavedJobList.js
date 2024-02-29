@@ -12,7 +12,7 @@ function SavedJobList({ jobs }) {
   }
 
   return (
-    <ul className="flex-1 px-9 py-7 space-y-12 overflow-y-scroll">
+    <ul className="flex-1 px-9 py-7 space-y-12 lg:overflow-y-scroll">
       {noStatusJobs.map((item) => (
         <SavedJobRow key={item.id} job={item} />
       ))}

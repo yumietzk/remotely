@@ -26,7 +26,7 @@ function TextInput({
       {children}
       {required && "*"}
       <input
-        className={`${inputClasses} border border-gray-100 rounded-lg px-2 py-1 text-current font-normal transition duration-300 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2`}
+        className={`${inputClasses} border border-gray-100 rounded-lg px-2 py-1 text-sm lg:text-bsse font-normal transition duration-300 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2`}
         type={type}
         name={name}
         placeholder={placeholder}

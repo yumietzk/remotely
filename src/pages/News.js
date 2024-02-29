@@ -32,11 +32,11 @@ function News() {
   }
 
   return (
-    <div className="flex-1 w-full px-11 overflow-y-scroll">
-      <h1 className="text-4xl font-bold mb-3 text-center">
+    <div className="flex-1 w-full px-5 lg:px-11 overflow-y-scroll">
+      <h1 className="text-3xl lg:text-4xl font-bold mb-2.5 lg:mb-3 text-center">
         The latest tech news
       </h1>
-      <p className="text-lg text-center mb-14">
+      <p className="text-base lg:text-lg text-center mb-10 lg:mb-14">
         Stay informed about industry trends and recent technological
         advancements.
       </p>

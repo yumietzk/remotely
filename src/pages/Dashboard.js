@@ -29,12 +29,12 @@ function Dashboard() {
   );
 
   return (
-    <div className="flex-1 px-11">
+    <div className="flex-1 px-5 lg:px-11 overflow-y-scroll lg:overflow-y-hidden">
       <h2 className="font-semibold text-xl lg:text-[26px] mt-6 lg:mt-10">
         Dashboard
       </h2>
 
-      <div className="pt-14 grid grid-rows-[min-content_800px] grid-cols-2 gap-y-12 gap-x-9">
+      <div className="pt-14 grid grid-rows-[min-content_min-content_min-content] lg:grid-rows-[min-content_800px] lg:grid-cols-2 gap-y-8 gap-x-4 lg:gap-y-12 lg:gap-x-9">
         <KeyMetrics jobs={newData} />
 
         <ApplicationChart jobs={newData} />

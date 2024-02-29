@@ -12,8 +12,8 @@ function SubHeader({
   const [openFilter, setOpenFilter] = useState(false);
 
   return (
-    <div className="mb-12">
-      <p className="text-lg mb-1">Search by positions.</p>
+    <div className="mb-8 lg:mb-12">
+      <p className="text-base lg:text-lg mb-1">Search by positions.</p>
 
       <div className="flex">
         <SearchBar onSearch={setSearchTerm} />

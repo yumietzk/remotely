@@ -87,7 +87,7 @@ function ProfilePicture({ url, size, handleUpdate }) {
 
       <div>
         <button
-          className="border border-green-100 bg-green-50 rounded-lg px-4 py-1.5 text-current font-normal cursor-pointer transition duration-300 hover:border-green-200 hover:bg-green-100 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-white"
+          className="border border-green-100 bg-green-50 rounded-lg px-4 py-1.5 text-sm lg:text-base font-normal cursor-pointer transition duration-300 hover:border-green-200 hover:bg-green-100 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-white"
           type="button"
           onClick={fileUpload}
         >

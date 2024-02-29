@@ -17,7 +17,7 @@ function PaginationContainer({
         disabled={currentPage === 1}
       >
         <CiCircleChevLeft
-          className={`w-8 h-8 ${
+          className={`w-7 h-7 lg:w-8 lg:h-8 ${
             currentPage === 1 ? "text-gray-100" : "text-current"
           }`}
         />
@@ -35,7 +35,7 @@ function PaginationContainer({
         disabled={currentPage === totalPages}
       >
         <CiCircleChevRight
-          className={`w-8 h-8 ${
+          className={`w-7 h-7 lg:w-8 lg:h-8 ${
             currentPage === totalPages ? "text-gray-100" : "text-current"
           }`}
         />

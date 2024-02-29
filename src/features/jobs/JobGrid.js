@@ -48,7 +48,9 @@ function JobGrid({ jobs }) {
 
   if (currentJobList.length === 0) {
     return (
-      <p>No jobs are currently available. Please try searching again 🙂</p>
+      <p className="text-sm lg:text-base">
+        No jobs are currently available. Please try searching again 🙂
+      </p>
     );
   }
 

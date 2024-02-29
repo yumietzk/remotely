@@ -7,7 +7,7 @@ function Chart({ data }) {
   const minSize = Math.min(250, 250);
 
   return (
-    <div className="pt-7 flex justify-center items-center mb-14">
+    <div className="pt-5 lg:pt-7 flex justify-center items-center mb-6 lg:mb-14">
       <PieChart width={400} height={400}>
         <Pie
           data={data}

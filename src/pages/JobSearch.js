@@ -66,7 +66,7 @@ function JobSearch() {
   }
 
   return (
-    <div className="flex-1 px-11 overflow-y-scroll overflow-x-hidden">
+    <div className="flex-1 px-5 lg:px-11 overflow-y-scroll overflow-x-hidden">
       <SubHeader
         setSearchTerm={setSearchTerm}
         filterList={filterList}

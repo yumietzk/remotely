@@ -3,7 +3,7 @@ import SidebarList from "./SidebarList";
 import { data } from "../../data/sidebarData";
 
 function Sidebar() {
-  const [screenWidth, setScreenWidth] = useState("");
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   useEffect(() => {
@@ -16,8 +16,6 @@ function Sidebar() {
   }, []);
 
   useEffect(() => {
-    if (!screenWidth) return;
-
     if (screenWidth < 1024) {
       setIsCollapsed(true);
     } else {
