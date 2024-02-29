@@ -18,8 +18,7 @@ function TopPage() {
               Find Your New Remote Job
             </h1>
             <p className="text-xl lg:text-2xl tracking-wide mb-20 xl:mb-40">
-              We help you find your new Software Engineer job available from
-              where you are located.
+              We help you find your new remote Software Engineer job.
             </p>
             <Link
               to={user ? "/dashboard" : "/signin"}
