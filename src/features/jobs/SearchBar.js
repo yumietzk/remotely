@@ -17,7 +17,11 @@ function SearchBar({ onSearch }) {
   }
 
   return (
-    <form className="w-96 flex items-center mr-2" onSubmit={handleSubmit}>
+    <form
+      className="w-96 flex items-center mr-2"
+      aria-label="search"
+      onSubmit={handleSubmit}
+    >
       <Button classes="relative left-0 rounded-full" type="submit">
         <CiSearch className="text-current w-4 h-4 lg:w-5 lg:h-5 bg-white rounded-full" />
       </Button>

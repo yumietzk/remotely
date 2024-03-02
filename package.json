@@ -1,5 +1,5 @@
 {
-  "name": "remotefromjapan",
+  "name": "remotely",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -7,8 +7,8 @@
     "@tanstack/react-query": "^5.17.1",
     "@tanstack/react-query-devtools": "^5.17.1",
     "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
+    "@testing-library/react": "^14.2.1",
+    "@testing-library/user-event": "^14.5.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.10.1",
@@ -45,6 +45,7 @@
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.4",
     "@tanstack/eslint-plugin-query": "^5.17.1",
+    "jest": "^27.5.1",
     "tailwindcss": "^3.3.3"
   }
 }
