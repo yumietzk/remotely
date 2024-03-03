@@ -12,14 +12,14 @@ const mockProps = {
 };
 
 describe("Button component", () => {
-  test("render text passed as a prop", () => {
+  test("should render text passed as a prop", () => {
     render(<Button {...mockProps} />);
 
     const buttonText = screen.getByText("Filters");
     expect(buttonText).toBeInTheDocument();
   });
 
-  test("handle onClick event when users click the button", async () => {
+  test("should handle onClick event when users click the button", async () => {
     const user = userEvent.setup();
 
     render(<Button {...mockProps} />);
@@ -32,7 +32,7 @@ describe("Button component", () => {
     expect(mockProps.handleClick).toHaveBeenCalled();
   });
 
-  test("disables the button when the disabled prop is true", () => {
+  test("should disable the button when the disabled prop is true", () => {
     render(<Button {...mockProps} disabled={true} />);
 
     const button = screen.getByRole("button");

@@ -8,7 +8,7 @@ const mockProps = {
 };
 
 describe("SearchBar component", () => {
-  test("has text in the input field when user types and has no text when user clears", async () => {
+  test("should have text in the input field when user types and has no text when user clears", async () => {
     const user = userEvent.setup();
 
     render(<SearchBar {...mockProps} />);
@@ -25,7 +25,7 @@ describe("SearchBar component", () => {
     expect(input).toHaveValue("");
   });
 
-  test("handles onSubmit event when form is submitted", () => {
+  test("should handle onSubmit event when form is submitted", () => {
     render(<SearchBar {...mockProps} />);
 
     const form = screen.getByRole("form", { name: "search" });

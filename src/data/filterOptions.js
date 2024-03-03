@@ -1,11 +1,4 @@
-const jobType = [
-  "Full time",
-  "Part time",
-  "Contract",
-  "Internship",
-  "Freelance",
-];
-
-const skill = ["React", "JavaScript", "iOS", "Android", "AWS"];
-
-export { jobType, skill };
+export const filterOptions = {
+  jobType: ["Full time", "Part time", "Contract", "Internship", "Freelance"],
+  skill: ["React", "JavaScript", "iOS", "Android", "AWS"],
+};

@@ -18,14 +18,14 @@ describe("Checkbox component", () => {
     expect(checkbox).not.toBeChecked();
   });
 
-  test("renders lable passed as a prop", () => {
+  test("should render lable passed as a prop", () => {
     render(<Checkbox {...mockProps} />);
 
     const label = screen.getByLabelText("React");
     expect(label).toBeInTheDocument();
   });
 
-  test("is checked and handle onChange event when users click", async () => {
+  test("should be checked and handle onChange event when users click", async () => {
     const user = userEvent.setup();
 
     const { rerender } = render(<Checkbox {...mockProps} />);

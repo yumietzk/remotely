@@ -1,21 +1,20 @@
-import { jobType, skill } from "../../data/filterOptions";
+import { filterOptions } from "../../data/filterOptions";
 import FilterList from "./FilterList";
 
 function FilterBar({ filterList, handleSelectedJobType, handleSelectedSkill }) {
   return (
     <div className="mt-4 space-y-3">
-      <FilterList
-        title="Job type"
-        labelData={jobType}
-        filterList={filterList}
-        onSelected={handleSelectedJobType}
-      />
-      <FilterList
-        title="Skill"
-        labelData={skill}
-        filterList={filterList}
-        onSelected={handleSelectedSkill}
-      />
+      {Object.entries(filterOptions).map(([type, options]) => (
+        <FilterList
+          key={type}
+          title={type === "jobType" ? "Job type" : "Skill"}
+          labelData={options}
+          filterList={filterList}
+          onSelected={
+            type === "jobType" ? handleSelectedJobType : handleSelectedSkill
+          }
+        />
+      ))}
     </div>
   );
 }
