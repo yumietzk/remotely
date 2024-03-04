@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -14,11 +14,7 @@ function AppLayout() {
     user: { id },
   } = useUser();
 
-  useEffect(() => {
-    getProfile();
-  }, []);
-
-  async function getProfile() {
+  const getProfile = useCallback(async () => {
     try {
       const { data, error } = await supabase
         .from("profiles")
@@ -34,7 +30,11 @@ function AppLayout() {
       console.error(error);
       alert(error.message);
     }
-  }
+  }, [id]);
+
+  useEffect(() => {
+    getProfile();
+  }, [getProfile]);
 
   return (
     <div className="h-screen w-screen font-primary font-normal text-base text-green-500 z-0">

@@ -25,7 +25,7 @@ function Dashboard() {
 
   // Check if the job is not archived yet
   const newData = trackingJobs.filter((item) =>
-    allJobs.jobs.some((job) => job.id === +String(item.id).slice(0, 7))
+    allJobs.jobs.some((job) => job.id === item.job_id)
   );
 
   return (

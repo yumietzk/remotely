@@ -15,26 +15,26 @@ function ProfilePicture({ url, size, handleUpdate }) {
   } = useUser();
 
   useEffect(() => {
+    function downloadPicture(path) {
+      try {
+        const {
+          data: { publicUrl },
+          error,
+        } = supabase.storage.from("images").getPublicUrl(path);
+
+        if (error) {
+          throw error;
+        }
+
+        setPictureUrl(publicUrl);
+      } catch (error) {
+        console.error(error);
+        toast.error(error.messsage);
+      }
+    }
+
     if (url) downloadPicture(url);
   }, [url]);
-
-  function downloadPicture(path) {
-    try {
-      const {
-        data: { publicUrl },
-        error,
-      } = supabase.storage.from("images").getPublicUrl(path);
-
-      if (error) {
-        throw error;
-      }
-
-      setPictureUrl(publicUrl);
-    } catch (error) {
-      console.error(error);
-      toast.error(error.messsage);
-    }
-  }
 
   function fileUpload() {
     inputRef.current.click();

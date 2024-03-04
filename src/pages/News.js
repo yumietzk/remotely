@@ -3,15 +3,15 @@ import Loading from "../components/elements/Loading";
 import Error from "../components/elements/Error";
 import ArticleList from "../features/news/ArticleList";
 
+async function fetchNews() {
+  const res = await fetch(
+    `https://newsdata.io/api/1/news?apikey=${process.env.REACT_APP_NEWS_API_KEY}&category=technology&language=en`
+  );
+
+  return res.json();
+}
+
 function News() {
-  async function fetchNews() {
-    const res = await fetch(
-      `https://newsdata.io/api/1/news?apikey=${process.env.REACT_APP_NEWS_API_KEY}&category=technology&language=en`
-    );
-
-    return res.json();
-  }
-
   const { isPending, isError, fetchStatus, data, error } = useQuery({
     queryKey: ["news"],
     queryFn: fetchNews,

@@ -71,8 +71,7 @@ function ApplicationTracker() {
   }
 
   const archivedJobs = trackingJobs.filter(
-    (item) =>
-      !allJobs.jobs.some((job) => job.id === +String(item.id).slice(0, 7))
+    (item) => !allJobs.jobs.some((job) => job.id === item.job_id)
   );
 
   return (

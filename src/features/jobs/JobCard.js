@@ -35,9 +35,7 @@ function JobCard({ job }) {
   useEffect(() => {
     // Check if the job is saved, and if so, also check if the status is "No Status"
     function checkStatus() {
-      const targetData = trackingJobs.find(
-        (item) => +String(item.id).slice(0, 7) === jobId
-      );
+      const targetData = trackingJobs.find((item) => item.job_id === jobId);
 
       if (targetData) {
         setIsSaved(true);
@@ -60,7 +58,6 @@ function JobCard({ job }) {
         const { error } = await supabase
           .from("trackings")
           .delete()
-          .eq("user_id", userId)
           .eq("id", targetId);
 
         if (error) {
@@ -70,12 +67,9 @@ function JobCard({ job }) {
         toast.success("Removed a job from the saved");
       } else {
         // Save a job
-        const now = `${Date.now()}`.slice(-8);
-        const newId = `${jobId}${now}`;
-
         const newData = {
-          id: newId,
           user_id: userId,
+          job_id: jobId,
           status: "No Status",
           company_name,
           title,

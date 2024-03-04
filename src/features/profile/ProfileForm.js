@@ -71,8 +71,6 @@ function ProfileForm({ profile, getProfile }) {
       }
 
       toast.success("Updated a profile");
-      setImageUrl(imageUrl);
-
       getProfile();
     } catch (error) {
       console.error(error);
@@ -105,6 +103,10 @@ function ProfileForm({ profile, getProfile }) {
           </TextInput>
         ))}
       </div>
+
+      {updateProfileError && (
+        <p className="text-sm lg:text-base text-red">{updateProfileError}</p>
+      )}
 
       <Button
         classes={`w-6/12 mx-auto border-none ${
