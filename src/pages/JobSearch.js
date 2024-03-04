@@ -75,9 +75,6 @@ function JobSearch() {
       />
 
       <JobTable
-        isLoading={isPending}
-        isError={isError}
-        error={error}
         jobs={newJobs}
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}

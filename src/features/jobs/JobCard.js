@@ -33,24 +33,24 @@ function JobCard({ job }) {
   } = job;
 
   useEffect(() => {
-    checkStatus();
-  }, [trackingJobs]);
+    // Check if the job is saved, and if so, also check if the status is "No Status"
+    function checkStatus() {
+      const targetData = trackingJobs.find(
+        (item) => +String(item.id).slice(0, 7) === jobId
+      );
 
-  // Check if the job is saved, and if so, check if the status is "No Status"
-  function checkStatus() {
-    const targetData = trackingJobs.find(
-      (item) => +String(item.id).slice(0, 7) === jobId
-    );
-
-    if (targetData) {
-      setIsSaved(true);
-      setCanRemove(targetData.status === "No Status");
-      setTargetId(targetData.id);
-    } else {
-      setIsSaved(false);
-      setCanRemove(true);
+      if (targetData) {
+        setIsSaved(true);
+        setCanRemove(targetData.status === "No Status");
+        setTargetId(targetData.id);
+      } else {
+        setIsSaved(false);
+        setCanRemove(true);
+      }
     }
-  }
+
+    checkStatus();
+  }, [trackingJobs, jobId]);
 
   // Can toggle if not applied yet
   async function handleToggleSave() {

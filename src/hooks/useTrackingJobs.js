@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useUser } from "../contexts/UserProvider";
 import { supabase } from "../services/supabase";
@@ -10,11 +10,7 @@ export function useTrackingJobs() {
     user: { id },
   } = useUser();
 
-  useEffect(() => {
-    getTrackingJobs();
-  }, []);
-
-  async function getTrackingJobs() {
+  const getTrackingJobs = useCallback(async () => {
     try {
       const { data, error } = await supabase
         .from("trackings")
@@ -30,7 +26,11 @@ export function useTrackingJobs() {
       console.error(error);
       toast.error(error.message);
     }
-  }
+  }, [id]);
+
+  useEffect(() => {
+    getTrackingJobs();
+  }, [getTrackingJobs]);
 
   return { trackingJobs, getTrackingJobs };
 }

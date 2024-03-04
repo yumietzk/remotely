@@ -9,6 +9,14 @@ function JobGrid({ jobs }) {
   const jobRef = useRef(null);
 
   useEffect(() => {
+    function scrollToTop() {
+      if (jobRef.current) {
+        jobRef.current.scrollIntoView({
+          behavior: "smooth",
+        });
+      }
+    }
+
     // Prevent useEffect from running on mount
     if (isMounted.current) {
       scrollToTop();
@@ -16,14 +24,6 @@ function JobGrid({ jobs }) {
       isMounted.current = true;
     }
   }, [currentPage]);
-
-  function scrollToTop() {
-    if (jobRef.current) {
-      jobRef.current.scrollIntoView({
-        behavior: "smooth",
-      });
-    }
-  }
 
   // Display 18 jobs per page
   const jobsPerPage = 18;

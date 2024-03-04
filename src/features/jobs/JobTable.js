@@ -2,9 +2,6 @@ import TableTop from "./TableTop";
 import JobGrid from "./JobGrid";
 
 function JobTable({
-  isLoading,
-  isError,
-  error,
   jobs,
   searchTerm,
   setSearchTerm,
@@ -12,14 +9,6 @@ function JobTable({
   handleDeleteSelected,
 }) {
   const numOfJobs = jobs.length;
-
-  if (isLoading) {
-    return <span>Loading...</span>;
-  }
-
-  if (isError) {
-    return <span>Error: {error.message}</span>;
-  }
 
   return (
     <main className="w-full">
