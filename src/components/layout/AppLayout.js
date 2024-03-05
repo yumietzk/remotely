@@ -41,7 +41,7 @@ function AppLayout() {
       <div className="h-full max-w-[1440px] w-full mx-auto flex">
         <Sidebar />
 
-        <div className="flex-1 bg-green-50 w-full h-full overflow-hidden py-7 lg:py-9 rounded-l-3xl flex flex-col">
+        <div className="flex-1 bg-green-50 w-full h-full overflow-hidden py-6 lg:py-7 rounded-l-3xl flex flex-col">
           <Header profile={profile} />
           <Outlet context={[profile, getProfile]} />
         </div>

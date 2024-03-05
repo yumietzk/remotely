@@ -1,9 +1,13 @@
 import { useEffect, useRef, useState } from "react";
+import { useTrackingJobs } from "../../hooks/useTrackingJobs";
+import Loading from "../../components/elements/Loading";
 import JobList from "./JobList";
 import PaginationContainer from "./PaginationContainer";
 
 function JobGrid({ jobs }) {
   const [currentPage, setCurrentPage] = useState(1);
+
+  const { isLoading, trackingJobs, getTrackingJobs } = useTrackingJobs();
 
   const isMounted = useRef(false);
   const jobRef = useRef(null);
@@ -46,6 +50,10 @@ function JobGrid({ jobs }) {
     setCurrentPage((cur) => cur - 1);
   }
 
+  if (isLoading) {
+    return <Loading />;
+  }
+
   if (currentJobList.length === 0) {
     return (
       <p className="text-sm lg:text-base">
@@ -56,7 +64,11 @@ function JobGrid({ jobs }) {
 
   return (
     <div ref={jobRef}>
-      <JobList jobs={currentJobList} />
+      <JobList
+        jobs={currentJobList}
+        trackingJobs={trackingJobs}
+        getTrackingJobs={getTrackingJobs}
+      />
 
       <PaginationContainer
         currentPage={currentPage}

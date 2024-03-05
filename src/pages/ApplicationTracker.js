@@ -17,14 +17,14 @@ const trackingStatus = [
 
 function ApplicationTracker() {
   const { isPending, isError, fetchStatus, data: allJobs, error } = useJobs();
-  const { trackingJobs, getTrackingJobs } = useTrackingJobs();
+  const { isLoading, trackingJobs, getTrackingJobs } = useTrackingJobs();
 
   // If the component is first mounted and the user has no network connection, the network error message will be rendered.
   if (isPending && fetchStatus === "paused") {
     return <Error message="Please check the internet connection ☹️" />;
   }
 
-  if (isPending) {
+  if (isPending || isLoading) {
     return <Loading />;
   }
 

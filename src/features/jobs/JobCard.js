@@ -1,7 +1,5 @@
-import { useEffect, useState } from "react";
 import { PiBookmarkSimpleLight, PiBookmarkSimpleFill } from "react-icons/pi";
 import { toast } from "react-toastify";
-import { useTrackingJobs } from "../../hooks/useTrackingJobs";
 import { supabase } from "../../services/supabase";
 import { useUser } from "../../contexts/UserProvider";
 import { formatDate } from "../../utils/formatDate";
@@ -10,13 +8,7 @@ import LinkButton from "../../components/elements/LinkButton";
 import Button from "../../components/elements/Button";
 import { truncateString } from "../../utils/truncateString";
 
-function JobCard({ job }) {
-  const [isSaved, setIsSaved] = useState(false);
-  const [canRemove, setCanRemove] = useState(true);
-  const [targetId, setTargetId] = useState("");
-
-  const { trackingJobs, getTrackingJobs } = useTrackingJobs();
-
+function JobCard({ job, trackingJobs, getTrackingJobs }) {
   const {
     user: { id: userId },
   } = useUser();
@@ -32,33 +24,24 @@ function JobCard({ job }) {
     // salary,
   } = job;
 
-  useEffect(() => {
-    // Check if the job is saved, and if so, also check if the status is "No Status"
-    function checkStatus() {
-      const targetData = trackingJobs.find((item) => item.job_id === jobId);
+  const jobInfo = { isSaved: false, canRemove: true, id: "" };
+  const targetData = trackingJobs.find((item) => item.job_id === jobId);
 
-      if (targetData) {
-        setIsSaved(true);
-        setCanRemove(targetData.status === "No Status");
-        setTargetId(targetData.id);
-      } else {
-        setIsSaved(false);
-        setCanRemove(true);
-      }
-    }
-
-    checkStatus();
-  }, [trackingJobs, jobId]);
+  if (targetData) {
+    jobInfo.isSaved = true;
+    jobInfo.canRemove = targetData.status === "No Status";
+    jobInfo.id = targetData.id;
+  }
 
   // Can toggle if not applied yet
   async function handleToggleSave() {
     try {
-      if (isSaved) {
+      if (jobInfo.isSaved) {
         // Remove a job from saved
         const { error } = await supabase
           .from("trackings")
           .delete()
-          .eq("id", targetId);
+          .eq("id", jobInfo.id);
 
         if (error) {
           throw error;
@@ -112,15 +95,15 @@ function JobCard({ job }) {
           <Button
             classes="relative group rounded-full focus:ring-offset-job-card"
             handleClick={handleToggleSave}
-            disabled={!canRemove}
+            disabled={!jobInfo.canRemove}
           >
-            {isSaved ? (
+            {jobInfo.isSaved ? (
               <PiBookmarkSimpleFill className="bg-white w-8 h-8 lg:w-9 lg:h-9 p-2 rounded-full" />
             ) : (
               <PiBookmarkSimpleLight className="bg-white w-8 h-8 lg:w-9 lg:h-9 p-2 rounded-full" />
             )}
 
-            {!canRemove && (
+            {!jobInfo.canRemove && (
               <span className="w-max bg-black text-white text-xs lg:text-sm py-1 px-2 rounded-lg absolute -left-[110%] bottom-[120%] z-10 invisible transition duration-300 group-hover:visible">
                 Already applied
               </span>

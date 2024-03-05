@@ -4,6 +4,7 @@ import { useUser } from "../contexts/UserProvider";
 import { supabase } from "../services/supabase";
 
 export function useTrackingJobs() {
+  const [isLoading, setIsLoading] = useState(false);
   const [trackingJobs, setTrackingJobs] = useState([]);
 
   const {
@@ -12,6 +13,8 @@ export function useTrackingJobs() {
 
   const getTrackingJobs = useCallback(async () => {
     try {
+      setIsLoading(true);
+
       const { data, error } = await supabase
         .from("trackings")
         .select()
@@ -25,6 +28,8 @@ export function useTrackingJobs() {
     } catch (error) {
       console.error(error);
       toast.error(error.message);
+    } finally {
+      setIsLoading(false);
     }
   }, [id]);
 
@@ -32,5 +37,5 @@ export function useTrackingJobs() {
     getTrackingJobs();
   }, [getTrackingJobs]);
 
-  return { trackingJobs, getTrackingJobs };
+  return { isLoading, trackingJobs, getTrackingJobs };
 }

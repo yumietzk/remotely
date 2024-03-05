@@ -11,7 +11,7 @@ function TableTop({
 }) {
   return (
     <div className="mb-8 flex items-center relative">
-      <h2 className="flex-none w-max text-3xl lg:text-4xl font-bold mr-3.5 lg:mr-5 ml-1 lg:ml-0">
+      <h2 className="flex-none w-max text-2xl lg:text-3xl font-bold mr-3.5 lg:mr-5 ml-1 lg:ml-0">
         {searchTerm ? searchTerm : "All"} jobs
       </h2>
 

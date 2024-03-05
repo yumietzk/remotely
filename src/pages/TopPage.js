@@ -6,7 +6,7 @@ function TopPage() {
   const { user } = useUser();
 
   return (
-    <div className="h-screen w-screen font-primary font-normal text-base bg-green-500 text-white px-6 sm:px-12 py-10">
+    <div className="h-fit xl:h-screen w-screen font-primary font-normal text-base bg-green-500 text-white px-6 sm:px-12 py-10">
       <div className="h-full max-w-[1440px] w-full mx-auto flex flex-col">
         <header className="h-9 mb-16 lg:mb-24">
           <div className="text-3xl font-medium font-secondary">Remotely 🌎</div>

@@ -11,11 +11,11 @@ import SubHeader from "../features/jobs/SubHeader";
 import JobTable from "../features/jobs/JobTable";
 
 function JobSearch() {
-  const { isPending, isError, fetchStatus, data, error } = useJobs();
-
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedJobType, setSelectedJobType] = useState([]);
   const [selectedSkill, setSelectedSkill] = useState([]);
+  
+  const { isPending, isError, fetchStatus, data, error } = useJobs();
 
   // If the component is first mounted and the user has no network connection, the network error message will be rendered.
   if (isPending && fetchStatus === "paused") {
