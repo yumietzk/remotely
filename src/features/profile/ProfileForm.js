@@ -15,7 +15,6 @@ const initialValues = {
 
 function ProfileForm({ profile, getProfile }) {
   const [isLoading, setIsLoading] = useState(false);
-  const [updateProfileError, setUpdateProfileError] = useState("");
   const [values, setValues] = useState(initialValues);
   const [imageUrl, setImageUrl] = useState("");
 
@@ -44,11 +43,11 @@ function ProfileForm({ profile, getProfile }) {
 
     try {
       setIsLoading(true);
-      setUpdateProfileError("");
 
+      // image can be changed solely
       if (!imageUrl) {
         if (!firstName || !country) {
-          toast.error("You sould fill in every required fields.");
+          toast.error("You should fill in every required fields.");
           return;
         }
       }
@@ -74,10 +73,14 @@ function ProfileForm({ profile, getProfile }) {
       getProfile();
     } catch (error) {
       console.error(error);
-      setUpdateProfileError(error.message);
+      toast.error(`Update failed: ${error.message}`);
     } finally {
       setIsLoading(false);
     }
+  }
+
+  function handleChange(name, value) {
+    setValues({ ...values, [name]: value });
   }
 
   return (
@@ -95,18 +98,12 @@ function ProfileForm({ profile, getProfile }) {
             labelClasses="flex flex-col text-sm lg:text-base"
             field={field}
             orgValue={values[field.name]}
-            handleChange={(value) =>
-              setValues({ ...values, [field.name]: value })
-            }
+            handleChange={handleChange}
           >
             {field.label}
           </TextInput>
         ))}
       </div>
-
-      {updateProfileError && (
-        <p className="text-sm lg:text-base text-red">{updateProfileError}</p>
-      )}
 
       <Button
         classes={`w-6/12 mx-auto border-none ${

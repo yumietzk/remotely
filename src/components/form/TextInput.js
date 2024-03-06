@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-
 function TextInput({
   children,
   labelClasses,
@@ -8,18 +6,7 @@ function TextInput({
   orgValue,
   handleChange,
 }) {
-  const [value, setValue] = useState("");
-
   const { type, name, placeholder, required } = field;
-
-  useEffect(() => {
-    if (orgValue) setValue(orgValue);
-  }, [orgValue]);
-
-  function handleClick(e) {
-    setValue(e.target.value);
-    handleChange(e.target.value);
-  }
 
   return (
     <label className={labelClasses}>
@@ -30,9 +17,9 @@ function TextInput({
         type={type}
         name={name}
         placeholder={placeholder}
-        value={value}
-        required={required || false}
-        onChange={handleClick}
+        value={orgValue}
+        // required={required || false}
+        onChange={(e) => handleChange(name, e.target.value)}
       />
     </label>
   );

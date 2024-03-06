@@ -2,7 +2,7 @@ import ApplicationCard from "./ApplicationCard";
 import Archived from "./Archived";
 
 function TrackerJob({ data, archivedJobs, removeJob, updateJob }) {
-  // Check if already categorized as archived but still keep in the tracker
+  // Check if already categorized as archived, which means it's kept in the tracker
   const showArchived = data.archived;
 
   let isArchived = false;
