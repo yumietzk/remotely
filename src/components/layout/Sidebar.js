@@ -28,11 +28,11 @@ function Sidebar() {
       <h1 className="text-2xl font-medium font-secondary mb-7">
         {isCollapsed ? "🌎" : "Remotely 🌎"}
       </h1>
-      <ul className="space-y-2 list-none">
+      <div className="space-y-2 list-none">
         {data.map((item) => (
           <SidebarList key={item.nav} item={item} isCollapsed={isCollapsed} />
         ))}
-      </ul>
+      </div>
     </nav>
   );
 }

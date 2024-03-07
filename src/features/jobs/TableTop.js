@@ -27,6 +27,7 @@ function TableTop({
       {searchTerm && (
         <Button
           classes="border-none rounded-full absolute -left-4 lg:-left-7 focus:ring-offset-green-100 z-10"
+          label="reset"
           handleClick={() => setSearchTerm("")}
         >
           <CiCircleRemove className="w-5 h-5 lg:w-6 lg:h-6" />

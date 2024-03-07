@@ -10,6 +10,7 @@ function Modal({ title, setShowModal, children, width = "220px" }) {
         <p className="mr-9 font-medium text-sm lg:text-base">{title}</p>
         <Button
           classes="rounded-full focus:ring-offset-green-100"
+          label="remove"
           handleClick={() => setShowModal(false)}
         >
           <CiCircleRemove className="w-5 h-5 lg:w-6 lg:h-6" />

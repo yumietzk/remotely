@@ -5,40 +5,16 @@ import { supabase } from "../../services/supabase";
 import TextInput from "../../components/form/TextInput";
 import Button from "../../components/elements/Button";
 import GoogleAuth from "./GoogleAuth";
+import { authForm } from "../../data/authForm";
 
-const inputFields = [
-  {
-    label: "Email",
-    type: "email",
-    name: "email",
-    required: true,
-    placeholder: "Enter your email",
-  },
-  {
-    label: "Password",
-    type: "password",
-    name: "password",
-    required: true,
-    placeholder: "Enter your password",
-  },
-];
-
+const { inputFields, items } = authForm;
 const initialState = { email: "", password: "" };
 
-const items = {
-  signUp: {
-    button: "Sign up",
-    googleButton: "Sign in with Google",
-    link: "/signin",
-    message: ["or", "Have an account?", "Sign in!"],
-  },
-  signIn: {
-    button: "Sign in",
-    googleButton: "Sign in with Google",
-    link: "/signup",
-    message: ["or", "Don't have an account?", "Sign up!"],
-  },
-};
+function validateEmail(email) {
+  const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  return pattern.test(email);
+}
 
 function AuthForm({ type }) {
   const [isLoading, setIsLoading] = useState(false);
@@ -57,7 +33,15 @@ function AuthForm({ type }) {
       setIsLoading(true);
       setError("");
 
-      if (!email || !password) return;
+      if (!email || !password) {
+        throw new Error("You should fill in every required fields.");
+      }
+
+      // Validate email
+      const isValidEmail = validateEmail(email);
+      if (!isValidEmail) {
+        throw new Error("You should enter a correct email.");
+      }
 
       if (type === "signUp") {
         const { error: signUpError } = await supabase.auth.signUp({
@@ -91,6 +75,10 @@ function AuthForm({ type }) {
     }
   }
 
+  function handleChange(name, value) {
+    setValues({ ...values, [name]: value });
+  }
+
   return (
     <>
       {error ? (
@@ -110,9 +98,7 @@ function AuthForm({ type }) {
                 inputClasses="w-[300px] sm:w-96 focus:ring-offset-green-500 sm:focus:ring-offset-green-100"
                 field={field}
                 orgValue={values[field.name]}
-                handleChange={(value) =>
-                  setValues({ ...values, [field.name]: value })
-                }
+                handleChange={handleChange}
               >
                 {field.label}
               </TextInput>
@@ -126,6 +112,7 @@ function AuthForm({ type }) {
               !isLoading && "hover:bg-green-400 sm:hover:bg-green-500"
             } focus:ring-offset-green-500 sm:focus:ring-offset-green-100`}
             type="submit"
+            label="submit form"
             disabled={isLoading}
           >
             {isLoading ? "Loading..." : button}

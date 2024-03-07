@@ -112,6 +112,7 @@ function ProfileForm({ profile, getProfile }) {
           !isLoading && "hover:bg-green-500"
         }`}
         type="submit"
+        label="submit form"
         disabled={isLoading}
       >
         {isLoading

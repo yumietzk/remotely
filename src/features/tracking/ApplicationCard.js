@@ -29,7 +29,11 @@ function ApplicationCard({ data, updateJob, removeJob, showArchived }) {
             src={company_logo}
             alt="Company logo"
           />
-          <Button classes="rounded-full" handleClick={() => setShowModal(true)}>
+          <Button
+            classes="rounded-full"
+            label="modal"
+            handleClick={() => setShowModal(true)}
+          >
             <HiOutlineDotsHorizontal className="h-4 w-4 lg:h-5 lg:w-5" />
           </Button>
         </div>

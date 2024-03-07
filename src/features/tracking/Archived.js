@@ -14,12 +14,14 @@ function Archived({ data, updateJob, removeJob }) {
       <div className="flex flex-col lg:flex-row justify-between items-stretch lg:items-center">
         <Button
           classes="bg-white text-sm lg:text-base text-black px-3.5 py-1 lg:py-1.5 mb-2 lg:mb-0 rounded-lg hover:bg-gray-100 focus:ring-offset-gray-200"
+          label="remove arvhive"
           handleClick={() => removeJob(id)}
         >
           Remove
         </Button>
         <Button
           classes="bg-white text-sm lg:text-base text-black px-3.5 py-1 lg:py-1.5 rounded-lg hover:bg-accent focus:ring-offset-gray-200"
+          label="keep arvhive"
           handleClick={() => updateJob(id, status, true, "archive")}
         >
           Keep it

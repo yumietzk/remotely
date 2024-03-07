@@ -26,7 +26,7 @@ function ArticleCard({ news, tempImage }) {
           </span>
         </div>
 
-        <h3 className="font-semibold text-base lg:text-lg mb-5">{title}</h3>
+        <h2 className="font-semibold text-base lg:text-lg mb-5">{title}</h2>
 
         <p
           className="font-light text-sm lg:text-base"

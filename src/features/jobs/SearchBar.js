@@ -22,7 +22,11 @@ function SearchBar({ onSearch }) {
       aria-label="search"
       onSubmit={handleSubmit}
     >
-      <Button classes="relative left-0 rounded-full" type="submit">
+      <Button
+        classes="relative left-0 rounded-full"
+        type="submit"
+        label="search"
+      >
         <CiSearch className="text-current w-4 h-4 lg:w-5 lg:h-5 bg-white rounded-full" />
       </Button>
 

@@ -24,6 +24,7 @@ function StatusSettingModal({
           <Button
             key={status}
             classes="bg-white px-3 py-1.5 rounded-full disabled:text-gray-100 hover:bg-gray-50 disabled:hover:bg-transparent focus:ring-offset-green-100"
+            label="set status"
             handleClick={() => handleUpdate(status)}
             disabled={currentStatus === status}
           >
@@ -36,6 +37,7 @@ function StatusSettingModal({
 
       <Button
         classes="w-full text-xs lg:text-sm flex justify-between items-center py-2 px-3 rounded-lg hover:bg-gray-50 focus:ring-offset-green-100"
+        label="remove"
         handleClick={handleRemove}
       >
         <CiTrash className="h-5 w-5" />

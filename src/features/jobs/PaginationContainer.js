@@ -13,6 +13,7 @@ function PaginationContainer({
     <div className="mt-11 mb-1.5 flex justify-center items-center space-x-4">
       <Button
         classes="rounded-full focus:ring-offset-green-100"
+        label="previous page"
         handleClick={onPreviousPage}
         disabled={currentPage === 1}
       >
@@ -31,6 +32,7 @@ function PaginationContainer({
 
       <Button
         classes="rounded-full focus:ring-offset-green-100"
+        label="next page"
         handleClick={onNextPage}
         disabled={currentPage === totalPages}
       >

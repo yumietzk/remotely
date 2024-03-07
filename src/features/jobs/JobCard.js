@@ -94,6 +94,7 @@ function JobCard({ job, trackingJobs, getTrackingJobs }) {
           {/* The button doesn't work if the job is already applied */}
           <Button
             classes="relative group rounded-full focus:ring-offset-job-card"
+            label="save"
             handleClick={handleToggleSave}
             disabled={!jobInfo.canRemove}
           >

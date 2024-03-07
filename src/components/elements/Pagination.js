@@ -53,6 +53,7 @@ function Pagination({ currentPage, totalPages, handleSetPage }) {
           classes={`text-sm lg:text-base ${
             num === currentPage ? "text-current font-medium" : "text-gray-100"
           }`}
+          label="pagination"
           handleClick={() => handleSetPage(num)}
           disabled={num === currentPage || num === "..."}
         >
