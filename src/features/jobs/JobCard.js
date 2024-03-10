@@ -1,18 +1,11 @@
 import { PiBookmarkSimpleLight, PiBookmarkSimpleFill } from "react-icons/pi";
-import { toast } from "react-toastify";
-import { supabase } from "../../services/supabase";
-import { useUser } from "../../contexts/UserProvider";
 import { formatDate } from "../../utils/formatDate";
 import { formatJobType } from "../../utils/formatJobType";
+import { truncateString } from "../../utils/truncateString";
 import LinkButton from "../../components/elements/LinkButton";
 import Button from "../../components/elements/Button";
-import { truncateString } from "../../utils/truncateString";
 
-function JobCard({ job, trackingJobs, getTrackingJobs }) {
-  const {
-    user: { id: userId },
-  } = useUser();
-
+function JobCard({ job, trackingJobs, addJob, removeJob }) {
   const {
     id: jobId,
     url,
@@ -34,46 +27,21 @@ function JobCard({ job, trackingJobs, getTrackingJobs }) {
   }
 
   // Can toggle if not applied yet
-  async function handleToggleSave() {
-    try {
-      if (jobInfo.isSaved) {
-        // Remove a job from saved
-        const { error } = await supabase
-          .from("trackings")
-          .delete()
-          .eq("id", jobInfo.id);
+  function handleToggleSave() {
+    if (jobInfo.isSaved) {
+      removeJob(jobInfo.id, "saved");
+    } else {
+      const data = {
+        job_id: jobId,
+        status: "No Status",
+        company_name,
+        title,
+        company_logo,
+        link_url: url,
+        archived: false,
+      };
 
-        if (error) {
-          throw error;
-        }
-
-        toast.success("Removed a job from the saved");
-      } else {
-        // Save a job
-        const newData = {
-          user_id: userId,
-          job_id: jobId,
-          status: "No Status",
-          company_name,
-          title,
-          company_logo,
-          link_url: url,
-          archived: false,
-        };
-
-        const { error } = await supabase.from("trackings").insert(newData);
-
-        if (error) {
-          throw error;
-        }
-
-        toast.success("Saved a job");
-      }
-
-      getTrackingJobs();
-    } catch (error) {
-      console.error(error);
-      toast.error(error.message);
+      addJob(data);
     }
   }
 

@@ -37,5 +37,75 @@ export function useTrackingJobs() {
     getTrackingJobs();
   }, [getTrackingJobs]);
 
-  return { isLoading, trackingJobs, getTrackingJobs };
+  async function addJob(data) {
+    try {
+      const newData = {
+        user_id: id,
+        ...data,
+      };
+
+      const { error } = await supabase.from("trackings").insert(newData);
+
+      if (error) {
+        throw error;
+      }
+
+      getTrackingJobs();
+      toast.success("Saved a job");
+    } catch (error) {
+      console.error(error);
+      toast.error(error.message);
+    }
+  }
+
+  async function updateJob(id, status, archived, type = "update") {
+    try {
+      const { error } = await supabase
+        .from("trackings")
+        .update({ status, archived })
+        .eq("id", id);
+
+      if (error) {
+        throw error;
+      }
+
+      getTrackingJobs();
+
+      if (type === "update") {
+        toast.success("Updated the status");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error(error.message);
+    }
+  }
+
+  async function removeJob(id, type = "application") {
+    try {
+      const { error } = await supabase.from("trackings").delete().eq("id", id);
+
+      if (error) {
+        throw error;
+      }
+
+      getTrackingJobs();
+
+      if (type === "application") {
+        toast.success("Removed an application");
+      } else {
+        toast.success("Removed a job from the saved");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error(error.message);
+    }
+  }
+
+  return {
+    isLoading,
+    trackingJobs,
+    addJob,
+    updateJob,
+    removeJob,
+  };
 }

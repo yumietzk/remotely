@@ -7,7 +7,7 @@ import PaginationContainer from "./PaginationContainer";
 function JobGrid({ jobs }) {
   const [currentPage, setCurrentPage] = useState(1);
 
-  const { isLoading, trackingJobs, getTrackingJobs } = useTrackingJobs();
+  const { isLoading, trackingJobs, addJob, removeJob } = useTrackingJobs();
 
   const isMounted = useRef(false);
   const jobRef = useRef(null);
@@ -67,7 +67,8 @@ function JobGrid({ jobs }) {
       <JobList
         jobs={currentJobList}
         trackingJobs={trackingJobs}
-        getTrackingJobs={getTrackingJobs}
+        addJob={addJob}
+        removeJob={removeJob}
       />
 
       <PaginationContainer

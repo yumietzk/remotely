@@ -1,22 +1,10 @@
-import { useQuery } from "@tanstack/react-query";
+import { useNews } from "../hooks/useNews";
 import Loading from "../components/elements/Loading";
 import Error from "../components/elements/Error";
 import ArticleList from "../features/news/ArticleList";
 
-async function fetchNews() {
-  const res = await fetch(
-    `https://newsdata.io/api/1/news?apikey=${process.env.REACT_APP_NEWS_API_KEY}&category=technology&language=en`
-  );
-
-  return res.json();
-}
-
 function News() {
-  const { isPending, isError, fetchStatus, data, error } = useQuery({
-    queryKey: ["news"],
-    queryFn: fetchNews,
-    staleTime: 180000, // 3 minutes
-  });
+  const { isPending, isError, fetchStatus, data, error } = useNews();
 
   // If the component is first mounted and the user has no network connection, the network error message will be rendered.
   if (isPending && fetchStatus === "paused") {

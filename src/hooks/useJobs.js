@@ -14,7 +14,6 @@ export function useJobs() {
     queryFn: fetchJobs,
     // It's recommended to not hit the API too often.
     staleTime: 21600000, // 6 hours
-    gcTime: 43200000, // 12 hours
   });
 
   return { isPending, isError, fetchStatus, data, error };
