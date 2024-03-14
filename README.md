@@ -1,39 +1,39 @@
 # Remotely
 
-🚧 Work in progress..
+The MVP of this app is live 🚀  
+[Remotely](https://remotelyapp.vercel.app/)
 
 ## About the project
 
-A job board platform where you can search for remote Software Engineer jobs and track job applications all in one place.  
-
-💡 You’ll get an overview of this app as described below, although there are more functionalities.
-I’m working on more details.  
-
-#### Search jobs
-
-You get a list of jobs on a Job Search page. You can jump to the details and save jobs you’re interested in.  
-
-![jobSearch1](https://github.com/yumietzk/remotely/assets/61277579/0deee84a-eadc-4f18-9b1c-02b53779cf9f)  
-
-You can filter the list of jobs and search for jobs by position.  
-
-![jobSearch2](https://github.com/yumietzk/remotely/assets/61277579/0aefcc27-8892-4829-9fd5-7af1d29f46c0)
-
-#### Tracking jobs
-
-You can see the jobs that you save in the “No Status” section on an Application Tracker page.  
-
-![tracker1](https://github.com/yumietzk/remotely/assets/61277579/a6607e92-79f9-48be-a95a-8ed976d461f8)  
-
-You can manage the applications on an Application Tracker page, categorizing them.  
-
-![tracker2](https://github.com/yumietzk/remotely/assets/61277579/8173fac3-c80f-46fc-8b98-24f899ef26f3)
+A job board platform where you can search for remote Software Engineer jobs and track job applications all in one place.
 
 #### Dashboard
 
-Your Dashboard page will look like the below after working on the app.  
+- You can see the summary of your job applications, including the visual application chart.
 
-![New Note](https://github.com/yumietzk/remotely/assets/61277579/d1ed79e5-396c-48a7-859f-4ba4cb998caf)
+#### Application Tracker
+
+- You can track and manage all your job applications, categorizing them into the “No Status,” “Applied,” “First Interview,” “Second Interview,” “Final Interview,” or “Offered” stages.
+
+> 💡 If the job is no longer available, you will be asked if you want to keep the application or remove it.
+
+#### Job Search
+
+- You can see all the available remote Software Engineer jobs, jump to the details and save jobs you’re interested in.
+
+- You can also filter jobs by job type and skill and search for jobs by position.
+
+> 💡 If you try to remove the job that you categorized as one other than "No Status” from saved, it is recognized that you have already applied for the job, and you will not be able to remove it.
+
+#### News
+
+- You can read the latest tech news.
+
+#### Profile
+
+- You can update your profile info.
+
+> ☝🏻 In the future, more fields may be added to utilize that information for your job search.
 
 ## Tech Stack
 
@@ -41,6 +41,8 @@ Your Dashboard page will look like the below after working on the app.
 - React Router
 - Tailwind CSS
 - Supabase
+
+> 💡 React Query is currently used to fetch and cache data only from the external APIs, but I'll learn more about it to make good use of it in the future.
 
 ### API
 
@@ -77,6 +79,8 @@ src
 +-- services         # shared helper functions for api calling
 |
 +-- utils            # shared utility functions
+
+__test__             # tests folder
 ```
 
 ## Routing
