@@ -1,7 +1,9 @@
 # Remotely
 
 The MVP of this app is live 🚀  
-[Remotely](https://remotelyapp.vercel.app/)
+[Remotely](https://remotelyapp.vercel.app/)  
+
+> ⚠️ I’m not expecting the use case for smaller screens, such as mobile devices, so please use this app on your laptop or tablet.
 
 ## About the project
 
