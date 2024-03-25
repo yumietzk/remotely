@@ -1,8 +1,8 @@
 export function formatString(string) {
   return string
     .trim()
-    .replace(" ", "")
-    .replace("_", "")
-    .replace("-", "")
+    .replaceAll(" ", "")
+    .replaceAll("_", "")
+    .replaceAll("-", "")
     .toLowerCase();
 }
